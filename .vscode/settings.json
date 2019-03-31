@@ -1,0 +1,10 @@
+{
+  "cSpell.ignorePaths": [
+    "**/src/utils",
+    "package.json"
+  ],
+  "cSpell.words": [
+    "AUTHED"
+  ],
+  "eslint.autoFixOnSave": true
+}

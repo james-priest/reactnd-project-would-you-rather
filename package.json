@@ -5,21 +5,34 @@
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-redux": "^6.0.1",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
+    "install-eslint": "npm i -D eslint-plugin-react",
+    "install-prettier": "npm i -D prettier eslint-config-prettier eslint-plugin-prettier",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/james-priest/reactnd-project-would-you-rather.git"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.16.4"
+  }
 }
