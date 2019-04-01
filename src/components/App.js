@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UITest from './mocks/UITest1';
+import UITest from './mocks/UITest2';
 
 class App extends Component {
   render() {
