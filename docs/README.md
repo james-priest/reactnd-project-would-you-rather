@@ -345,8 +345,7 @@ Here's a set of screenshots that show a sample project.
 [![wyr6](../assets/images/wyr6-small.jpg)](../assets/images/wyr6.jpg)<br>
 <span class="center bold">Leader Board</span>
 
-<!-- 
-### 1.6 Step by Step Guide
+### 1.6 Step-by-Step Guide
 #### 1.6.1 Planning Stage 📐
 ##### Step 1 - Draw All of the Views of the App
 We need to determine the look and functionality of each view in your app. One of the best approaches is to draw each view of the app on paper so that you'll have a good idea of what information and data you're planning to have on each page.
@@ -395,4 +394,4 @@ For further information about this take a look at
 
 **Step 8** - Add finishing touches and make sure the project meets the [rubric](https://review.udacity.com/#!/rubrics/1567/view).
 
-Remember, this is just a template. As you build more projects, you'll modify this template to suit your needs. You may also find it more intuitive to use a different approach. Regardless of the approach you take, however, **planning out your app is imperative to success**. -->
+Remember, this is just a template. As you build more projects, you'll modify this template to suit your needs. You may also find it more intuitive to use a different approach. Regardless of the approach you take, however, **planning out your app is imperative to success**.
