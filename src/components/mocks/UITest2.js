@@ -139,7 +139,7 @@ export class UITest2 extends Component {
         <Image src="images/avatars/lion.png" size="mini" />
         <Image src="images/avatars/dog.png" size="tiny" />
         <Image src="images/avatars/rabbit.png" size="small" />
-        <Image src="images/avatars/quala.png" size="medium" />
+        <Image src="images/avatars/koala.png" size="medium" />
       </div>
     );
   }
