@@ -327,22 +327,22 @@ We encourage you to get creative with your projects by adding additional functio
 
 Here's a set of screenshots that show a sample project.
 
-[![wyr1](../assets/images/wyr1-small.jpg)](../assets/images/wyr1.jpg)<br>
+[![wyr1](assets/images/wyr1-small.jpg)](../assets/images/wyr1.jpg)<br>
 <span class="center bold">Login page</span>
 
-[![wyr2](../assets/images/wyr2-small.jpg)](../assets/images/wyr2.jpg)<br>
+[![wyr2](assets/images/wyr2-small.jpg)](../assets/images/wyr2.jpg)<br>
 <span class="center bold">Home page</span>
 
-[![wyr3](../assets/images/wyr3-small.jpg)](../assets/images/wyr3.jpg)<br>
+[![wyr3](assets/images/wyr3-small.jpg)](../assets/images/wyr3.jpg)<br>
 <span class="center bold">Poll page</span>
 
-[![wyr4](../assets/images/wyr4-small.jpg)](../assets/images/wyr4.jpg)<br>
+[![wyr4](assets/images/wyr4-small.jpg)](../assets/images/wyr4.jpg)<br>
 <span class="center bold">Poll Results</span>
 
-[![wyr5](../assets/images/wyr5-small.jpg)](../assets/images/wyr5.jpg)<br>
+[![wyr5](assets/images/wyr5-small.jpg)](../assets/images/wyr5.jpg)<br>
 <span class="center bold">Create Question</span>
 
-[![wyr6](../assets/images/wyr6-small.jpg)](../assets/images/wyr6.jpg)<br>
+[![wyr6](assets/images/wyr6-small.jpg)](../assets/images/wyr6.jpg)<br>
 <span class="center bold">Leader Board</span>
 
 ### 1.6 Step-by-Step Guide
