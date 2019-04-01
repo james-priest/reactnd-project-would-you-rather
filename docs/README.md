@@ -300,7 +300,6 @@ Users should be ordered in descending order based on the sum of the number of qu
 
 The user should be able to navigate to the leaderboard, to a specific question, and to the form that allows the user to create a new poll both from within the app and by typing in the address into the address bar. To make sure we’re showing the data that is relevant to the user, the application should require the user to be signed in order to access those pages.
 
-<!-- 
 ### 1.3 App Architecture
 By walking through the Planning Stage and the Coding Stage of the Chirper Project, we’ve given you a useful template for building Redux applications. We recommend using this template for building your “Would You Rather?” Project. Remember that planning your project and its architecture before starting to code will save you a lot of debugging time later on!
 
@@ -310,6 +309,7 @@ Your application’s store should be the source of truth, and components should 
 
 Your application’s code should be structured and organized in a logical way, and your components should be modular and reusable.
 
+<!-- 
 ### 1.4 Project Instructions
 1) Use React to build your application’s UI. Remember that composition is key. It’s rarely a mistake to break a component into smaller pieces. Look for opportunities to reuse your components.
 
