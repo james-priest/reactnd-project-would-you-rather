@@ -260,7 +260,6 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
 
 Using the provided starter code, you will build a React/Redux front end for the application.
 
-<!-- 
 ### 1.2 App Functionality
 The person using your application should have a way of impersonating/logging in as an existing user. (This could be as simple as having a login box that appears at the root of the application that lets the user select a name from the list of existing users. Alternatively, you could create your own account creation process to allow a user to sign up for an account.) Your application should work correctly regardless of which user is selected. Once the user logs in, the home page should be shown.
 
@@ -301,6 +300,7 @@ Users should be ordered in descending order based on the sum of the number of qu
 
 The user should be able to navigate to the leaderboard, to a specific question, and to the form that allows the user to create a new poll both from within the app and by typing in the address into the address bar. To make sure we’re showing the data that is relevant to the user, the application should require the user to be signed in order to access those pages.
 
+<!-- 
 ### 1.3 App Architecture
 By walking through the Planning Stage and the Coding Stage of the Chirper Project, we’ve given you a useful template for building Redux applications. We recommend using this template for building your “Would You Rather?” Project. Remember that planning your project and its architecture before starting to code will save you a lot of debugging time later on!
 
