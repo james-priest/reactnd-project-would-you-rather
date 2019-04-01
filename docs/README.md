@@ -309,7 +309,6 @@ Your application’s store should be the source of truth, and components should 
 
 Your application’s code should be structured and organized in a logical way, and your components should be modular and reusable.
 
-<!-- 
 ### 1.4 Project Instructions
 1) Use React to build your application’s UI. Remember that composition is key. It’s rarely a mistake to break a component into smaller pieces. Look for opportunities to reuse your components.
 
@@ -323,6 +322,7 @@ Your application’s code should be structured and organized in a logical way, a
 
 6) Please carefully test your app against the [rubric](https://review.udacity.com/#!/rubrics/1567/view) to make sure all of the rubric requirements are met. Your project must meet all of the rubric criteria in order to pass.
 
+<!-- 
 ### 1.5 Sample Project UI
 We encourage you to get creative with your projects by adding additional functionality and/or styling (after you've ensured that the project meets all of the specifications in the rubric)!
 
