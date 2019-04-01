@@ -322,7 +322,6 @@ Your application’s code should be structured and organized in a logical way, a
 
 6) Please carefully test your app against the [rubric](https://review.udacity.com/#!/rubrics/1567/view) to make sure all of the rubric requirements are met. Your project must meet all of the rubric criteria in order to pass.
 
-<!-- 
 ### 1.5 Sample Project UI
 We encourage you to get creative with your projects by adding additional functionality and/or styling (after you've ensured that the project meets all of the specifications in the rubric)!
 
@@ -346,6 +345,7 @@ Here's a set of screenshots that show a sample project.
 [![wyr6](../assets/images/wyr6-small.jpg)](../assets/images/wyr6.jpg)<br>
 <span class="center bold">Leader Board</span>
 
+<!-- 
 ### 1.6 Step by Step Guide
 #### 1.6.1 Planning Stage 📐
 ##### Step 1 - Draw All of the Views of the App
