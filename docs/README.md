@@ -301,7 +301,7 @@ Users should be ordered in descending order based on the sum of the number of qu
 The user should be able to navigate to the leaderboard, to a specific question, and to the form that allows the user to create a new poll both from within the app and by typing in the address into the address bar. To make sure we’re showing the data that is relevant to the user, the application should require the user to be signed in order to access those pages.
 
 ### 1.3 App Architecture
-By walking through the Planning Stage and the Coding Stage of the Chirper Project, we’ve given you a useful template for building Redux applications. We recommend using this template for building your “Would You Rather?” Project. Remember that planning your project and its architecture before starting to code will save you a lot of debugging time later on!
+By walking through the [Planning Stage and the Coding Stage of the Chirper Project](https://james-priest.github.io/udacity-nanodegree-react/course-notes/react-redux.html#72-project-walkthrough), we’ve given you a useful template for building Redux applications. We recommend using this template for building your “Would You Rather?” Project. Remember that planning your project and its architecture before starting to code will save you a lot of debugging time later on!
 
 For this application, most of the application’s state should be managed by Redux. You’ll find that there are situations where it makes sense to store state outside of the Redux store. Check out what Dan Abramov, the creator of Redux, thinks about [choosing between Redux's store and React's state](https://github.com/reactjs/redux/issues/1287).
 
@@ -395,3 +395,299 @@ For further information about this take a look at
 **Step 8** - Add finishing touches and make sure the project meets the [rubric](https://review.udacity.com/#!/rubrics/1567/view).
 
 Remember, this is just a template. As you build more projects, you'll modify this template to suit your needs. You may also find it more intuitive to use a different approach. Regardless of the approach you take, however, **planning out your app is imperative to success**.
+
+## 2. Planning Stage
+### 2.1 Semantic UI React
+This stage of the process consists of drawing or mocking up each of the app's views.
+
+I started with pencil and paper and then began looking for a React UI library to accommodate the look and feel.
+
+I settled on [Sematic UI React](https://react.semantic-ui.com/). It comes pre-baked with many of the UI layouts and controls necessary to meet the requirements.
+
+Additionally, the docs are awesome. They have samples and CodeSandbox instances embedded in every page for easy testing and modification.
+
+### 2.2 UI Testing
+I playing around with various components from the React library and tested how involved the implementation was. It turned out to be very straight-forward.
+
+#### 2.2.1 UITest1
+Here I tested a handful of random components that you can see from the import list.
+
+```jsx
+// UITest1.js
+import React, { Component } from 'react';
+import { Accordion, Grid, Header, Icon, Image, Label, Message, Segment }
+  from 'semantic-ui-react';
+
+const AccountSettingsHeader = props => (
+  <Header as="h2" {...props}>
+    <Icon name="settings" />
+    <Header.Content>
+      Account Settings
+      <Header.Subheader>Manage your preferences</Header.Subheader>
+    </Header.Content>
+  </Header>
+);
+
+const FetchingMessage = () => (
+  <Message icon>
+    <Icon name="circle notched" loading />
+    <Message.Content>
+      <Message.Header>Just one second</Message.Header>
+      We're fetching that content for you.
+    </Message.Content>
+  </Message>
+);
+
+const panels = [
+  {
+    key: 'what-is-dog',
+    title: 'What is a dog?',
+    content: [
+      'A dog is a type of domesticated animal. Known for its loyalty and',
+      'faithfulness guest in many households across the world.'
+    ].join(' ')
+  },
+  ...
+];
+
+const LabelRibbons = () => (
+  <Segment>
+    <Grid columns={2}>
+      <Grid.Column>
+        <Segment raised>
+          <Label as="a" color="red" ribbon>
+            Overview
+          </Label>
+          <span>Account Details</span>
+
+          <Image src="/images/wireframe/paragraph.png" />
+
+          <Label as="a" color="blue" ribbon>
+            Community
+          </Label>
+          <span>User Reviews</span>
+
+          <Image src="/images/wireframe/paragraph.png" />
+        </Segment>
+      </Grid.Column>
+
+      <Grid.Column>
+        <Segment>
+          <Label as="a" color="orange" ribbon="right">
+            Specs
+          </Label>
+          <Image src="/images/wireframe/paragraph.png" />
+
+          <Label as="a" color="teal" ribbon="right">
+            Reviews
+          </Label>
+          <Image src="/images/wireframe/paragraph.png" />
+        </Segment>
+      </Grid.Column>
+    </Grid>
+  </Segment>
+);
+
+export default class UITest1 extends Component {
+  render() {
+    return (
+      <div>
+        <AccountSettingsHeader dividing />
+        <FetchingMessage />
+        <Message
+          success
+          icon="thumbs up"
+          header="Nice job!"
+          content="Your profile is complete."
+        />
+        <Accordion defaultActiveIndex={0} panels={panels} styled />
+        <LabelRibbons />
+      </div>
+    );
+  }
+}
+```
+
+Here's the output of that this code.
+
+[![wyr7](assets/images/wyr7-small.jpg)](../assets/images/wyr7.jpg)<br>
+<span class="center bold">UITest1.js</span>
+
+#### 2.2.2 UITest2
+I also did a second test to see what the menu and nav system looked like. I wanted to make sure these were responsive and adjusted well on mobile.
+
+I had to bump up the font size a bit but overall the components scaled well.
+
+You can also see which components I used from the import list.
+
+```jsx
+// UITest2.js
+import React, { Component, Fragment } from 'react';
+import faker from 'faker';
+import { Menu, Segment, Responsive, Image, Grid, Icon, Button }
+  from 'semantic-ui-react';
+
+export class UITest2 extends Component {
+  state = { activeItem: 'home' };
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  render() {
+    const { activeItem } = this.state;
+    return (
+      <div>
+        <Responsive as={Menu} minWidth={651} pointing secondary>
+          <Menu.Item
+            name="home"
+            active={activeItem === 'home'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="new poll"
+            active={activeItem === 'new poll'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="leader board"
+            active={activeItem === 'leader board'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <span>
+                <Image
+                  src="images/avatars/fox.png"
+                  avatar
+                  spaced="right"
+                  verticalAlign="bottom"
+                />
+                James Priest
+              </span>
+            </Menu.Item>
+            <Menu.Item>
+              <Button
+                content="Logout"
+                icon="arrow alternate circle right"
+                labelPosition="right"
+                basic
+                compact
+              />
+            </Menu.Item>
+          </Menu.Menu>
+        </Responsive>
+        <Responsive as={Fragment} minWidth={375} maxWidth={650}>
+          <Grid columns={2}>
+            <Grid.Row>
+              <Grid.Column>
+                <Image
+                  src="images/avatars/fox.png"
+                  avatar
+                  spaced="right"
+                  verticalAlign="bottom"
+                />
+                James Priest
+              </Grid.Column>
+              <Grid.Column verticalAlign="bottom" textAlign="right">
+                <Button
+                  content="Logout"
+                  icon="arrow alternate circle right"
+                  labelPosition="right"
+                  basic
+                  compact
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={16}>
+                <Menu pointing secondary widths={3}>
+                  <Menu.Item
+                    name="home"
+                    active={activeItem === 'home'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="new poll"
+                    active={activeItem === 'new poll'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="leader board"
+                    active={activeItem === 'leader board'}
+                    onClick={this.handleItemClick}
+                  />
+                </Menu>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Responsive>
+        <Responsive as={Fragment} maxWidth={374}>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <Image
+                  src="images/avatars/fox.png"
+                  avatar
+                  spaced="right"
+                  verticalAlign="bottom"
+                />
+                James Priest
+                <Button
+                  content="Logout"
+                  icon="arrow alternate circle right"
+                  labelPosition="right"
+                  basic
+                  compact
+                  floated="right"
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              {/* <Grid.Column> */}
+              <Menu pointing secondary widths={3}>
+                <Menu.Item
+                  name="home"
+                  active={activeItem === 'home'}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  name="new poll"
+                  active={activeItem === 'new poll'}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  name="leader board"
+                  active={activeItem === 'leader board'}
+                  onClick={this.handleItemClick}
+                />
+              </Menu>
+              {/* </Grid.Column> */}
+            </Grid.Row>
+          </Grid>
+        </Responsive>
+
+        <Segment>
+          <img
+            src="/images/wireframe/media-paragraph.png"{% raw %}
+            style={{ width: '100%' }}
+            alt="media"{% endraw %}
+          />
+        </Segment>
+        <p>{faker.lorem.paragraphs(1)}</p>
+        <Image src="images/avatars/lion.png" size="mini" />
+        <Image src="images/avatars/dog.png" size="tiny" />
+        <Image src="images/avatars/rabbit.png" size="small" />
+        <Image src="images/avatars/koala.png" size="medium" />
+      </div>
+    );
+  }
+}
+
+export default UITest2;
+```
+
+One of the things that Semantic UI React has is a Responsive control that can be used to show a different UI based on `min-width` or `max-width`.
+
+I created three breakpoint width for the navigation menu to use. Here's the UI.
+
+[![wyr8](assets/images/wyr8-small.jpg)](../assets/images/wyr8.jpg)<br>
+<span class="center bold">UITest2.js</span>

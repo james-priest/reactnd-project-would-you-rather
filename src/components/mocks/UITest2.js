@@ -5,7 +5,6 @@ import {
   Segment,
   Responsive,
   Image,
-  Container,
   Grid,
   Icon,
   Button
@@ -20,20 +19,20 @@ export class UITest2 extends Component {
     const { activeItem } = this.state;
     return (
       <div>
-        <Responsive as={Menu} minWidth={501} pointing secondary>
+        <Responsive as={Menu} minWidth={651} pointing secondary>
           <Menu.Item
             name="home"
             active={activeItem === 'home'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name="leader board"
-            active={activeItem === 'leader board'}
+            name="new poll"
+            active={activeItem === 'new poll'}
             onClick={this.handleItemClick}
           />
           <Menu.Item
-            name="add question"
-            active={activeItem === 'add question'}
+            name="leader board"
+            active={activeItem === 'leader board'}
             onClick={this.handleItemClick}
           />
           <Menu.Menu position="right">
@@ -48,11 +47,6 @@ export class UITest2 extends Component {
                 James Priest
               </span>
             </Menu.Item>
-            {/* <Menu.Item
-              name="logout"
-              active={activeItem === 'logout'}
-              onClick={this.handleItemClick}
-            /> */}
             <Menu.Item>
               <Button
                 content="Logout"
@@ -64,28 +58,10 @@ export class UITest2 extends Component {
             </Menu.Item>
           </Menu.Menu>
         </Responsive>
-        <Responsive as={Fragment} maxWidth={500}>
-          {/* <Menu secondary>
-            <Menu.Item>
-              <span>
-                Hello, James Priest
-                <Image
-                  src="images/avatars/fox.png"
-                  avatar
-                  spaced="left"
-                  verticalAlign="bottom"
-                />
-              </span>
-            </Menu.Item>
-            <Menu.Item
-              name="logout"
-              active={activeItem === 'logout'}
-              onClick={this.handleItemClick}
-            />
-          </Menu> */}
-          <Grid>
+        <Responsive as={Fragment} minWidth={375} maxWidth={650}>
+          <Grid columns={2}>
             <Grid.Row>
-              <Grid.Column width={8}>
+              <Grid.Column>
                 <Image
                   src="images/avatars/fox.png"
                   avatar
@@ -94,11 +70,7 @@ export class UITest2 extends Component {
                 />
                 James Priest
               </Grid.Column>
-              <Grid.Column width={8} verticalAlign="bottom" textAlign="right">
-                {/* <Button icon basic compact>
-                  <Icon link name="close" />
-                  Logout
-                </Button> */}
+              <Grid.Column verticalAlign="bottom" textAlign="right">
                 <Button
                   content="Logout"
                   icon="arrow alternate circle right"
@@ -108,24 +80,72 @@ export class UITest2 extends Component {
                 />
               </Grid.Column>
             </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={16}>
+                <Menu pointing secondary widths={3}>
+                  <Menu.Item
+                    name="home"
+                    active={activeItem === 'home'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="new poll"
+                    active={activeItem === 'new poll'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="leader board"
+                    active={activeItem === 'leader board'}
+                    onClick={this.handleItemClick}
+                  />
+                </Menu>
+              </Grid.Column>
+            </Grid.Row>
           </Grid>
-          <Menu pointing secondary widths={3}>
-            <Menu.Item
-              name="home"
-              active={activeItem === 'home'}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="leader board"
-              active={activeItem === 'leader board'}
-              onClick={this.handleItemClick}
-            />
-            <Menu.Item
-              name="add question"
-              active={activeItem === 'add question'}
-              onClick={this.handleItemClick}
-            />
-          </Menu>
+        </Responsive>
+        <Responsive as={Fragment} maxWidth={374}>
+          <Grid>
+            <Grid.Row>
+              <Grid.Column>
+                <Image
+                  src="images/avatars/fox.png"
+                  avatar
+                  spaced="right"
+                  verticalAlign="bottom"
+                />
+                James Priest
+                <Button
+                  content="Logout"
+                  icon="arrow alternate circle right"
+                  labelPosition="right"
+                  basic
+                  compact
+                  floated="right"
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              {/* <Grid.Column> */}
+              <Menu pointing secondary widths={3}>
+                <Menu.Item
+                  name="home"
+                  active={activeItem === 'home'}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  name="new poll"
+                  active={activeItem === 'new poll'}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  name="leader board"
+                  active={activeItem === 'leader board'}
+                  onClick={this.handleItemClick}
+                />
+              </Menu>
+              {/* </Grid.Column> */}
+            </Grid.Row>
+          </Grid>
         </Responsive>
 
         <Segment>
