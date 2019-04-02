@@ -685,7 +685,9 @@ export class UITest2 extends Component {
 export default UITest2;
 ```
 
-Here's the UI.
+One of the things that Semantic UI React has is a Responsive control that can be used to show a different UI based on `min-width` or `max-width`.
+
+I created three breakpoint width for the navigation menu to use. Here's the UI.
 
 [![wyr8](assets/images/wyr8-small.jpg)](../assets/images/wyr8.jpg)<br>
 <span class="center bold">UITest2.js</span>
