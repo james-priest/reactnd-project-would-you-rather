@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   Accordion,
-  Container,
   Grid,
   Header,
   Icon,
