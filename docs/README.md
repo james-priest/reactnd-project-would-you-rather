@@ -691,3 +691,12 @@ I created three breakpoint width for the navigation menu to use. Here's the UI.
 
 [![wyr8](assets/images/wyr8-small.jpg)](../assets/images/wyr8.jpg)<br>
 <span class="center bold">UITest2.js</span>
+
+### 2.3 UI Mockups
+I started the process of mocking up the UI. I began with the Nav component and made it responsive.
+
+#### 2.3.1 Home 
+I added the Nav component and mocked out the content.
+
+[![wyr9](assets/images/wyr9-small.jpg)](../assets/images/wyr9.jpg)<br>
+<span class="center bold">Home Page</span>
