@@ -16,9 +16,9 @@ code {
     monospace;
 }
 
-.App {
-  padding: 20px;
-}
+/* .App {
+  padding: 20px 0 0 0;
+} */
 
 /* @media screen and (max-width: 650px) {
   html, body {

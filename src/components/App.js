@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import UITest from './mocks/UITest2';
+import Home from './mocks/Home';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <UITest />
+        <Home />
       </div>
     );
   }
