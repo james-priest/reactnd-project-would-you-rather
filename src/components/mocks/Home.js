@@ -7,7 +7,7 @@ export class Home extends Component {
     return (
       <div>
         <Nav />
-        {/* <TabControl /> */}
+        <TabControl />
       </div>
     );
   }
