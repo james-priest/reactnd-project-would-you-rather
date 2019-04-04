@@ -58,7 +58,7 @@ export class Nav extends Component {
           </Menu.Menu>
         </Responsive>
         <Responsive as={Fragment} minWidth={375} maxWidth={650}>
-          <Grid columns={2}>
+          <Grid columns={2} padded="vertically">
             <Grid.Row>
               <Grid.Column>
                 <Image
@@ -104,7 +104,7 @@ export class Nav extends Component {
           </Grid>
         </Responsive>
         <Responsive as={Fragment} maxWidth={374}>
-          <Grid>
+          <Grid padded="vertically" columns={1}>
             <Grid.Row>
               <Grid.Column>
                 <Image
@@ -126,25 +126,25 @@ export class Nav extends Component {
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
-              {/* <Grid.Column> */}
-              <Menu pointing secondary widths={3}>
-                <Menu.Item
-                  name="home"
-                  active={activeItem === 'home'}
-                  onClick={this.handleItemClick}
-                />
-                <Menu.Item
-                  name="new poll"
-                  active={activeItem === 'new poll'}
-                  onClick={this.handleItemClick}
-                />
-                <Menu.Item
-                  name="leader board"
-                  active={activeItem === 'leader board'}
-                  onClick={this.handleItemClick}
-                />
-              </Menu>
-              {/* </Grid.Column> */}
+              <Grid.Column>
+                <Menu pointing secondary widths={3}>
+                  <Menu.Item
+                    name="home"
+                    active={activeItem === 'home'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="new poll"
+                    active={activeItem === 'new poll'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="leader board"
+                    active={activeItem === 'leader board'}
+                    onClick={this.handleItemClick}
+                  />
+                </Menu>
+              </Grid.Column>
             </Grid.Row>
           </Grid>
         </Responsive>
