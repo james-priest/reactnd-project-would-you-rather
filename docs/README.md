@@ -699,7 +699,7 @@ For the visual design stage I took a pencil to paper in order to draw out a roug
 - Home
 - Poll Question
 - Poll Answered
-- Create Poll
+- New Poll
 - Leaderboard
 - Login
 
@@ -715,13 +715,351 @@ Live Demo: [Would You Rather App@4-ui-mockups](https://codesandbox.io/s/github/j
 ### 2.4 Mockup - Nav
 I split out the navigation into a Nav component that is responsive and scales well on mobile devices.
 
+```jsx
+// Nav.js
+import React, { Component, Fragment } from 'react';
+import {
+  Menu,
+  Responsive,
+  Image,
+  Grid,
+  Button,
+  Container
+} from 'semantic-ui-react';
+
+export class Nav extends Component {
+  state = { activeItem: 'home' };
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  render() {
+    const { activeItem } = this.state;
+    return (
+      <Container>
+        <Responsive as={Menu} minWidth={651} pointing secondary>
+          <Menu.Item
+            name="home"
+            active={activeItem === 'home'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="new poll"
+            active={activeItem === 'new poll'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Item
+            name="leader board"
+            active={activeItem === 'leader board'}
+            onClick={this.handleItemClick}
+          />
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <span>
+                <Image
+                  src="images/avatars/fox.png"
+                  avatar
+                  spaced="right"
+                  verticalAlign="bottom"
+                />
+                James Priest
+              </span>
+            </Menu.Item>
+            <Menu.Item>
+              <Button
+                content="Logout"
+                labelPosition="right"
+                basic
+                compact
+                icon="log out"
+                size="mini"
+              />
+            </Menu.Item>
+          </Menu.Menu>
+        </Responsive>
+        <Responsive as={Fragment} minWidth={375} maxWidth={650}>
+          <Grid columns={2} padded="vertically">
+            <Grid.Row>
+              <Grid.Column>
+                <Image
+                  src="images/avatars/fox.png"
+                  avatar
+                  spaced="right"
+                  verticalAlign="bottom"
+                />
+                James Priest
+              </Grid.Column>
+              <Grid.Column verticalAlign="bottom" textAlign="right">
+                <Button
+                  content="Logout"
+                  labelPosition="right"
+                  basic
+                  compact
+                  icon="log out"
+                  size="mini"
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={16}>
+                <Menu pointing secondary widths={3}>
+                  <Menu.Item
+                    name="home"
+                    active={activeItem === 'home'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="new poll"
+                    active={activeItem === 'new poll'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="leader board"
+                    active={activeItem === 'leader board'}
+                    onClick={this.handleItemClick}
+                  />
+                </Menu>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Responsive>
+        <Responsive as={Fragment} maxWidth={374}>
+          <Grid padded="vertically" columns={1}>
+            <Grid.Row>
+              <Grid.Column>
+                <Image
+                  src="images/avatars/fox.png"
+                  avatar
+                  spaced="right"
+                  verticalAlign="bottom"
+                />
+                James Priest
+                <Button
+                  content="Logout"
+                  labelPosition="right"
+                  basic
+                  compact
+                  icon="log out"
+                  size="mini"
+                  floated="right"
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <Menu pointing secondary widths={3}>
+                  <Menu.Item
+                    name="home"
+                    active={activeItem === 'home'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="new poll"
+                    active={activeItem === 'new poll'}
+                    onClick={this.handleItemClick}
+                  />
+                  <Menu.Item
+                    name="leader board"
+                    active={activeItem === 'leader board'}
+                    onClick={this.handleItemClick}
+                  />
+                </Menu>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Responsive>
+      </Container>
+    );
+  }
+}
+
+export default Nav;
+```
+
 [![wyr12](assets/images/wyr12-small.jpg)](../assets/images/wyr12.jpg)<br>
 Live Demo: [Would You Rather App@5-mockup-nav](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/5-mockup-nav/?fontsize=14) on CodeSandbox
 
-<!-- 
 ### 2.5 Mockup - Home
+This next mockup employs a Tab component and uses a hard-coded object structure to mimic data from the database.
+
+I also an using composition to break these components into smaller chunks
+
+#### App.js
+
+```jsx
+// App.js
+import React, { Component } from 'react';
+import Home from './mocks/Home';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Home />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+#### Home.js
+
+```jsx
+// Home.js
+import React, { Component } from 'react';
+import Nav from './Nav';
+import TabControl from './TabControl';
+
+export class Home extends Component {
+  render() {
+    return (
+      <div>
+        <Nav />
+        <TabControl />
+      </div>
+    );
+  }
+}
+
+export default Home;
+```
+
+#### TabControl.js
+
+```jsx
+// TabControl.js
+import React, { Component } from 'react';
+import { Tab, Grid } from 'semantic-ui-react';
+import { Question } from './Question';
+
+const questionData = {
+  unanswered: [
+    {
+      user: 'James Priest',
+      avatar: 'koala.png',
+      question: 'Jump out of an airplane'
+    },
+    {
+      user: 'Evi Monday',
+      avatar: 'rabbit.png',
+      question: 'Surprise a friend'
+    },
+    {
+      user: 'Brittini Bryant',
+      avatar: 'dog.png',
+      question: 'Teach a dog to code'
+    }
+  ],
+  answered: [
+    {
+      user: 'Meryem Jow',
+      avatar: 'tiger.png',
+      question: 'Know how to speak fluent German'
+    },
+    {
+      user: 'Peter Cruckshank',
+      avatar: 'gorilla.png',
+      question: 'Have a seamless MERN app deployment'
+    },
+    {
+      user: 'Joey Rivera',
+      avatar: 'lion.png',
+      question: 'Run your own dev company'
+    }
+  ]
+};
+
+const panes = [
+  {
+    menuItem: 'Unanswered',
+    render: () => (
+      <Tab.Pane>
+        {questionData.unanswered.map(question => (
+          <Question key={question.user} {...question} />
+        ))}
+      </Tab.Pane>
+    )
+  },
+  {
+    menuItem: 'Answered',
+    render: () => (
+      <Tab.Pane>
+        {questionData.answered.map(question => (
+          <Question key={question.user} {...question} />
+        ))}
+      </Tab.Pane>
+    )
+  }
+];
+
+export class TabControl extends Component {
+  render() {
+    return (
+      <Grid padded="vertically" columns={1} centered>
+        <Grid.Row>{% raw %}
+          <Grid.Column style={{ maxWidth: 550 }}>
+            <Tab panes={panes} className="tab" />
+          </Grid.Column>
+        </Grid.Row>{% endraw %}
+      </Grid>
+    );
+  }
+}
+
+export default TabControl;
+```
+
+#### Question.js
+
+```jsx
+// Question.js
+import React from 'react';
+import { Segment, Grid, Header, Button, Image } from 'semantic-ui-react';
+
+export const Question = ({ avatar, user, question }) => (
+  <Segment.Group>
+    <Header as="h5" textAlign="left" block attached="top">
+      {user} asks:
+    </Header>
+    <Grid divided padded>
+      <Grid.Row>
+        <Grid.Column width={5}>
+          <Image src={'/images/avatars/' + avatar} />
+        </Grid.Column>
+        <Grid.Column width={11} textAlign="center">
+          <Header as="h5" textAlign="left">
+            Would you rather
+          </Header>
+          <p>
+            {question}
+            <br />
+            or...
+          </p>
+          <Button color="green" size="tiny" fluid positive>
+            View Poll
+          </Button>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
+  </Segment.Group>
+);
+```
+
+Here's are two screenshots of the working mockup - one shows the Unanswered Questions tab and the other shows the Answered Questions tab.
+
+[![wyr10](assets/images/wyr10-small.jpg)](../assets/images/wyr10.jpg)<br>
+<span class="center bold">Unanswered Questions</span>
+
+[![wyr11](assets/images/wyr11-small.jpg)](../assets/images/wyr11.jpg)<br>
+<span class="center bold">Answered Questions</span>
+
+- Live Demo: [Would You Rather App@6-mockup-home](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/6-mockup-home/?fontsize=14) on CodeSandbox
+
+
+<!-- 
 ### 2.6 Mockup - Poll Question
 ### 2.7 Mockup - Poll Result
-### 2.8 Mockup - Create Poll
+### 2.8 Mockup - New Poll
 ### 2.9 Mockup - Leaderboard
 ### 2.10 Mockup - Login -->
