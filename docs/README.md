@@ -347,7 +347,7 @@ Here's a set of screenshots that show a sample project.
 
 ### 1.6 Step-by-Step Guide
 #### 1.6.1 Planning Stage 📐
-##### Step 1 - Draw All of the Views of the App
+##### Step 1 - Draw All of the Views of the App (Visual Design Stage)
 We need to determine the look and functionality of each view in your app. One of the best approaches is to draw each view of the app on paper so that you'll have a good idea of what information and data you're planning to have on each page.
 
 Instead of paper and pencil, you can be a bit more digital and use [software for creating mockups](https://codingsans.com/blog/mockup-tools). If you were given project specifications, check your mock against them to make sure that you have all of the required features.
@@ -396,7 +396,7 @@ For further information about this take a look at
 
 Remember, this is just a template. As you build more projects, you'll modify this template to suit your needs. You may also find it more intuitive to use a different approach. Regardless of the approach you take, however, **planning out your app is imperative to success**.
 
-## 2. Planning Stage
+## 2. Visual Design Stage
 ### 2.1 Semantic UI React
 This stage of the process consists of drawing or mocking up each of the app's views.
 
@@ -407,7 +407,7 @@ I settled on [Sematic UI React](https://react.semantic-ui.com/). It comes pre-ba
 Additionally, the docs are awesome. They have samples and CodeSandbox instances embedded in every page for easy testing and modification.
 
 ### 2.2 UI Testing
-I playing around with various components from the React library and tested how involved the implementation was. It turned out to be very straight-forward.
+I played around with various components from the Semantic-UI-React library and tested how involved the implementation was going to be. It turned out to be pretty  straight-forward.
 
 #### 2.2.1 UITest1
 Here I tested a handful of random components that you can see from the import list.
@@ -693,10 +693,35 @@ I created three breakpoint width for the navigation menu to use. Here's the UI.
 <span class="center bold">UITest2.js</span>
 
 ### 2.3 UI Mockups
-I started the process of mocking up the UI. I began with the Nav component and made it responsive.
+For the visual design stage I took a pencil to paper in order to draw out a rough sketch of each View. This showed me that I had  seven views to create.
 
-#### 2.3.1 Home 
-I added the Nav component and mocked out the content.
+- Nav
+- Home
+- Poll Question
+- Poll Answered
+- Create Poll
+- Leaderboard
+- Login
+
+From there I decided to go straight into building my mockups using [Semantic-UI-React](https://react.semantic-ui.com/) in order to get up to speed on the UI framework.
+
+This would give me a chance to see which layouts, controls, and components work best to display the data.
+
+#### 2.3.1 Sample Page
 
 [![wyr9](assets/images/wyr9-small.jpg)](../assets/images/wyr9.jpg)<br>
-<span class="center bold">Home Page</span>
+Live Demo: [Would You Rather App@4-ui-mockups](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/4-ui-mockups/?fontsize=14) on CodeSandbox
+
+### 2.4 Mockup - Nav
+I split out the navigation into a Nav component that is responsive and scales well on mobile devices.
+
+[![wyr12](assets/images/wyr12-small.jpg)](../assets/images/wyr12.jpg)<br>
+Live Demo: [Would You Rather App@5-mockup-nav](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/5-mockup-nav/?fontsize=14) on CodeSandbox
+
+<!-- 
+### 2.5 Mockup - Home
+### 2.6 Mockup - Poll Question
+### 2.7 Mockup - Poll Result
+### 2.8 Mockup - Create Poll
+### 2.9 Mockup - Leaderboard
+### 2.10 Mockup - Login -->
