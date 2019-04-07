@@ -710,7 +710,7 @@ This would give me a chance to see which layouts, controls, and components work 
 #### 2.3.1 Sample Page
 
 [![wyr9](assets/images/wyr9-small.jpg)](../assets/images/wyr9.jpg)<br>
-Live Demo: [Would You Rather App@4-ui-mockups](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/4-ui-mockups/?fontsize=14) on CodeSandbox
+Live Demo: [Would You Rather@4-ui-mockups](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/4-ui-mockups/?fontsize=14) on CodeSandbox
 
 ### 2.4 Mockup - Nav
 I split out the navigation into a Nav component that is responsive and scales well on mobile devices.
@@ -876,14 +876,14 @@ export default Nav;
 ```
 
 [![wyr12](assets/images/wyr12-small.jpg)](../assets/images/wyr12.jpg)<br>
-Live Demo: [Would You Rather App@5-mockup-nav](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/5-mockup-nav/?fontsize=14) on CodeSandbox
+Live Demo: [Would You Rather@5-mockup-nav](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/5-mockup-nav/?fontsize=14) on CodeSandbox
 
 ### 2.5 Mockup - Home
 This next mockup employs a Tab component and uses a hard-coded object structure to mimic data from the database.
 
 I also an using composition to break these components into smaller chunks
 
-#### App.js
+#### 2.5.1 App.js
 
 ```jsx
 // App.js
@@ -903,7 +903,7 @@ class App extends Component {
 export default App;
 ```
 
-#### Home.js
+#### 2.5.2 Home.js
 
 ```jsx
 // Home.js
@@ -925,7 +925,7 @@ export class Home extends Component {
 export default Home;
 ```
 
-#### TabControl.js
+#### 2.5.3 TabControl.js
 
 ```jsx
 // TabControl.js
@@ -1010,7 +1010,7 @@ export class TabControl extends Component {
 export default TabControl;
 ```
 
-#### Question.js
+#### 2.5.4 Question.js
 
 ```jsx
 // Question.js
@@ -1054,11 +1054,367 @@ Here's are two screenshots of the working mockup - one shows the Unanswered Ques
 [![wyr11](assets/images/wyr11-small.jpg)](../assets/images/wyr11.jpg)<br>
 <span class="center bold">Answered Questions</span>
 
-- Live Demo: [Would You Rather App@6-mockup-home](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/6-mockup-home/?fontsize=14) on CodeSandbox
+> Live Demo: [Would You Rather@6-mockup-home](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/6-mockup-home/?fontsize=14) on CodeSandbox
 
+### 2.6 Mockup - Framework
+The next thing I did was to build out a framework for the app so I could click each of the menu items and navigate to every page. This required adding the following.
+
+- Routing with React Router
+- Empty landing pages for each views and menu items
+
+#### 2.6.1 App.js
+This component imports the following
+
+- React Router
+- Semantic UI Grid
+- Mock data
+- Components for each page
+
+```jsx
+// App.js
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Grid } from 'semantic-ui-react';
+import { questionData } from './mocks/_data';
+import Nav from './mocks/Nav';
+import Home from './mocks/Home';
+import NewPoll from './mocks/NewPoll';
+import Leaderboard from './mocks/Leaderboard';
+import Login from './mocks/Login';
+import NoMatch from './mocks/NoMatch404';
+import PollContainer from './mocks/PollContainer';
+
+class App extends Component {
+  state = {
+    authUser: false,
+    showResult: false
+  };
+  handleLogin = () => {
+    this.setState(prevState => ({
+      authUser: !prevState.authUser
+    }));
+  };
+  setResult = showResult => {
+    this.setState({
+      showResult: showResult
+    });
+  };
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          {this.state.authUser === true ? (
+            <Fragment>
+              <Nav onLogout={this.handleLogin} />
+              <ContentGrid>
+                <AppRoutes
+                  setResult={this.setResult}
+                  showResult={this.state.showResult}
+                />
+              </ContentGrid>
+            </Fragment>
+          ) : (
+            <Route render={() => <Login onLogin={this.handleLogin} />} />
+          )}
+        </div>
+      </Router>
+    );
+  }
+}
+
+const ContentGrid = ({ children }) => (
+  <Grid padded="vertically" columns={1} centered>
+    <Grid.Row>{% raw %}
+      <Grid.Column style={{ maxWidth: 550 }}>{children}</Grid.Column>
+    </Grid.Row>{% endraw %}
+  </Grid>
+);
+
+const AppRoutes = props => (
+  <Switch>
+    <Route
+      exact
+      path="/"
+      render={() => <Home onSetResult={props.setResult} />}
+    />
+    <Route
+      path="/questions/:question_id"
+      render={() => (
+        <PollContainer {...questionData} showResult={props.showResult} />
+      )}
+    />
+    <Route path="/add" component={NewPoll} />
+    <Route path="/leaderboard" component={Leaderboard} />
+    <Route component={NoMatch} />
+  </Switch>
+);
+
+export default App;
+```
+
+State is used to manage a redirect to the login page and well as whether to show a poll's question or results based on whether the question has been answered or not.
+
+#### 2.6.2 Login.js
+
+```jsx
+// Login.js
+import React, { Component } from 'react';
+
+export class Login extends Component {
+  handleClick = e => {
+    e.preventDefault();
+    this.props.onLogin();
+  };
+  render() {
+    return (
+      <div>
+        <h3>Login</h3>
+        <button onClick={this.handleClick}>Login</button>
+      </div>
+    );
+  }
+}
+
+export default Login;
+```
+
+[![wyr13](assets/images/wyr13-small.jpg)](../assets/images/wyr13.jpg)<br>
+<span class="center bold">Minimal Login</span>
+
+#### 2.6.3 Home.js
+Home has now been updated in the following ways.
+
+- Mock data has been moved into it's own external library
+- Tab component is now rendered within the this view
+
+```jsx
+// Home.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Tab } from 'semantic-ui-react';
+import { Question } from './Question';
+import { userQuestionData } from './_data';
+
+export class Home extends Component {
+  static propTypes = {
+    onSetResult: PropTypes.func.isRequired
+  };
+  render() {
+    return <TabControl onSetResult={this.props.onSetResult} />;
+  }
+}
+
+const panes = props => [
+  {
+    menuItem: 'Unanswered',
+    render: () => (
+      <Tab.Pane>
+        {userQuestionData.unanswered.map(question => (
+          <Question
+            key={question.qid}
+            {...question}
+            unanswered={true}
+            {...props}
+            // onSetResult={props.onSetResult}
+          />
+        ))}
+      </Tab.Pane>
+    )
+  },
+  {
+    menuItem: 'Answered',
+    render: () => (
+      <Tab.Pane>
+        {userQuestionData.answered.map(question => (
+          <Question
+            key={question.qid}
+            {...question}
+            unanswered={false}
+            {...props}
+            // onSetResult={props.onSetResult}
+          />
+        ))}
+      </Tab.Pane>
+    )
+  }
+];
+
+class TabControl extends Component {
+  render() {
+    return <Tab panes={panes(this.props)} className="tab" />;
+  }
+}
+
+export default Home;
+```
+
+We are also now passing in a few more props into the Question component. This is so it can render the UI differently based on whether a question has been answered or not.
+
+#### 2.6.4 Question.js
+This component is responsible for displaying the question differently if it has already been answered. For that reason we're doing the following.
+
+- Setting proper color scheme based on whether question is answered
+- Redirecting to 'questions/:question_id' when the Button is clicked
+- We trigger the `onSetResult` props function in order to set a flag in App that will determine if a poll question or poll result is shown.
+
+```jsx
+// Question.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { Segment, Grid, Header, Button, Image } from 'semantic-ui-react';
+
+const color = {
+  green: {
+    name: 'green',
+    hex: '#21ba45'
+  },
+  blue: {
+    name: 'blue',
+    hex: '#2185d0'
+  },
+  teal: {
+    name: 'teal',
+    hex: '#009c95'
+  },
+  grey: {
+    name: null,
+    hex: '#767676'
+  }
+};
+export class Question extends Component {
+  static propTypes = {
+    qid: PropTypes.number.isRequired,
+    author: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    question: PropTypes.string.isRequired,
+    unanswered: PropTypes.bool.isRequired,
+    onSetResult: PropTypes.func.isRequired
+  };
+  state = {
+    viewPoll: false
+  };
+  handleClick = e => {
+    this.props.onSetResult(!this.props.unanswered);
+
+    this.setState(prevState => ({
+      viewPoll: !prevState.viewPoll
+    }));
+  };
+  render() {
+    const { avatar, author, question, qid, unanswered } = this.props;
+
+    const tabColor = unanswered === true ? color.green : color.blue;
+
+    if (this.state.viewPoll === true) {
+      return <Redirect push to={`/questions/${qid}`} />;
+    }
+    return (
+      <Segment.Group>
+        <Header
+          as="h5"
+          textAlign="left"
+          block
+          attached="top"{% raw %}
+          style={{
+            borderTop: `2px solid ${tabColor.hex}`
+          }}
+        >{% endraw %}
+          {author} asks:
+        </Header>
+        <Grid divided padded>
+          <Grid.Row>
+            <Grid.Column width={5}>
+              <Image src={`/images/avatars/${avatar}`} />
+            </Grid.Column>
+            <Grid.Column width={11} textAlign="center">
+              <Header as="h5" textAlign="left">
+                Would you rather
+              </Header>
+              <p>
+                {question}
+                <br />
+                or...
+              </p>
+              <Button
+                color={tabColor.name}
+                size="tiny"
+                fluid
+                onClick={this.handleClick}
+              >
+                {unanswered === true ? 'Answer Poll' : 'Results'}
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment.Group>
+    );
+  }
+}
+
+export default Question;
+```
+
+[![wyr14](assets/images/wyr14-small.jpg)](../assets/images/wyr14.jpg)<br>
+<span class="center bold">Unanswered Questions Tab</span>
+
+[![wyr15](assets/images/wyr15-small.jpg)](../assets/images/wyr15.jpg)<br>
+<span class="center bold">Answered Questions Tab</span>
+
+#### 2.6.5 NewPoll.js
+
+```jsx
+// NewPoll.js
+import React, { Component } from 'react';
+import { Segment } from 'semantic-ui-react';
+
+export class NewPoll extends Component {
+  render() {
+    return (
+      <div>
+        <Segment>
+          <h3>New Poll</h3>
+        </Segment>
+      </div>
+    );
+  }
+}
+
+export default NewPoll;
+```
+
+[![wyr16](assets/images/wyr16-small.jpg)](../assets/images/wyr16.jpg)<br>
+<span class="center bold">New Poll Stub</span>
+
+#### 2.6.6 Leaderboard.js
+
+```jsx
+// Leaderboard.js
+import React, { Component, Fragment } from 'react';
+import { Segment } from 'semantic-ui-react';
+
+export class Leaderboard extends Component {
+  render() {
+    return (
+      <Fragment>
+        <Segment>
+          <h3>Leaderboard</h3>
+        </Segment>
+      </Fragment>
+    );
+  }
+}
+
+export default Leaderboard;
+```
+
+[![wyr17](assets/images/wyr17-small.jpg)](../assets/images/wyr17.jpg)<br>
+<span class="center bold">Leaderboard Stub</span>
+
+> Live Demo: [Would You Rather@7-mockup-framework](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/7-mockup-framework/?fontsize=14) on CodeSandbox
 
 <!-- 
-### 2.6 Mockup - Poll Question
+### 2.7 Mockup - Poll Question
 ### 2.7 Mockup - Poll Result
 ### 2.8 Mockup - New Poll
 ### 2.9 Mockup - Leaderboard
