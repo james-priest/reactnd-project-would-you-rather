@@ -1413,6 +1413,142 @@ export default Leaderboard;
 
 > Live Demo: [Would You Rather@7-mockup-framework](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/7-mockup-framework/?fontsize=14) on CodeSandbox
 
+### 2.7 Mockup - Poll Question
+The next set of changes happens in PollContainer.  This component is responsible for rendering the poll question or poll result.
+
+#### 2.7.1 PollContainer.js
+
+```jsx
+// PollContainer.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Segment, Header, Grid, Image } from 'semantic-ui-react';
+import PollQuestion from './PollQuestion';
+import PollResult from './PollResult';
+
+export class PollContainer extends Component {
+  static propTypes = {
+    avatar: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    optionOne: PropTypes.object.isRequired,
+    optionTwo: PropTypes.object.isRequired,
+    showResult: PropTypes.bool.isRequired
+  };
+  state = {
+    showResult: this.props.showResult
+  };
+
+  handleSubmit = val => {
+    this.setState({
+      showResult: true
+    });
+  };
+
+  render() {
+    const { avatar, author } = this.props;
+
+    return (
+      <Segment.Group>
+        <Header as="h5" textAlign="left" block attached="top">
+          {author} asks:
+        </Header>
+        <Grid divided padded>
+          <Grid.Row>
+            <Grid.Column width={5}>
+              <Image src={`/images/avatars/${avatar}`} />
+            </Grid.Column>
+            <Grid.Column width={11}>
+              {this.state.showResult === false ? (
+                <PollQuestion {...this.props} onSubmit={this.handleSubmit} />
+              ) : (
+                <PollResult {...this.props} />
+              )}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment.Group>
+    );
+  }
+}
+
+export default PollContainer;
+```
+
+Next is the Poll Question component that is rendered when one of the questions is selected from the Unanswered Questions tab.
+
+```jsx
+import React, { Component, Fragment } from 'react';
+import { Header, Button, Form, Radio } from 'semantic-ui-react';
+
+export class PollQuestion extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    optionOne: PropTypes.object.isRequired,
+    optionTwo: PropTypes.object.isRequired
+  };
+  state = {
+    value: ''
+  };
+
+  handleChange = (e, { value }) => this.setState({ value });
+
+  handleSubmit = e => {
+    e.preventDefault();
+    if (this.state.value !== '') {
+      this.props.onSubmit(this.state.value);
+    }
+  };
+
+  render() {
+    const { optionOne, optionTwo } = this.props;
+    const disabled = this.state.value === '' ? true : false;
+
+    return (
+      <Fragment>
+        <Header as="h4">Would you rather</Header>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <Radio
+              label={optionOne.text}
+              name="radioGroup"
+              value="this"
+              checked={this.state.value === 'this'}
+              onChange={this.handleChange}
+            />
+            <br />
+            <Radio
+              label={optionTwo.text}
+              name="radioGroup"
+              value="that"
+              checked={this.state.value === 'that'}
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Button
+              color="green"
+              size="tiny"
+              fluid
+              positive
+              disabled={disabled}
+              content="Submit"
+            />
+          </Form.Field>
+        </Form>
+      </Fragment>
+    );
+  }
+}
+
+export default PollQuestion;
+```
+
+[![wyr18](assets/images/wyr18-small.jpg)](../assets/images/wyr18.jpg)<br>
+<span class="center bold">Poll Question</span>
+
+> Live Demo: [Would You Rather@8-mockup-poll-question](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/8-mockup-poll-question/?fontsize=14) on CodeSandbox
+
+
 <!-- 
 ### 2.7 Mockup - Poll Question
 ### 2.7 Mockup - Poll Result
