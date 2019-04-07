@@ -32,6 +32,16 @@ code {
 .tab .ui.tabular.menu .active.item {
   background: none #fff;
 }
+.ui.radio.checkbox {
+  margin-left: 20px;
+  margin-bottom: 4px;
+}
+i.compact.icon {
+  margin: 0 .5em 0 0!important;
+}
+.ui.ribbon.label.vote {
+  margin-bottom: 8px;
+}
 
 /* @media screen and (max-width: 650px) {
   html, body {

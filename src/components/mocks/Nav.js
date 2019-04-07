@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter, NavLink } from 'react-router-dom';
 import {
   Menu,
   Responsive,
@@ -8,36 +9,24 @@ import {
   Container
 } from 'semantic-ui-react';
 
-export class Nav extends Component {
-  state = { activeItem: 'home' };
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+class Nav extends Component {
+  handleLogout = e => {
+    e.preventDefault();
+    this.props.onLogout();
+  };
 
   render() {
-    const { activeItem } = this.state;
     return (
       <Container>
         <Responsive as={Menu} minWidth={651} pointing secondary>
-          <Menu.Item
-            name="home"
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="new poll"
-            active={activeItem === 'new poll'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="leader board"
-            active={activeItem === 'leader board'}
-            onClick={this.handleItemClick}
-          />
+          <Menu.Item name="home" as={NavLink} to="/" exact />
+          <Menu.Item name="new poll" as={NavLink} to="/add" />
+          <Menu.Item name="leader board" as={NavLink} to="/leaderboard" />
           <Menu.Menu position="right">
             <Menu.Item>
               <span>
                 <Image
-                  src="images/avatars/fox.png"
+                  src="/images/avatars/fox.png"
                   avatar
                   spaced="right"
                   verticalAlign="bottom"
@@ -53,6 +42,7 @@ export class Nav extends Component {
                 compact
                 icon="log out"
                 size="mini"
+                onClick={this.handleLogout}
               />
             </Menu.Item>
           </Menu.Menu>
@@ -62,7 +52,7 @@ export class Nav extends Component {
             <Grid.Row>
               <Grid.Column>
                 <Image
-                  src="images/avatars/fox.png"
+                  src="/images/avatars/fox.png"
                   avatar
                   spaced="right"
                   verticalAlign="bottom"
@@ -77,26 +67,19 @@ export class Nav extends Component {
                   compact
                   icon="log out"
                   size="mini"
+                  onClick={this.handleLogout}
                 />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column width={16}>
                 <Menu pointing secondary widths={3}>
-                  <Menu.Item
-                    name="home"
-                    active={activeItem === 'home'}
-                    onClick={this.handleItemClick}
-                  />
-                  <Menu.Item
-                    name="new poll"
-                    active={activeItem === 'new poll'}
-                    onClick={this.handleItemClick}
-                  />
+                  <Menu.Item name="home" as={NavLink} to="/" exact />
+                  <Menu.Item name="new poll" as={NavLink} to="/add" />
                   <Menu.Item
                     name="leader board"
-                    active={activeItem === 'leader board'}
-                    onClick={this.handleItemClick}
+                    as={NavLink}
+                    to="/leaderboard"
                   />
                 </Menu>
               </Grid.Column>
@@ -108,7 +91,7 @@ export class Nav extends Component {
             <Grid.Row>
               <Grid.Column>
                 <Image
-                  src="images/avatars/fox.png"
+                  src="/images/avatars/fox.png"
                   avatar
                   spaced="right"
                   verticalAlign="bottom"
@@ -122,26 +105,19 @@ export class Nav extends Component {
                   icon="log out"
                   size="mini"
                   floated="right"
+                  onClick={this.handleLogout}
                 />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
               <Grid.Column>
                 <Menu pointing secondary widths={3}>
-                  <Menu.Item
-                    name="home"
-                    active={activeItem === 'home'}
-                    onClick={this.handleItemClick}
-                  />
-                  <Menu.Item
-                    name="new poll"
-                    active={activeItem === 'new poll'}
-                    onClick={this.handleItemClick}
-                  />
+                  <Menu.Item name="home" as={NavLink} to="/" exact />
+                  <Menu.Item name="new poll" as={NavLink} to="/add" />
                   <Menu.Item
                     name="leader board"
-                    active={activeItem === 'leader board'}
-                    onClick={this.handleItemClick}
+                    as={NavLink}
+                    to="/leaderboard"
                   />
                 </Menu>
               </Grid.Column>
@@ -153,4 +129,4 @@ export class Nav extends Component {
   }
 }
 
-export default Nav;
+export default withRouter(Nav);
