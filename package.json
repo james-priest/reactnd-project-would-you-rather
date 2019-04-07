@@ -5,9 +5,11 @@
   "dependencies": {
     "faker": "^4.1.0",
     "fomantic-ui-css": "^2.7.4",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
