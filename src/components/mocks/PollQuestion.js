@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { Header, Button, Form, Radio } from 'semantic-ui-react';
 
 export class PollQuestion extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    optionOne: PropTypes.object.isRequired,
+    optionTwo: PropTypes.object.isRequired
+  };
   state = {
     value: ''
   };
