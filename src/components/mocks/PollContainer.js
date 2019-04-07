@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Segment, Header, Grid, Image } from 'semantic-ui-react';
 import PollQuestion from './PollQuestion';
 import PollResult from './PollResult';
 
 export class PollContainer extends Component {
+  static propTypes = {
+    avatar: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    optionOne: PropTypes.object.isRequired,
+    optionTwo: PropTypes.object.isRequired,
+    showResult: PropTypes.bool.isRequired
+  };
   state = {
     showResult: this.props.showResult
   };
