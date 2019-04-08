@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import {
   Header,
@@ -10,13 +11,17 @@ import {
 } from 'semantic-ui-react';
 
 export class PollResult extends Component {
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    optionOne: PropTypes.object.isRequired,
+    optionTwo: PropTypes.object.isRequired
+  };
   handleClick = () => {
     this.props.history.push('/');
   };
 
   render() {
     const { optionOne, optionTwo } = this.props;
-    // console.log('this.props', this.props);
 
     return (
       <Fragment>
