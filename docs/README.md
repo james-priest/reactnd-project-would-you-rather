@@ -1414,7 +1414,7 @@ export default Leaderboard;
 > Live Demo: [Would You Rather@7-mockup-framework](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/7-mockup-framework/?fontsize=14) on CodeSandbox
 
 ### 2.7 Mockup - Poll Question
-The next set of changes happens in PollContainer.  This component is responsible for rendering the poll question or poll result.
+The next set of changes happens in PollContainer.  This component is responsible for rendering the poll question or poll result based on a `showResult` flag we pass down.
 
 #### 2.7.1 PollContainer.js
 
@@ -1474,9 +1474,11 @@ export class PollContainer extends Component {
 export default PollContainer;
 ```
 
+#### 2.7.2 PollQuestion.js
 Next is the Poll Question component that is rendered when one of the questions is selected from the Unanswered Questions tab.
 
 ```jsx
+// PollQuestion.js
 import React, { Component, Fragment } from 'react';
 import { Header, Button, Form, Radio } from 'semantic-ui-react';
 
@@ -1548,10 +1550,78 @@ export default PollQuestion;
 
 > Live Demo: [Would You Rather@8-mockup-poll-question](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/8-mockup-poll-question/?fontsize=14) on CodeSandbox
 
+### 2.8 Mockup - Poll Result
+The next step was to add in the PollResult.js component.
+
+#### 2.8.1 PollResult.js
+
+```jsx
+// PollResult.js
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import {
+  Header,
+  Segment,
+  Progress,
+  Label,
+  Button,
+  Icon
+} from 'semantic-ui-react';
+
+export class PollResult extends Component {
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    optionOne: PropTypes.object.isRequired,
+    optionTwo: PropTypes.object.isRequired
+  };
+  handleClick = () => {
+    this.props.history.push('/');
+  };
+
+  render() {
+    const { optionOne, optionTwo } = this.props;
+
+    return (
+      <Fragment>{% raw %}
+        <Header as="h3">Results:</Header>
+        <Segment color="green" style={{ backgroundColor: 'honeydew' }}>
+          <Label color="orange" ribbon="right" className="vote">
+            <Icon name="check circle outline" size="big" className="compact" />
+            <div style={{ float: 'right' }}>
+              Your
+              <br />
+              Vote
+            </div>
+          </Label>
+          <p style={{ fontWeight: 'bold' }}>{optionOne.text}</p>
+          <Progress percent={((2 / 3) * 100).toFixed(2)} progress color="green">
+            2 out of 3 votes
+          </Progress>
+        </Segment>
+        <Segment color="grey" style={{ backgroundColor: '#f4f4f4' }}>
+          <p style={{ fontWeight: 'bold' }}>{optionTwo.text}</p>
+          <Progress percent={((1 / 3) * 100).toFixed(2)} progress>
+            1 out of 3 votes
+          </Progress>
+        </Segment>
+        <Button size="tiny" floated="right" onClick={this.handleClick}>
+          Back
+        </Button>
+      </Fragment>{% endraw %}
+    );
+  }
+}
+
+export default withRouter(PollResult);
+```
+
+[![wyr19](assets/images/wyr19-small.jpg)](../assets/images/wyr19.jpg)<br>
+<span class="center bold">Poll Result</span>
+
+> Live Demo: [Would You Rather@9-mockup-poll-result](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/9-mockup-poll-result/?fontsize=14) on CodeSandbox
 
 <!-- 
-### 2.7 Mockup - Poll Question
-### 2.7 Mockup - Poll Result
-### 2.8 Mockup - New Poll
-### 2.9 Mockup - Leaderboard
-### 2.10 Mockup - Login -->
+### 2.9 Mockup - New Poll
+### 2.10 Mockup - Leaderboard
+### 2.11 Mockup - Login -->
