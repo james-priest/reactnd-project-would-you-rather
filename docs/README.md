@@ -1621,7 +1621,124 @@ export default withRouter(PollResult);
 
 > Live Demo: [Would You Rather@9-mockup-poll-result](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/9-mockup-poll-result/?fontsize=14) on CodeSandbox
 
-<!-- 
 ### 2.9 Mockup - New Poll
+The New Poll page allows you to create a poll.
+
+For this mockup I implemented the following.
+
+- Validation to require both fields have data before enabling submit
+- Loader to show submission of data
+- Redirect after successful submit
+
+I used state to manage the form which makes this a controlled component.
+
+#### 2.9.1 NewPoll.js
+
+```jsx
+// NewPoll.js
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import {
+  Segment,
+  Header,
+  Grid,
+  Divider,
+  Form,
+  Dimmer,
+  Loader
+} from 'semantic-ui-react';
+
+export class NewPoll extends Component {
+  state = {
+    validSubmit: false,
+    isLoading: false,
+    option1: '',
+    option2: ''
+  };
+  handleChange = e => {
+    console.log(e.target.id);
+    this.setState({ [e.target.id]: e.target.value });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log('this.state.option1', this.state.option1);
+    console.log('this.state.option2', this.state.option2);
+
+    new Promise((res, rej) => {
+      this.setState({ isLoading: true });
+      setTimeout(() => res('success'), 1000);
+    }).then(() => {
+      this.setState({
+        option1: '',
+        option2: ''
+      });
+      this.setState({ validSubmit: true });
+    });
+  };
+  render() {
+    const disabled = this.state.option1 === '' || this.state.option2 === '';
+    if (this.state.validSubmit === true) {
+      return <Redirect to="/" />;
+    }
+    return (
+      <Segment.Group>
+        <Header as="h3" textAlign="left" block attached="top">
+          Create a New Poll
+        </Header>
+        <Grid padded>
+          <Grid.Column>
+            {this.state.isLoading && (
+              <Dimmer active inverted>
+                <Loader content="Updating" />
+              </Dimmer>
+            )}
+            <p>Complete the question:</p>
+            <p>
+              <strong>Would you rather...</strong>
+            </p>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Input
+                id="option1"
+                placeholder="Enter option one..."
+                value={this.state.option1}
+                onChange={this.handleChange}
+                required
+              />
+              <Divider horizontal>Or</Divider>
+              <Form.Input
+                id="option2"
+                placeholder="Enter option two..."
+                value={this.state.option2}
+                onChange={this.handleChange}
+                required
+              />
+              <Form.Button positive size="tiny" fluid disabled={disabled}>
+                Submit
+              </Form.Button>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </Segment.Group>
+    );
+  }
+}
+
+export default NewPoll;
+```
+
+Here are screenshots of the form in different states.
+
+[![wyr23](assets/images/wyr23-small.jpg)](../assets/images/wyr23.jpg)<br>
+<span class="center bold">New Poll - Incomplete fields</span>
+
+[![wyr21](assets/images/wyr21-small.jpg)](../assets/images/wyr21.jpg)<br>
+<span class="center bold">New Poll - Valid fields</span>
+
+[![wyr22](assets/images/wyr22-small.jpg)](../assets/images/wyr22.jpg)<br>
+<span class="center bold">New Poll - Loader on Submission</span>
+
+> Live Demo: [Would You Rather@10-mockup-new-poll](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/10-mockup-new-poll/?fontsize=14) on CodeSandbox
+
+<!-- 
 ### 2.10 Mockup - Leaderboard
 ### 2.11 Mockup - Login -->
