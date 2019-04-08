@@ -3,40 +3,40 @@ export const userQuestionData = {
     {
       qid: 1,
       author: 'James Priest',
-      avatar: 'koala.png',
-      question: 'Jump out of an airplane'
+      avatar: 'fox.png',
+      question: 'Visit a friend in a foreign country'
     },
     {
       qid: 2,
-      author: 'Evi Monday',
-      avatar: 'rabbit.png',
-      question: 'Surprise a friend'
-    },
-    {
-      qid: 3,
-      author: 'Brittini Bryant',
-      avatar: 'dog.png',
-      question: 'Teach a dog to code'
-    }
-  ],
-  answered: [
-    {
-      qid: 4,
       author: 'Meryem Jow',
       avatar: 'tiger.png',
       question: 'Know how to speak fluent German'
     },
     {
       qid: 5,
-      author: 'Peter Cruckshank',
-      avatar: 'gorilla.png',
-      question: 'Have a seamless MERN app deployment'
+      author: 'Evi Monday',
+      avatar: 'rabbit.png',
+      question: 'Surprise a friend'
+    }
+  ],
+  answered: [
+    {
+      qid: 4,
+      author: 'Brittini Bryant',
+      avatar: 'dog.png',
+      question: 'Teach a dog to code'
     },
     {
-      qid: 6,
+      qid: 3,
       author: 'Joey Rivera',
       avatar: 'lion.png',
       question: 'Run your own dev company'
+    },
+    {
+      qid: 6,
+      author: 'Peter Cruckshank',
+      avatar: 'gorilla.png',
+      question: 'Have a seamless MERN app deployment'
     }
   ]
 };
