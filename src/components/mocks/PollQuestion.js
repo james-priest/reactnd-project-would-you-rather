@@ -33,16 +33,16 @@ export class PollQuestion extends Component {
             <Radio
               label={optionOne.text}
               name="radioGroup"
-              value="this"
-              checked={this.state.value === 'this'}
+              value="optionOne"
+              checked={this.state.value === 'optionOne'}
               onChange={this.handleChange}
             />
             <br />
             <Radio
               label={optionTwo.text}
               name="radioGroup"
-              value="that"
-              checked={this.state.value === 'that'}
+              value="optionTwo"
+              checked={this.state.value === 'optionTwo'}
               onChange={this.handleChange}
             />
           </Form.Field>

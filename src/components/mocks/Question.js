@@ -58,9 +58,8 @@ export class Question extends Component {
           style={{
             borderTop: `2px solid ${tabColor.hex}`
           }}
-        >
-          {author} asks:
-        </Header>
+          content={`${author} asks:`}
+        />
         <Grid divided padded>
           <Grid.Row>
             <Grid.Column width={5}>
@@ -80,9 +79,8 @@ export class Question extends Component {
                 size="tiny"
                 fluid
                 onClick={this.handleClick}
-              >
-                {unanswered === true ? 'Answer Poll' : 'Results'}
-              </Button>
+                content={unanswered === true ? 'Answer Poll' : 'Results'}
+              />
             </Grid.Column>
           </Grid.Row>
         </Grid>
