@@ -1,4 +1,5 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/a716b2bd-1082-43d9-bd17-cd3684d2d7ad/deploy-status)](https://app.netlify.com/sites/reactnd-would-you-rather/deploys)
+[![Edit reactnd-project-would-you-rather](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/master/?fontsize=14)
 
 # Would You Rather
 
@@ -8,7 +9,7 @@ It's built with React, Redux, React Router, & Redux Thunk.
 
 This app is the second of three projects required for [Udacity's React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
 
-**Live Demo**: [https://reactnd-would-you-rather.netlify.com/](https://reactnd-would-you-rather.netlify.com/)
+- **Live Demo:** [https://reactnd-would-you-rather.netlify.com/](https://reactnd-would-you-rather.netlify.com/)
 
 ## Installation
 
