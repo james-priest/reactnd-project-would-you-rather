@@ -1739,6 +1739,120 @@ Here are screenshots of the form in different states.
 
 > Live Demo: [Would You Rather@10-mockup-new-poll](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/10-mockup-new-poll/?fontsize=14) on CodeSandbox
 
-<!-- 
 ### 2.10 Mockup - Leaderboard
+The leaderboard shows the top three users ranked by score. Score is determined by number of questions answered plus number of questions asked for a total score.
+
+Here are the elements of the mockup
+
+- Name
+- Answered questions score
+- Created questions score
+- Total score
+- Avatar image
+- Ordered ranking
+
+#### 2.10.1 Leaderboard.js
+
+```jsx
+// Leaderboard.js
+import React, { Component, Fragment } from 'react';
+import {
+  Segment,
+  Grid,
+  Header,
+  Image,
+  Label,
+  Divider,
+  Icon
+} from 'semantic-ui-react';
+import { leaderboardData, users } from './_data';
+
+const trophyColor = ['yellow', 'grey', 'orange'];
+
+export class Leaderboard extends Component {
+  render() {
+    return (
+      <Fragment>
+        {leaderboardData.map((user, idx) => (
+          <Segment.Group key={user.id}>
+            <Label corner="left" icon="trophy" color={trophyColor[idx]} />
+            <Grid divided padded>
+              <Grid.Row>
+                <Grid.Column width={4} verticalAlign="middle">
+                  <Image src={`/images/avatars/${user.avatar}`} />
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Header as="h3" textAlign="left">
+                    {user.name}
+                  </Header>
+                  <Grid>
+                    <Grid.Column width={12}>Answered questions</Grid.Column>
+                    <Grid.Column width={4}>{user.answerCount}</Grid.Column>
+                  </Grid>
+                  <Divider />
+                  <Grid>
+                    <Grid.Column width={12}>Created questions</Grid.Column>
+                    <Grid.Column width={4}>{user.questionCount}</Grid.Column>
+                  </Grid>
+                </Grid.Column>
+                <Grid.Column width={4} textAlign="center">
+                  <Segment.Group>
+                    <Header as="h5" block attached="top" content="Score" />
+                    <Segment>
+                      <Label circular color="green" size="big">
+                        {user.questionCount + user.answerCount}
+                      </Label>
+                    </Segment>
+                  </Segment.Group>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Segment.Group>
+        ))}
+      </Fragment>
+    );
+  }
+}
+
+export default Leaderboard;
+```
+
+#### 2.10.2 _data.js
+Here's the mock data. When it comes time to pull actual data from the DB it'll need to be formatted like this in order to be mapped over.
+
+```jsx
+// _data.js
+export const leaderboardData = [
+  {
+    id: 'brittinibryant',
+    name: 'Brittini Bryant',
+    avatar: 'dog.png',
+    answerCount: 11,
+    questionCount: 4
+  },
+  {
+    id: 'joeylenerivera',
+    name: 'Joeylene Rivera',
+    avatar: 'lion.png',
+    answerCount: 7,
+    questionCount: 4
+  },
+  {
+    id: 'evidencemonday',
+    name: 'Evidence Monday',
+    avatar: 'rabbit.png',
+    answerCount: 4,
+    questionCount: 3
+  }
+];
+```
+
+Here's a screenshot of the leaderboard.
+
+[![wyr24](assets/images/wyr24-small.jpg)](../assets/images/wyr24.jpg)<br>
+<span class="center bold">Leaderboard</span>
+
+> Live Demo: [Would You Rather@11-mockup-leaderboard](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/11-mockup-leaderboard/?fontsize=14) on CodeSandbox
+
+<!-- 
 ### 2.11 Mockup - Login -->
