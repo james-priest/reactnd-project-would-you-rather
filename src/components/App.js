@@ -12,7 +12,8 @@ import PollContainer from './mocks/PollContainer';
 
 class App extends Component {
   state = {
-    authUser: false,
+    // authUser: false,
+    authUser: true,
     showResult: false
   };
   handleLogin = () => {
