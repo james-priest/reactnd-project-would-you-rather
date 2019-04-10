@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { withRouter, NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import {
   Menu,
   Responsive,
@@ -8,14 +9,21 @@ import {
   Button,
   Container
 } from 'semantic-ui-react';
+import { navUsers } from './_data';
 
 class Nav extends Component {
+  static propTypes = {
+    onLogout: PropTypes.func.isRequired,
+    user: PropTypes.string.isRequired
+  };
   handleLogout = e => {
     e.preventDefault();
     this.props.onLogout();
   };
 
   render() {
+    const { user } = this.props;
+
     return (
       <Container>
         <Responsive as={Menu} minWidth={651} pointing secondary>
@@ -26,12 +34,12 @@ class Nav extends Component {
             <Menu.Item>
               <span>
                 <Image
-                  src="/images/avatars/fox.png"
+                  src={`/images/avatars/${navUsers[user].avatar.name}.png`}
                   avatar
                   spaced="right"
                   verticalAlign="bottom"
                 />
-                James Priest
+                {navUsers[user].name}
               </span>
             </Menu.Item>
             <Menu.Item>
@@ -52,12 +60,12 @@ class Nav extends Component {
             <Grid.Row>
               <Grid.Column>
                 <Image
-                  src="/images/avatars/fox.png"
+                  src={`/images/avatars/${navUsers[user].avatar.name}.png`}
                   avatar
                   spaced="right"
                   verticalAlign="bottom"
                 />
-                James Priest
+                {navUsers[user].name}
               </Grid.Column>
               <Grid.Column verticalAlign="bottom" textAlign="right">
                 <Button
@@ -91,12 +99,12 @@ class Nav extends Component {
             <Grid.Row>
               <Grid.Column>
                 <Image
-                  src="/images/avatars/fox.png"
+                  src={`/images/avatars/${navUsers[user].avatar.name}.png`}
                   avatar
                   spaced="right"
                   verticalAlign="bottom"
                 />
-                James Priest
+                {navUsers[user].name}
                 <Button
                   content="Logout"
                   labelPosition="right"
@@ -129,4 +137,4 @@ class Nav extends Component {
   }
 }
 
-export default withRouter(Nav);
+export default Nav;

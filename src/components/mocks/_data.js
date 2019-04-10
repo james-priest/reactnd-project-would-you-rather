@@ -1,10 +1,11 @@
+// cspell:disable
 export const userQuestionData = {
   unanswered: [
     {
       qid: 2,
       author: 'Meryem Jow',
       avatar: 'tiger.png',
-      question: 'Move to Germany'
+      question: 'Eat sushi with your bestie'
     },
     {
       qid: 1,
@@ -78,6 +79,73 @@ export const leaderboardData = [
     questionCount: 3
   }
 ];
+
+export const navUsers = {
+  brittini: {
+    id: 'brittini',
+    name: 'Brittini',
+    avatar: {
+      name: 'dog',
+      src: '/images/avatars/dog.png'
+    }
+  },
+  ifenna: {
+    id: 'ifenna',
+    name: 'Infenna',
+    avatar: {
+      name: 'cat',
+      src: '/images/avatars/cat.png'
+    }
+  },
+  peter: {
+    id: 'peter',
+    name: 'Peter',
+    avatar: {
+      name: 'gorilla',
+      src: '/images/avatars/gorilla.png'
+    }
+  },
+  joeylene: {
+    id: 'joeylene',
+    name: 'Joeylene',
+    avatar: {
+      name: 'lion',
+      src: '/images/avatars/lion.png'
+    }
+  },
+  anusha: {
+    id: 'anusha',
+    name: 'Anusha',
+    avatar: {
+      name: 'koala',
+      src: '/images/avatars/koala.png'
+    }
+  },
+  evidence: {
+    id: 'evidence',
+    name: 'Evidence',
+    avatar: {
+      name: 'rabbit',
+      src: '/images/avatars/rabbit.png'
+    }
+  },
+  meryem: {
+    id: 'meryem',
+    name: 'Meryem',
+    avatar: {
+      name: 'tiger',
+      src: '/images/avatars/tiger.png'
+    }
+  },
+  james: {
+    id: 'james',
+    name: 'James',
+    avatar: {
+      name: 'fox',
+      src: '/images/avatars/fox.png'
+    }
+  }
+};
 
 export const users = {
   sarahedo: {

@@ -20,7 +20,7 @@ code {
   padding: 0 6px;
 }
 
-/* tab highlight */
+/* home page tab highlight */
 .tab .ui.tabular.menu .item {
   flex: 1 1 auto;
   background: none #f6f6f6;
@@ -32,15 +32,32 @@ code {
 .tab .ui.tabular.menu .active.item {
   background: none #fff;
 }
+/* poll quesion page */
 .ui.radio.checkbox {
   margin-left: 20px;
   margin-bottom: 4px;
 }
+/* poll results page */
 i.compact.icon {
   margin: 0 .5em 0 0!important;
 }
 .ui.ribbon.label.vote {
   margin-bottom: 8px;
+}
+/* login page row spacing */
+.footer {
+  text-align: center;
+  font-size: .85em;
+}
+.ui.grid>.row.login:first-of-type {
+  padding-top: 1em;
+}
+.ui.grid>.row.login:last-of-type {
+  padding-bottom: 1em;
+}
+.ui.grid>.row.login {
+  padding-top: .5em;
+  padding-bottom: .5em;
 }
 
 /* @media screen and (max-width: 650px) {
