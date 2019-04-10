@@ -1820,6 +1820,8 @@ export default Leaderboard;
 #### 2.10.2 _data.js
 Here's the mock data. When it comes time to pull actual data from the DB it'll need to be formatted like this in order to be mapped over.
 
+<!-- cspell:disable -->
+
 ```jsx
 // _data.js
 export const leaderboardData = [
@@ -1847,6 +1849,8 @@ export const leaderboardData = [
 ];
 ```
 
+<!-- cspell:enable -->
+
 Here's a screenshot of the leaderboard.
 
 [![wyr24](assets/images/wyr24-small.jpg)](../assets/images/wyr24.jpg)<br>
@@ -1854,5 +1858,192 @@ Here's a screenshot of the leaderboard.
 
 > Live Demo: [Would You Rather@11-mockup-leaderboard](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/11-mockup-leaderboard/?fontsize=14) on CodeSandbox
 
-<!-- 
-### 2.11 Mockup - Login -->
+### 2.11 Mockup - Login
+The last mockup is of the Login screen. This needs to do the following.
+
+- Display a dropdown of users
+- Enable submit when a user is selected
+- Pass the user to the nav component for display
+
+#### 2.11.1 Login.js
+
+```jsx
+// Login.js
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { Segment, Grid, Header, Image, Form } from 'semantic-ui-react';
+import { navUsers } from './_data';
+
+export class Login extends Component {
+  static propTypes = {
+    onLogin: PropTypes.func.isRequired
+  };
+  state = {
+    value: ''
+  };
+  onChange = (e, { value }) => {
+    this.setState({ value });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.onLogin(this.state.value);
+  };
+  generateDropdownData = () => {
+    return Object.values(navUsers).map(user => ({
+      key: user.id,
+      text: user.name,
+      value: user.id,
+      image: { avatar: true, src: user.avatar.src }
+    }));
+  };
+  render() {
+    const { value } = this.state;
+    const disabled = value === '' ? true : false;
+
+    return (
+      <Fragment>
+        <Segment.Group>
+          <Header as="h4" block attached="top" textAlign="center">
+            <Header.Content>
+              Welcome to the Would You Rather App!
+            </Header.Content>
+            <Header.Subheader>Please sign in to continue</Header.Subheader>
+          </Header>
+          <Grid padded textAlign="center">
+            <Grid.Row className="login">
+              <Grid.Column width={16}>
+                <Image
+                  src="/images/avatars/animals.png"
+                  size="medium"
+                  centered
+                />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row className="login">
+              <Grid.Column>
+                <Header as="h2" color="green">
+                  Sign In
+                </Header>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row className="login">
+              <Grid.Column>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Dropdown
+                    placeholder="Select a Friend"
+                    fluid
+                    selection
+                    scrolling
+                    options={this.generateDropdownData()}
+                    value={value}
+                    onChange={this.onChange}
+                    required
+                  />
+                  <Form.Button
+                    content="Login"
+                    // size="tiny"
+                    positive
+                    disabled={disabled}
+                    fluid
+                  />
+                </Form>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment.Group>
+        <footer className="footer">
+          <a href="https://www.freepik.com/free-photos-vectors/design">
+            Avatar characters created by freepik - www.freepik.com
+          </a>
+        </footer>
+      </Fragment>
+    );
+  }
+}
+
+export default Login;
+```
+
+The data that is used to populate the drop down comes from here.
+
+#### 2.11.2 _data.js
+
+```jsx
+// _data.js
+export const navUsers = {
+  brittini: {
+    id: 'brittini',
+    name: 'Brittini',
+    avatar: {
+      name: 'dog',
+      src: '/images/avatars/dog.png'
+    }
+  },
+  ifenna: {
+    id: 'ifenna',
+    name: 'Infenna',
+    avatar: {
+      name: 'cat',
+      src: '/images/avatars/cat.png'
+    }
+  },
+  peter: {
+    id: 'peter',
+    name: 'Peter',
+    avatar: {
+      name: 'gorilla',
+      src: '/images/avatars/gorilla.png'
+    }
+  },
+  joeylene: {
+    id: 'joeylene',
+    name: 'Joeylene',
+    avatar: {
+      name: 'lion',
+      src: '/images/avatars/lion.png'
+    }
+  },
+  anusha: {
+    id: 'anusha',
+    name: 'Anusha',
+    avatar: {
+      name: 'koala',
+      src: '/images/avatars/koala.png'
+    }
+  },
+  evidence: {
+    id: 'evidence',
+    name: 'Evidence',
+    avatar: {
+      name: 'rabbit',
+      src: '/images/avatars/rabbit.png'
+    }
+  },
+  meryem: {
+    id: 'meryem',
+    name: 'Meryem',
+    avatar: {
+      name: 'tiger',
+      src: '/images/avatars/tiger.png'
+    }
+  },
+  james: {
+    id: 'james',
+    name: 'James',
+    avatar: {
+      name: 'fox',
+      src: '/images/avatars/fox.png'
+    }
+  }
+};
+```
+
+Here are screenshots of the login page.
+
+[![wyr25](assets/images/wyr25-small.jpg)](../assets/images/wyr25.jpg)<br>
+<span class="center bold">Login 1</span>
+
+[![wyr27](assets/images/wyr27-small.jpg)](../assets/images/wyr27.jpg)<br>
+<span class="center bold">Login 2</span>
+
+> Live Demo: [Would You Rather@12-mockup-login](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/12-mockup-login/?fontsize=14) on CodeSandbox
