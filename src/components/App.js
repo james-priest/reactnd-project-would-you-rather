@@ -12,14 +12,18 @@ import PollContainer from './mocks/PollContainer';
 
 class App extends Component {
   state = {
-    // authUser: false,
-    authUser: true,
-    showResult: false
+    authUser: false,
+    showResult: false,
+    user: ''
   };
-  handleLogin = () => {
-    this.setState(prevState => ({
-      authUser: !prevState.authUser
-    }));
+  handleLogin = user => {
+    this.setState({
+      authUser: true,
+      user
+    });
+  };
+  handleLogout = () => {
+    this.setState({ authUser: false });
   };
   setResult = showResult => {
     this.setState({
@@ -32,7 +36,7 @@ class App extends Component {
         <div className="App">
           {this.state.authUser === true ? (
             <Fragment>
-              <Nav onLogout={this.handleLogin} />
+              <Nav onLogout={this.handleLogout} user={this.state.user} />
               <ContentGrid>
                 <AppRoutes
                   setResult={this.setResult}
@@ -41,7 +45,15 @@ class App extends Component {
               </ContentGrid>
             </Fragment>
           ) : (
-            <Route render={() => <Login onLogin={this.handleLogin} />} />
+            <Route
+              render={() => (
+                <Fragment>
+                  <ContentGrid>
+                    <Login onLogin={this.handleLogin} />
+                  </ContentGrid>
+                </Fragment>
+              )}
+            />
           )}
         </div>
       </Router>

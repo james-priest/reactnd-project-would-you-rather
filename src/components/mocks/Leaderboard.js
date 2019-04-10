@@ -5,8 +5,7 @@ import {
   Header,
   Image,
   Label,
-  Divider,
-  Icon
+  Divider
 } from 'semantic-ui-react';
 import { leaderboardData, users } from './_data';
 
