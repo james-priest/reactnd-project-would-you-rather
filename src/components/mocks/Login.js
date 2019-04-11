@@ -1,6 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Segment, Grid, Header, Image, Form } from 'semantic-ui-react';
+import {
+  Segment,
+  Grid,
+  Header,
+  Image,
+  Form,
+  Loader,
+  Dimmer
+} from 'semantic-ui-react';
 import { navUsers } from './_data';
 
 export class Login extends Component {
@@ -8,14 +16,18 @@ export class Login extends Component {
     onLogin: PropTypes.func.isRequired
   };
   state = {
-    value: ''
+    value: '',
+    loading: false
   };
   onChange = (e, { value }) => {
     this.setState({ value });
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.onLogin(this.state.value);
+    new Promise((res, rej) => {
+      this.setState({ loading: true });
+      setTimeout(() => res(), 1000);
+    }).then(() => this.props.onLogin(this.state.value));
   };
   generateDropdownData = () => {
     return Object.values(navUsers).map(user => ({
@@ -38,6 +50,11 @@ export class Login extends Component {
             </Header.Content>
             <Header.Subheader>Please sign in to continue</Header.Subheader>
           </Header>
+          {this.state.loading === true && (
+            <Dimmer active inverted>
+              <Loader inverted content="Loading" />
+            </Dimmer>
+          )}
           <Grid padded textAlign="center">
             <Grid.Row className="login">
               <Grid.Column width={16}>
