@@ -50,31 +50,24 @@ export class Login extends Component {
             </Header.Content>
             <Header.Subheader>Please sign in to continue</Header.Subheader>
           </Header>
-          {this.state.loading === true && (
-            <Dimmer active inverted>
-              <Loader inverted content="Loading" />
-            </Dimmer>
-          )}
           <Grid padded textAlign="center">
             <Grid.Row className="login">
               <Grid.Column width={16}>
+                {this.state.loading === true && (
+                  <Dimmer active inverted>
+                    <Loader inverted content="Loading" />
+                  </Dimmer>
+                )}
                 <Image
                   src="/images/avatars/animals.png"
                   size="medium"
                   centered
                 />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row className="login">
-              <Grid.Column>
-                <Header as="h2" color="green">
-                  Sign In
-                </Header>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row className="login">
-              <Grid.Column>
+                <br />
                 <Form onSubmit={this.handleSubmit}>
+                  <Header as="h2" color="green">
+                    Sign In
+                  </Header>
                   <Form.Dropdown
                     placeholder="Select a Friend"
                     fluid

@@ -9,8 +9,12 @@ export class Home extends Component {
   static propTypes = {
     onSetResult: PropTypes.func.isRequired
   };
+  // render() {
+  //   return <TabControl onSetResult={this.props.onSetResult} />;
+  // }
   render() {
-    return <TabControl onSetResult={this.props.onSetResult} />;
+    const { onSetResult } = this.props;
+    return <Tab panes={panes({ onSetResult })} className="tab" />;
   }
 }
 
@@ -24,8 +28,8 @@ const panes = props => [
             key={question.qid}
             {...question}
             unanswered={true}
-            {...props}
-            // onSetResult={props.onSetResult}
+            // {...props}
+            onSetResult={props.onSetResult}
           />
         ))}
       </Tab.Pane>
@@ -40,8 +44,8 @@ const panes = props => [
             key={question.qid}
             {...question}
             unanswered={false}
-            {...props}
-            // onSetResult={props.onSetResult}
+            // {...props}
+            onSetResult={props.onSetResult}
           />
         ))}
       </Tab.Pane>
@@ -49,10 +53,11 @@ const panes = props => [
   }
 ];
 
-class TabControl extends Component {
-  render() {
-    return <Tab panes={panes(this.props)} className="tab" />;
-  }
-}
+// class TabControl extends Component {
+//   render() {
+//     const { onSetResult } = this.props;
+//     return <Tab panes={panes({ onSetResult })} className="tab" />;
+//   }
+// }
 
 export default Home;
