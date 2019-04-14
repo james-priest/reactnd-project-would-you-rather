@@ -2159,7 +2159,6 @@ Leaderboard View Requirements:
   - New Poll form
 - The user needs to be logged in before any of the views are available since the views are dependent on the logged in user
 
-<!-- 
 ### 3.2 Step 2 - Component Hierarchy
 The views will now be used in creating the component hierarchy. This is done by drawing boxes around every component and sub-component in the mock and giving them names.
 
@@ -2268,6 +2267,7 @@ Right now, we don’t care which components will be upgraded to containers. As w
 
 Remember that container components get data from the store and pass it to the presentational components that need the data.
 
+<!--
 ### 3.3 Step 3 - App Events
 This is where we determine what events happen in the app.
 
