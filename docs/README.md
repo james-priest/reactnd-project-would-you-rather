@@ -2267,7 +2267,6 @@ Right now, we don’t care which components will be upgraded to containers. As w
 
 Remember that container components get data from the store and pass it to the presentational components that need the data.
 
-<!--
 ### 3.3 Step 3 - App Events
 This is where we determine what events happen in the app.
 
@@ -2375,6 +2374,7 @@ Data used to populate tab panes.
 
 - <span class="underline">get</span> specific user from **users**.
 
+<!--
 ### 3.4 Step 4 - Store Data
 The next step is to determine what data lives in the store and what should live in the component.
 
