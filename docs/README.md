@@ -314,7 +314,7 @@ Your application’s code should be structured and organized in a logical way, a
 
 2) We recommend using Create React App to generate your submission since it's the easiest way to ensure you have everything the project reviewer will need to install and run your app.
 
-3) By walking through the Planning Stage and the Coding Stage of the Chirper Project, we’ve given you a useful template for building Redux applications. We recommend using this template for building your “Would You Rather?” Project. Remember that planning your project and its architecture before starting to code will save you a lot of debugging time later on!
+3) By walking through the [Planning Stage and the Coding Stage of the Chirper Project](https://james-priest.github.io/udacity-nanodegree-react/course-notes/react-redux.html#72-project-walkthrough), we’ve given you a useful template for building Redux applications. We recommend using this template for building your “Would You Rather?” Project. Remember that planning your project and its architecture before starting to code will save you a lot of debugging time later on!
 
 4) Use Redux to manage your application state. For this application, most of the application’s state should be managed by Redux. You may use component state to handle form input fields and controlled components. Otherwise, the rest of the state for your application should be controlled by your reducers.
 
@@ -396,7 +396,7 @@ For further information about this take a look at
 
 Remember, this is just a template. As you build more projects, you'll modify this template to suit your needs. You may also find it more intuitive to use a different approach. Regardless of the approach you take, however, **planning out your app is imperative to success**.
 
-## 2. Visual Design Stage
+## 2. Mockup Creation
 ### 2.1 Semantic UI React
 This stage of the process consists of drawing or mocking up each of the app's views.
 
@@ -2047,3 +2047,389 @@ Here are screenshots of the login page.
 <span class="center bold">Login 2</span>
 
 > Live Demo: [Would You Rather@12-mockup-login](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/12-mockup-login/?fontsize=14) on CodeSandbox
+
+## 3. Application Design
+### 3.1 Step 1 - View Requirements
+Now that we have mockups created I can list those here along with the requirements for each application view.
+
+#### 3.1.1 Login view
+
+[![wyr28](assets/images/wyr28-small.jpg)](../assets/images/wyr28.jpg)<br>
+<span class="center bold">Login</span>
+
+Login View Requirements:
+
+- Is shown if user is not logged in regardless of url or route the user navigates to
+- Is shown when user logs out
+- Login form dropdown shows a list of accounts to choose from
+- Clicking Login button logs user in with the selected account
+
+#### 3.1.2 Home view
+
+[![wyr29](assets/images/wyr29-small.jpg)](../assets/images/wyr29.jpg)<br>
+<span class="center bold">Home - Unanswered Polls</span>
+
+Home View Requirements:
+
+- Upon login the user is take to root (`/`)  and shown the Home view
+- User can toggle between his/her answered and unanswered polls
+- Unanswered polls should be shown by default
+- Polls in both categories are arranged from most recent to least recently created
+- The logged in account name should be visible on the page
+- Clicking any poll (answered or unanswered) navigates to the poll's details
+- Poll details should be located at `questions/:question_id`
+
+[![wyr34](assets/images/wyr34-small.jpg)](../assets/images/wyr34.jpg)<br>
+<span class="center bold">Home - Answered Polls</span>
+
+#### 3.1.3 Poll Question view
+
+[![wyr30](assets/images/wyr30-small.jpg)](../assets/images/wyr30.jpg)<br>
+<span class="center bold">Poll Question</span>
+
+Poll Question View Requirements:
+
+- Text "Would You Rather"
+- Avatar of the user who posted the polling question
+- Two answer options
+
+When someone votes in a poll:
+
+- All poll information should be shown (Poll Results)
+- User's poll question choice is clearly marked on the results page
+- Users can only vote once per poll and they shouldn't be able to change their answers
+- The answered poll should now appear in the Answered column when user goes back to the Home page
+
+#### 3.1.4 Poll Result view
+
+[![wyr31](assets/images/wyr31-small.jpg)](../assets/images/wyr31.jpg)<br>
+<span class="center bold">Poll Result</span>
+
+Poll Result View Requirements:
+
+- Both poll question options contain the following:
+  - Text of the option
+  - Number of people who voted for that option
+  - Percentage of people who voted for that option
+- The option selected by the logged in user should be clearly marked
+
+#### 3.1.5 Poll 404 view
+
+[![wyr37](assets/images/wyr37-small.jpg)](../assets/images/wyr37.jpg)<br>
+<span class="center bold">Poll 404</span>
+
+Poll 404 View Requirements:
+
+- 404 page is displayed if user tries to access a poll that doesn't exist
+- Keep in mind newly created polls will not be accessible at their url because of the way the mock backend is set up
+- Navigation bar should be displayed so user can easily navigate back into the application
+
+#### 3.1.6 New Poll view
+
+[![wyr32](assets/images/wyr32-small.jpg)](../assets/images/wyr32.jpg)<br>
+<span class="center bold">New Poll</span>
+
+New Poll View Requirements:
+
+- Add new poll form should be available at the `/add` route
+- Form shows text "Would You Rather" followed by a textbox for option 1 and another for option 2
+- Upon submitting the form, a new poll should be created, and user should be take to Home page
+- The new polling question should appear in the Unanswered column
+
+#### 3.1.7 Leaderboard view
+
+[![wyr33](assets/images/wyr33-small.jpg)](../assets/images/wyr33.jpg)<br>
+<span class="center bold">Leaderboard</span>
+
+Leaderboard View Requirements:
+
+- Page is available at the `/leaderboard` route
+- Each entry should contain the following:
+  - User's name
+  - User's picture
+  - Number of questions the user asked (new polls created)
+  - Number of questions the user answered
+- Users are ordered in descending order based on sum of number of questions asked and number of questions answered.
+
+#### 3.1.8 Additional Requirements
+
+- User should be able to navigate from within the app and url bar to the following:
+  - Leaderboard
+  - Specific question
+  - New Poll form
+- The user needs to be logged in before any of the views are available since the views are dependent on the logged in user
+
+<!-- 
+### 3.2 Step 2 - Component Hierarchy
+The views will now be used in creating the component hierarchy. This is done by drawing boxes around every component and sub-component in the mock and giving them names.
+
+Determining what should be a component should follow the same rules for deciding if a new function or object should be created. It should follow the single responsibility principle. A component should ideally only do one thing.
+
+Components used in the hierarchies that come from the Semantic-UI-React library will be identified with the acronym (SUIR).
+
+#### 3.2.1 Login view components
+
+[![wyr35](assets/images/wyr35-small.jpg)](../assets/images/wyr35.jpg)<br>
+<span class="center bold">Login</span>
+
+This view is broken down into the following React components:
+
+- **App** - container for the project
+  - **Segment (SUIR)** - wrapper for the content
+    - **Header (SUIR)** - title for the view
+    - **Grid (SUIR)** - formats content
+      - **Form (SUIR)** - dropdown with list of user accounts and login button
+
+#### 3.2.2 Home view components
+
+[![wyr36](assets/images/wyr36-small.jpg)](../assets/images/wyr36.jpg)<br>
+<span class="center bold">Home</span>
+
+- **App** - container for the project
+  - **Nav** - displays navigation
+  - **Tab (SUIR)** - shows 2 tabs - unanswered polls tab and answered polls tab
+    - **Pane (SUIR)** - unanswered polls content
+      - **UserCard** - shows header content and user avatar
+        - **PollTeaser** - shows poll preview & button to poll question
+    - **Pane (SUIR)** - answered polls content
+      - **UserCard** - shows header content and user avatar
+        - **PollTeaser** - shows poll preview & button to poll question
+
+#### 3.2.3 Poll Question view components
+
+[![wyr38](assets/images/wyr38-small.jpg)](../assets/images/wyr38.jpg)<br>
+<span class="center bold">Poll Question</span>
+
+- **App** - container for the project
+  - **Nav** - displays navigation
+  - **UserCard** - shows header content and user avatar
+    - **PollQuestion** - shows two question options with a submit button
+
+#### 3.2.4 Poll Result view components
+
+[![wyr39](assets/images/wyr39-small.jpg)](../assets/images/wyr39.jpg)<br>
+<span class="center bold">Poll Result</span>
+
+- **App** - container for the project
+  - **Nav** - displays navigation
+  - **UserCard** - shows header content and user avatar
+    - **PollResult** - shows both question options with # of votes & percentage
+
+#### 3.2.5 Poll 404 view components
+
+[![wyr40](assets/images/wyr40-small.jpg)](../assets/images/wyr40.jpg)<br>
+<span class="center bold">Poll 404</span>
+
+- **App** - container for the project
+  - **Nav** - displays navigation
+  - **Segment** - wrapper for the content (SUIR)
+
+#### 3.2.6 New Poll view components
+
+[![wyr41](assets/images/wyr41-small.jpg)](../assets/images/wyr41.jpg)<br>
+<span class="center bold">New Poll</span>
+
+- **App** - container for the project
+  - **Nav** - displays navigation
+  - **New Poll** - view for the form
+    - **Form (SUIR)** - submit form for new poll
+
+#### 3.2.7 Leaderboard view components
+
+[![wyr42](assets/images/wyr42-small.jpg)](../assets/images/wyr42.jpg)<br>
+<span class="center bold">Leaderboard</span>
+
+- **App** - container for the project
+  - **Nav** - displays navigation
+  - **Leaderboard** - displays list of top three users
+    - **LeaderboardCard** - displays a single leaderboard card
+
+#### 3.2.8 Master list of all components
+Here's the master list of components according to how I broke things up. This does not include components from the Sematic-UI-React library, some of which were outlined above.
+
+- **App**
+- **Login** (view)
+- **Nav**
+- **Home** (view)
+- **UserCard**
+- **PollTeaser**
+- **PollQuestion** (view)
+- **PollResult** (view)
+- **Poll404** (view)
+- **NewPoll** (view)
+- **Leaderboard** (view)
+- **LeaderboardCard**
+
+The component hierarchies tells us which components will be used inside of other components. It gives us the skeleton of our app.
+
+One thing to bear in mind is that each of these components are **presentational components**.
+
+Right now, we don’t care which components will be upgraded to containers. As we start building out the store, we’ll create additional components that will become **container components**.
+
+Remember that container components get data from the store and pass it to the presentational components that need the data.
+
+### 3.3 Step 3 - App Events
+This is where we determine what events happen in the app.
+
+We do this by taking a look at what can happen in each component. Specifically, what **actions** the app or user is performing on the **data** in each component.
+
+Is the data being set, modified, or deleted? If so, we’ll need an action to keep track of that event.
+
+We’ll do the following in the analysis of of each component:
+
+- <span class="underline">underline</span> the action
+- **bold** the data
+
+#### 3.3.1 App component events
+When the app first loads we need to fill the store with data.
+
+[![wyr43](assets/images/wyr43-small.jpg)](../assets/images/wyr43.jpg)<br>
+<span class="center bold">App component</span>
+
+Action and data:
+
+- <span class="underline">get</span> **users** - `GET_USERS`
+- <span class="underline">get</span> **questions**  - `GET_QUESTIONS`
+
+> ##### 3.3.1.1 Preview of Redux steps
+> The first thing we need to do is fill the Redux store with all initial data when App loads. This is the `users` and `questions` data sets.
+>
+>Here are the steps to do so:
+>
+> - Create `handleInitialData()` in 'actions/shared.js'.
+> - Make async call to data API receiving back both `users` and`questions`.
+> - Then returned promise should `.then()` dispatch
+>   - `getUsers(users)` action creator
+>   - `getQuestions(questions)` action creator
+> - Invoke `handleInitialData()` from App's `componentDidMount()` lifecycle event.
+
+#### 3.3.2 Login component events
+Data used to populate form.
+
+[![wyr44](assets/images/wyr44-small.jpg)](../assets/images/wyr44.jpg)<br>
+<span class="center bold">Login component</span>
+
+Action and data:
+
+- <span class="underline">get</span> **users** - `GET_USERS`
+- <span class="underline">set</span> **authUser**  - `SET_AUTH_USER`
+
+#### 3.3.3 Home component events
+Data used to populate tab panes.
+
+[![wyr45](assets/images/wyr45-small.jpg)](../assets/images/wyr45.jpg)<br>
+<span class="center bold">Home component</span>
+
+- <span class="underline">get</span> list of unanswered **questions** for pane 1 (Unanswered).
+- <span class="underline">get</span> list of answered **questions** for pane 2 (Answered).
+
+#### 3.3.4 UserCard component events
+
+[![wyr46](assets/images/wyr46-small.jpg)](../assets/images/wyr46.jpg)<br>
+<span class="center bold">UserCard component</span>
+
+- <span class="underline">get</span> user from list of **users**.
+
+#### 3.3.5 PollTeaser component events
+
+[![wyr47](assets/images/wyr47-small.jpg)](../assets/images/wyr47.jpg)<br>
+<span class="center bold">PollTeaser component</span>
+
+- <span class="underline">get</span> question from the list of **questions**.
+
+#### 3.3.6 PollQuestion component events
+
+[![wyr48](assets/images/wyr48-small.jpg)](../assets/images/wyr48.jpg)<br>
+<span class="center bold">PollQuestion component</span>
+
+- <span class="underline">get</span> **authUser** to record an answered question.
+- <span class="underline">get</span> question from the list of **questions**.
+- <span class="underline">set</span> **option** for the answered question.
+
+#### 3.3.7 PollAnswer component events
+
+[![wyr49](assets/images/wyr49-small.jpg)](../assets/images/wyr49.jpg)<br>
+<span class="center bold">PollAnswer component</span>
+
+- <span class="underline">get</span> question from the list of **questions** which contains the answers.
+
+#### 3.3.8 NewPoll component events
+
+[![wyr50](assets/images/wyr50-small.jpg)](../assets/images/wyr50.jpg)<br>
+<span class="center bold">NewPoll component</span>
+
+- <span class="underline">get</span> **authUser** to save a new question.
+- <span class="underline">set</span> **text** for both question options.
+
+#### 3.3.9 Leaderboard component events
+
+[![wyr51](assets/images/wyr51-small.jpg)](../assets/images/wyr51.jpg)<br>
+<span class="center bold">Leaderboard component</span>
+
+- <span class="underline">get</span> **users**.
+
+#### 3.3.10 LeaderboardCard component events
+
+[![wyr52](assets/images/wyr52-small.jpg)](../assets/images/wyr52.jpg)<br>
+<span class="center bold">LeaderboardCard component</span>
+
+- <span class="underline">get</span> specific user from **users**.
+
+### 3.4 Step 4 - Store Data
+The next step is to determine what data lives in the store and what should live in the component.
+
+The main problems Redux (and react-redux bindings) was meant to solve were:
+
+- Propagation of props through the entire component tree.
+- Ensuring consistency and predictability of the state across the app.
+
+According to Dan Abramov we should use the following principle for determining whether to store a piece of data in the store or in a React component:
+
+> “Use Redux for state that matters globally or is mutated in complex ways… The rule of thumb is: do whatever is less awkward.”
+
+See the following for more information on this.
+
+- [Organizing State](https://redux.js.org/faq/organizing-state)
+- [How to choose between Redux's store and React's state?](https://github.com/reactjs/redux/issues/1287)
+
+For each piece of data from Step 3, let’s see whether it’s used by multiple components or mutated in a complex way.
+
+#### 3.4.1 Data elements
+Here's the list of data elements we'll be using in this app.
+
+- Users data
+- Questions data
+- AuthUser data
+- Text data (for new questions)
+- Option data (for answered questions)
+
+Next we indicate in which component each data element will be used.
+
+|  | Users | Questions | AuthUser| Text | Option |
+| | --- | --- | --- | --- | --- |
+| App | x | x | | | |
+| Login | x | | x | | |
+| Home | | x | | | |
+| UserCard | x | | | | |
+| PollTeaser | | x | | | |
+| PollQuestion | x | x | | | x |
+| PollAnswer | | x | | | |
+| NewPoll | | | x | x | |
+| Leaderboard | x | | | | |
+| LeaderboardCard | x | | | | |
+
+Users and questions are used throughout the app and is perfectly suited for the store.  AuthUser is used globally and should also be part of the store.
+
+Text and option data can be kept as component state.
+
+Here's the list of data elements we'll be using in this app separated by store/state.
+
+- **store**
+  - users data
+  - questions data
+  - authUser data
+- **state**
+  - text data (for new questions)
+  - option data (for answered questions)
+
+#### 3.4.2  -->
