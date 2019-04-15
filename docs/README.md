@@ -1968,6 +1968,8 @@ The data that is used to populate the drop down comes from here.
 
 #### 2.11.2 _data.js
 
+<!-- cspell:disable -->
+
 ```jsx
 // _data.js
 export const navUsers = {
@@ -2037,6 +2039,8 @@ export const navUsers = {
   }
 };
 ```
+
+<!-- cspell:enable -->
 
 Here are screenshots of the login page.
 
@@ -2221,7 +2225,7 @@ This view is broken down into the following React components:
 
 - **App** - container for the project
   - **Nav** - displays navigation
-  - **Segment** - wrapper for the content (SUIR)
+  - **Segment (SUIR)** - wrapper for the content
 
 #### 3.2.6 New Poll view components
 
@@ -2287,8 +2291,8 @@ When the app first loads we need to fill the store with data.
 
 Action and data:
 
-- <span class="underline">get</span> **users** - `GET_USERS`
-- <span class="underline">get</span> **questions**  - `GET_QUESTIONS`
+- <span class="underline">get</span> **users** - `RECEIVE_USERS`
+- <span class="underline">get</span> **questions**  - `RECEIVE_QUESTIONS`
 
 > ##### 3.3.1.1 Preview of Redux steps
 > The first thing we need to do is fill the Redux store with all initial data when App loads. This is the `users` and `questions` data sets.
@@ -2310,7 +2314,7 @@ Data used to populate form.
 
 Action and data:
 
-- <span class="underline">get</span> **users** - `GET_USERS`
+- <span class="underline">get</span> **users** - `RECEIVE_USERS`
 - <span class="underline">set</span> **authUser**  - `SET_AUTH_USER`
 
 #### 3.3.3 Home component events
@@ -2448,3 +2452,43 @@ Our store will consist of the following data "tables".
 
 [![wyr53](assets/images/wyr53-small.jpg)](../assets/images/wyr53.jpg)<br>
 <span class="center bold">Redux Store Entities</span>
+
+## 4. Coding Phase
+### 4.1 API Functions
+The first step is to create a set of API functions to our async data requests. This includes
+
+- get initial data
+- save question
+- save answers.
+
+#### 4.1.1 /src/utils/api.js
+
+```js
+// api.js
+import {
+  _getUsers,
+  _getQuestions,
+  _saveQuestion,
+  _saveQuestionAnswer
+} from './_DATA';
+
+export function getInitialData() {
+  return Promise.all([_getUsers(), _getQuestions()]).then(
+    ([users, questions]) => ({
+      users,
+      questions
+    })
+  );
+}
+
+export function saveQuestion(info) {
+  return _saveQuestion(info);
+}
+
+export function saveQuestionAnswer(info) {
+  return _saveQuestionAnswer(info);
+}
+```
+
+<!-- ### 4.2 Actions
+The  -->
