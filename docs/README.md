@@ -2374,7 +2374,6 @@ Data used to populate tab panes.
 
 - <span class="underline">get</span> specific user from **users**.
 
-<!--
 ### 3.4 Step 4 - Store Data
 The next step is to determine what data lives in the store and what should live in the component.
 
@@ -2422,14 +2421,27 @@ Users and questions are used throughout the app and is perfectly suited for the 
 
 Text and option data can be kept as component state.
 
-Here's the list of data elements we'll be using in this app separated by store/state.
+Here's the list of data elements we'll be using in this app separated in by store or by component state.
 
 - **store**
   - users data
   - questions data
   - authUser data
-- **state**
+- **component state**
   - text data (for new questions)
   - option data (for answered questions)
 
-#### 3.4.2  -->
+#### 3.4.2 Data Normalization
+The [Redux documentation recommends normalizing our state](https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape) according to the following normalization principles.
+
+- Each type of data gets its own “table” in the state.
+- Each “data table” should store the individual items in an object, with the IDs of the items as keys and the items themselves as the values.
+- Any references to individual items should be done by storing the item’s ID.
+- Arrays of IDs should be used to indicate ordering.
+
+#### 3.4.3 Store properties
+Our store will consist of the following data "tables".
+
+- users
+- questions
+- authUser
