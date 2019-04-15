@@ -2461,7 +2461,8 @@ The first step is to create a set of API functions to our async data requests. T
 - save question
 - save answers.
 
-#### 4.1.1 /src/utils/api.js
+#### 4.1.1 api.js
+This is located at `/src/utils/api.js`.
 
 ```js
 // api.js
@@ -2490,5 +2491,71 @@ export function saveQuestionAnswer(info) {
 }
 ```
 
-<!-- ### 4.2 Actions
-The  -->
+### 4.2 Actions
+The next step is to create a set of actions and action creators.
+
+#### 4.2.1 authUser.js
+This is located at: `/src/actions/authUser.js`.
+
+```js
+// authUser.js
+export const SET_AUTH_USER = 'SET_AUTH_USER';
+
+export function setAuthUser(id) {
+  return {
+    type: SET_AUTH_USER,
+    id
+  };
+}
+```
+
+#### 4.2.2 questions.js
+This is located at: `/src/actions/questions.js`.
+
+```js
+// questions.js
+export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+
+export function receiveQuestions(questions) {
+  return {
+    type: RECEIVE_QUESTIONS,
+    questions
+  };
+}
+```
+
+#### 4.2.3 users.js
+This is located at: `/src/actions/users.js`.
+
+```js
+// user.js
+export const RECEIVE_USERS = 'RECEIVE_USERS';
+
+export function receiveUsers(users) {
+  return {
+    type: RECEIVE_USERS,
+    users
+  };
+}
+```
+
+#### 4.2.4 shared.js
+This is located at: `/src/actions/shared.js`.
+
+```js
+// shared.js
+import { getInitialData } from '../utils/api';
+import { receiveQuestions } from '../actions/questions';
+import { receiveUsers } from '../actions/users';
+
+export function handleInitialData() {
+  return dispatch => {
+    return getInitialData.then(({ users, questions }) => {
+      console.log('users', users);
+      console.log('questions', questions);
+      dispatch(receiveQuestions(questions));
+      dispatch(receiveUsers(users));
+    });
+  };
+}
+```
