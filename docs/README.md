@@ -2445,3 +2445,6 @@ Our store will consist of the following data "tables".
 - users
 - questions
 - authUser
+
+[![wyr53](assets/images/wyr53-small.jpg)](../assets/images/wyr53.jpg)<br>
+<span class="center bold">Redux Store Entities</span>
