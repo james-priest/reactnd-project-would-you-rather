@@ -2494,6 +2494,13 @@ export function saveQuestionAnswer(info) {
 ### 4.2 Actions
 The next step is to create a set of actions and action creators.
 
+We start by creating the following files in `/src/actions/`.
+
+- authUser.js
+- questions.js
+- users.js
+- shared.js
+
 #### 4.2.1 authUser.js
 This is located at: `/src/actions/authUser.js`.
 
@@ -2559,3 +2566,124 @@ export function handleInitialData() {
   };
 }
 ```
+
+### 4.3 Reducers
+The next step is to create our reducers.
+
+We start by creating the following files in `/src/reducers/`;
+
+- authUser.js
+- questions.js
+- users.js
+- index.js
+
+#### 4.3.1 authUser.js
+This is located at `/src/reducers/authUser.js`.
+
+```js
+// authUser.js
+import { SET_AUTH_USER } from '../actions/authUser';
+
+export default function authUser(state = null, action) {
+  if (action.type === SET_AUTH_USER) {
+    return action.id;
+  }
+  return state;
+}
+```
+
+#### 4.3.2 questions.js
+This is located at `/src/reducers/questions.js`.
+
+```js
+// questions.js
+import { RECEIVE_QUESTIONS } from '../actions/questions';
+
+export default function questions(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_QUESTIONS:
+      return {
+        ...state,
+        ...action.questions
+      };
+    default:
+      return state;
+  }
+}
+```
+
+#### 4.3.3 users.js
+This is located at `/src/reducers/users.js`.
+
+```js
+// users.js
+import { RECEIVE_USERS } from '../actions/users';
+
+export default function users(state = {}, action) {
+  switch (action.type) {
+    case RECEIVE_USERS:
+      return {
+        ...state,
+        ...action.users
+      };
+    default:
+      return state;
+  }
+}
+```
+
+#### 4.3.4 index.js
+This is located at `/src/reducers/index.js`.
+
+What we do here is combine the reducers into one main root reducer which will combine the following into a single state object.
+
+- `authUser` reducer
+- `questions` reducer
+- `users` reducer
+
+Remember, we need to do this because the `createStore` function only accepts a single reducer.
+
+```js
+// index.js
+import { combineReducers } from 'redux';
+import authUser from '../reducers/authUser';
+import questions from '../reducers/questions';
+import users from '../reducers/users';
+
+export default combineReducers({
+  authUser,
+  questions,
+  users
+});
+```
+
+#### 4.3.5 Add Redux Provider code to entry point
+This step instantiates the store and passes it to Provider which wraps App and acts as a Context.
+
+This happens in `/src/index.js`.
+
+```jsx
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
+import './index.css';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers/index';
+
+const store = createStore(rootReducer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+```
+
+#### 4.3.6 Testing
+Now we can test to make sure that our Redux store objects are in place by opening Chrome DevTools and going to the React Developer Tools tab.
+
+[![wyr54](assets/images/wyr54-small.jpg)](../assets/images/wyr54.jpg)<br>
+<span class="center bold">React Tools showing storeState</span>
