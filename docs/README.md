@@ -2454,6 +2454,8 @@ Our store will consist of the following data "tables".
 <span class="center bold">Redux Store Entities</span>
 
 ## 4. Coding Phase
+Now that the design phase is done I can jump into the coding phase with a clear roadmap of what components need to be built and how to build them.
+
 ### 4.1 API Functions
 The first step is to create a set of API functions to our async data requests. This includes
 
