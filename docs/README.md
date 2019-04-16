@@ -1656,13 +1656,10 @@ export class NewPoll extends Component {
     option2: ''
   };
   handleChange = e => {
-    console.log(e.target.id);
     this.setState({ [e.target.id]: e.target.value });
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log('this.state.option1', this.state.option1);
-    console.log('this.state.option2', this.state.option2);
 
     new Promise((res, rej) => {
       this.setState({ isLoading: true });
@@ -2568,9 +2565,7 @@ import { receiveUsers } from '../actions/users';
 
 export function handleInitialData() {
   return dispatch => {
-    return getInitialData.then(({ users, questions }) => {
-      console.log('users', users);
-      console.log('questions', questions);
+    return getInitialData().then(({ users, questions }) => {
       dispatch(receiveQuestions(questions));
       dispatch(receiveUsers(users));
     });
@@ -2698,3 +2693,82 @@ Now we can test to make sure that our Redux store objects are in place by openin
 
 [![wyr54](assets/images/wyr54-small.jpg)](../assets/images/wyr54.jpg)<br>
 <span class="center bold">React Tools showing storeState</span>
+
+### 4.4 Middleware
+The next step is to create the middleware functions.
+
+All middleware follows this currying pattern.
+
+```js
+const logger = (store) => (next) => (action) => {
+ // ...
+}
+```
+
+The first middleware function will be a logger that will output the following:
+
+- action
+- state
+
+We start by creating the following files in `/src/middleware/`.
+
+- logger.js
+- index.jsx
+
+#### 4.4.1 logger.js
+This is located at `/src/middleware/logger.js`.
+
+```js
+// logger.js
+const logger = store => next => action => {
+  console.group(action.type);
+  console.log('The action:', action);
+  const returnValue = next(action);
+  console.log('The new state: ', store.getState());
+  console.groupEnd();
+  return returnValue;
+};
+
+export default logger;
+```
+
+#### 4.4.2 index.js
+This is located at `/src/middleware/index.js`.
+
+```js
+// index.js
+import thunk from 'redux-thunk';
+import logger from './logger';
+import { applyMiddleware } from 'redux';
+
+export default applyMiddleware(thunk, logger);
+```
+
+One thing to note is that middleware gets run after the action creator returns an object or function but before getting sent to the reducer.
+
+Middleware also gets run in the order we apply it.
+
+#### 4.4.3 Add Redux Middleware to code entry point
+This is located at `/src/index.js`.
+
+```jsx
+// index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
+import './index.css';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers/index';
+import middleware from './middleware';
+
+const store = createStore(rootReducer, middleware);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
+```
+
