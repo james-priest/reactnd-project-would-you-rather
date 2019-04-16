@@ -2457,11 +2457,20 @@ Our store will consist of the following data "tables".
 Now that the design phase is done I can jump into the coding phase with a clear roadmap of what components need to be built and how to build them.
 
 ### 4.1 API Functions
-The first step is to create a set of API functions to our async data requests. This includes
+The first step is to create a set of function wrappers to our async data requests. The async methods would be direct database fetch requests and include:
 
-- get initial data
-- save question
-- save answers.
+- _getUsers
+- _getQuestions
+- _saveQuestion
+- _saveQuestionAnswer
+
+We'll want to create the following API function wrappers for these.
+
+- getInitialData - takes in _getUsers & _getQuestions
+- saveQuestion - location to format data for post request
+- saveQuestionAnswer - location to format data for post request
+
+`getInitialData` is one spot we might use to [normalize the state](https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape) once we get the data back from the fetch request and prior to it populating the store.
 
 #### 4.1.1 api.js
 This is located at `/src/utils/api.js`.
