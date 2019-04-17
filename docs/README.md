@@ -2772,3 +2772,81 @@ ReactDOM.render(
 );
 ```
 
+### 4.5 Initialize App Data
+The next step is to invoke our `handleInitialData()` thunk action creator that was created in `/src/actions/shared.js`.
+
+Here's what that code looks like.
+
+```js
+// shared.js
+import { getInitialData } from '../utils/api';
+import { receiveQuestions } from '../actions/questions';
+import { receiveUsers } from '../actions/users';
+
+export function handleInitialData() {
+  return dispatch => {
+    return getInitialData().then(({ users, questions }) => {
+      dispatch(receiveQuestions(questions));
+      dispatch(receiveUsers(users));
+    });
+  };
+}
+```
+
+It uses the thunk signature of `function xyz() { return dispatch => {...} }`.
+
+Inside it invokes our Promise-based `getInitialData()` async request, then it dispatches the resulting data entities in order to fill our Redux store.
+
+We should invoke this from App since this is the entry point to our application. Now in order to invoke this we need to expose the action as props by using 'react-redux' `connect` method.
+
+#### 4.5.1 App.js
+We do this in `/src/components/App.js`.
+
+```jsx
+// App.js
+import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Grid } from 'semantic-ui-react';
+import { handleInitialData } from '../actions/shared'; // <- new
+import { connect } from 'react-redux'; // <- new
+
+class App extends Component {
+  componentDidMount() { // <- new
+    this.props.handleInitialData(); // <- new
+  } // <- new
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <ContentGrid>
+            <p>New Start...</p>
+          </ContentGrid>
+        </div>
+      </Router>
+    );
+  }
+}
+
+const ContentGrid = ({ children }) => ({% raw %}
+  <Grid padded="vertically" columns={1} centered>
+    <Grid.Row>
+      <Grid.Column style={{ maxWidth: 550 }}>{children}</Grid.Column>
+    </Grid.Row>
+  </Grid>
+);{% endraw %}
+
+export default connect( // <- new
+  null, // <- new
+  { handleInitialData } // <- new
+)(App); // <- new
+```
+
+When we run the app we can now see the that it is wrapped by the connect component.
+
+[![wyr55](assets/images/wyr55-small.jpg)](../assets/images/wyr55.jpg)<br>
+<span class="center bold">React Tools showing storeState</span>
+
+We can also see our logger is working properly because it outputs both  the RECEIVE_QUESTIONS and RECEIVE_USERS actions.
+
+[![wyr56](assets/images/wyr56-small.jpg)](../assets/images/wyr56.jpg)<br>
+<span class="center bold">DevTools Console with Logger output</span>
