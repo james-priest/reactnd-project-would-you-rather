@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
+import { handleInitialData } from '../actions/shared';
+import { connect } from 'react-redux';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.handleInitialData();
+  }
   render() {
     return (
       <Router>
@@ -24,4 +29,7 @@ const ContentGrid = ({ children }) => (
   </Grid>
 );
 
-export default App;
+export default connect(
+  null,
+  { handleInitialData }
+)(App);
