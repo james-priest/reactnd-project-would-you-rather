@@ -1,8 +1,44 @@
+// let users = {
+//   sarahedo: {
+//     id: 'sarahedo',
+//     name: 'Sarah Edo',
+//     avatarURL: '/images/avatars/rabbit.png',
+//     answers: {
+//       '8xf0y6ziyjabvozdd253nd': 'optionOne',
+//       '6ni6ok3ym7mf1p33lnez': 'optionTwo',
+//       am8ehyc8byjqgar0jgpub9: 'optionTwo',
+//       loxhs1bqm25b708cmbf3g: 'optionTwo'
+//     },
+//     questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
+//   },
+//   tylermcginnis: {
+//     id: 'tylermcginnis',
+//     name: 'Tyler McGinnis',
+//     avatarURL: '/images/avatars/fox.png',
+//     answers: {
+//       vthrdm985a262al8qx3do: 'optionOne',
+//       xj352vofupe1dqz9emx13r: 'optionTwo'
+//     },
+//     questions: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do']
+//   },
+//   johndoe: {
+//     id: 'johndoe',
+//     name: 'John Doe',
+//     avatarURL: '/images/avatars/dog.png',
+//     answers: {
+//       xj352vofupe1dqz9emx13r: 'optionOne',
+//       vthrdm985a262al8qx3do: 'optionTwo',
+//       '6ni6ok3ym7mf1p33lnez': 'optionTwo'
+//     },
+//     questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r']
+//   }
+// };
+
 let users = {
-  sarahedo: {
-    id: 'sarahedo',
-    name: 'Sarah Edo',
-    avatarURL: '/images/avatars/rabbit.png',
+  brittini: {
+    id: 'brittini',
+    name: 'Brittini',
+    avatarURL: '/images/avatars/dog.png',
     answers: {
       '8xf0y6ziyjabvozdd253nd': 'optionOne',
       '6ni6ok3ym7mf1p33lnez': 'optionTwo',
@@ -11,26 +47,61 @@ let users = {
     },
     questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
   },
-  tylermcginnis: {
-    id: 'tylermcginnis',
-    name: 'Tyler McGinnis',
-    avatarURL: '/images/avatars/fox.png',
+  ifenna: {
+    id: 'ifenna',
+    name: 'Ifenna',
+    avatarURL: '/images/avatars/cat.png',
     answers: {
       vthrdm985a262al8qx3do: 'optionOne',
       xj352vofupe1dqz9emx13r: 'optionTwo'
     },
     questions: ['loxhs1bqm25b708cmbf3g', 'vthrdm985a262al8qx3do']
   },
-  johndoe: {
-    id: 'johndoe',
-    name: 'John Doe',
-    avatarURL: '/images/avatars/dog.png',
+  joeylene: {
+    id: 'joeylene',
+    name: 'Joeylene',
+    avatarURL: '/images/avatars/lion.png',
     answers: {
       xj352vofupe1dqz9emx13r: 'optionOne',
       vthrdm985a262al8qx3do: 'optionTwo',
       '6ni6ok3ym7mf1p33lnez': 'optionTwo'
     },
     questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r']
+  },
+  peter: {
+    id: 'peter',
+    name: 'Peter',
+    avatarURL: '/images/avatars/gorilla.png',
+    answers: {},
+    questions: []
+  },
+  anusha: {
+    id: 'anusha',
+    name: 'Anusha',
+    avatarURL: '/images/avatars/koala.png',
+    answers: {},
+    questions: []
+  },
+  evidence: {
+    id: 'evidence',
+    name: 'Evidence',
+    avatarURL: '/images/avatars/rabbit.png',
+    answers: {},
+    questions: []
+  },
+  meryem: {
+    id: 'meryem',
+    name: 'Meryem',
+    avatarURL: '/images/avatars/tiger.png',
+    answers: {},
+    questions: []
+  },
+  james: {
+    id: 'james',
+    name: 'James',
+    avatarURL: '/images/avatars/fox.png',
+    answers: {},
+    questions: []
   }
 };
 

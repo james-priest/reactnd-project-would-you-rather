@@ -2406,9 +2406,10 @@ Here's the list of data elements we'll be using in this app.
 Next we indicate in which component each data element will be used.
 
 |  | Users | Questions | AuthUser| Text | Option |
-| | --- | --- | --- | --- | --- |
-| App | x | x | | | |
+| --- | :-: | :-: | :-: | :-: | :-: |
+| App | | | x | | |
 | Login | x | | x | | |
+| Nav | x | | x | | |
 | Home | | x | | | |
 | UserCard | x | | | | |
 | PollTeaser | | x | | | |
@@ -2746,7 +2747,7 @@ export default applyMiddleware(thunk, logger);
 
 One thing to note is that middleware gets run after the action creator returns an object or function but before getting sent to the reducer.
 
-Middleware also gets run in the order we apply it.
+Middleware also gets run in the order we apply it. Thunk needs to be run first so that it can properly handle logger.
 
 #### 4.4.3 Add Redux Middleware to code entry point
 This is located at `/src/index.js`.
@@ -2850,3 +2851,323 @@ We can also see our logger is working properly because it outputs both  the RECE
 
 [![wyr56](assets/images/wyr56-small.jpg)](../assets/images/wyr56.jpg)<br>
 <span class="center bold">DevTools Console with Logger output</span>
+
+### 4.6 Login & Navigation
+Next we'll work on the login and navigation components. These go hand-in-hand to authenticate the user in the login component and then display the authenticated user in the navigation component.
+
+#### 4.6.1 App Component
+First we need to modify App to render the Login component if the user has not been authenticated yet. This is done in `/src/components/App.js`.
+
+```jsx
+// App.js
+import React, { Component, Fragment } from 'react';{% raw %}
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Grid } from 'semantic-ui-react';
+import { handleInitialData } from '../actions/shared';
+import { connect } from 'react-redux';
+import Login from './Login';
+import Nav from './Nav';
+import Home from './Home';
+
+class App extends Component {
+  componentDidMount() {
+    this.props.handleInitialData();
+  }
+  render() {
+    const { authUser } = this.props;
+    return (
+      <Router>
+        <div className="App">
+          {authUser === null ? (
+            <Route
+              render={() => (
+                <ContentGrid>
+                  <Login />
+                </ContentGrid>
+              )}
+            />
+          ) : (
+            <Fragment>
+              <Nav />
+              <ContentGrid>
+                <Route exact path="/" Component={Home} />
+              </ContentGrid>
+            </Fragment>
+          )}
+        </div>
+      </Router>
+    );
+  }
+}
+
+const ContentGrid = ({ children }) => (
+  <Grid padded="vertically" columns={1} centered>
+    <Grid.Row>
+      <Grid.Column style={{ maxWidth: 550 }}>{children}</Grid.Column>
+    </Grid.Row>
+  </Grid>
+);
+
+function mapStateToProps({ authUser }) {
+  return {
+    authUser
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { handleInitialData }
+)(App);{% endraw %}
+```
+
+We use `mapStateToProps` to get the store's `authUser` state.
+
+#### 4.6.2 Login Component
+Next we update the Login component to do the following:
+
+- get `users` to populate Login Form dropdown component
+- dispatch SET_AUTH_USER for login
+
+We do this in the Login component which is located at `/src/components/Login.js`.
+
+The code in 'Login.js' is split into multiple components following this hierarchy:
+
+- Login
+  - LoginHeader
+  - LoginGridLayout
+    - BrandImage
+    - LoginForm
+
+```jsx
+// Login.js
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {
+  Segment,
+  Grid,
+  Header,
+  Image,
+  Form,
+  Loader,
+  Dimmer
+} from 'semantic-ui-react';
+import { setAuthUser } from '../actions/authUser';
+
+export class Login extends Component {
+  state = {
+    loading: false
+  };
+  handleLoading = () => {
+    this.setState({ loading: true });
+  };
+
+  render() {
+    return (
+      <Fragment>
+        <Segment.Group>
+          <LoginHeader />
+          <LoginGridLayout
+            image={<BrandImage />}
+            form={<ConnectedLoginForm onLoading={this.handleLoading} />}
+            loading={this.state.loading}
+          />
+        </Segment.Group>
+        <footer className="footer">
+          <a href="https://www.freepik.com/free-photos-vectors/design">
+            Avatar characters created by freepik - www.freepik.com
+          </a>
+        </footer>
+      </Fragment>
+    );
+  }
+}
+
+const LoginHeader = () => (
+  <Header as="h4" block attached="top" textAlign="center">
+    <Header.Content>Welcome to the Would You Rather App!</Header.Content>
+    <Header.Subheader>Please sign in to continue</Header.Subheader>
+  </Header>
+);
+
+const LoginGridLayout = ({ image, form, loading }) => (
+  <div>
+    <Grid padded textAlign="center">
+      <Grid.Row className="login">
+        <Grid.Column width={16}>
+          {loading === true && (
+            <Dimmer active inverted>
+              <Loader inverted content="Loading" />
+            </Dimmer>
+          )}
+          {image}
+          <br />
+          {form}
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
+  </div>
+);
+
+const BrandImage = () => (
+  <Image src="/images/avatars/animals.png" size="medium" centered />
+);
+
+class LoginForm extends Component {
+  static propTypes = {
+    onLoading: PropTypes.func.isRequired
+  };
+  state = {
+    value: ''
+  };
+  onChange = (e, { value }) => {
+    this.setState({ value });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    const { onLoading, setAuthUser } = this.props;
+    const authUser = this.state.value;
+
+    new Promise((res, rej) => {
+      onLoading();
+      setTimeout(() => res(), 500);
+    }).then(() => setAuthUser(authUser));
+  };
+  generateDropdownData = () => {
+    const { users } = this.props;
+
+    return users.map(user => ({
+      key: user.id,
+      text: user.name,
+      value: user.id,
+      image: { avatar: true, src: user.avatarURL }
+    }));
+  };
+  render() {
+    const { value } = this.state;
+    const disabled = value === '' ? true : false;
+
+    return (
+      <Form onSubmit={this.handleSubmit}>
+        <Header as="h2" color="green">
+          Sign In
+        </Header>
+        <Form.Dropdown
+          placeholder="Select a Friend"
+          fluid
+          selection
+          scrolling
+          options={this.generateDropdownData()}
+          value={value}
+          onChange={this.onChange}
+          required
+        />
+        <Form.Button content="Login" positive disabled={disabled} fluid />
+      </Form>
+    );
+  }
+}
+
+const ConnectedLoginForm = connect(
+  mapStateToProps,
+  { setAuthUser }
+)(LoginForm);
+
+function mapStateToProps({ users }) {
+  return {
+    users: Object.values(users)
+  };
+}
+
+export default Login;
+```
+
+#### 4.6.3 Nav Component
+The nav component will display who is logged in. It is located in `/src/components/Nav.js`.
+
+```jsx
+// Nav.js
+import React, { Component, Fragment } from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+  Menu,
+  Responsive,
+  Image,
+  Grid,
+  Button,
+  Container
+} from 'semantic-ui-react';
+import { setAuthUser } from '../actions/authUser';
+
+class Nav extends Component {
+  handleLogout = e => {
+    e.preventDefault();
+    this.props.setAuthUser(null);
+  };
+
+  render() {
+    const { authUser, users } = this.props;
+
+    return (
+      <Container>
+        <Responsive as={Menu} minWidth={651} pointing secondary>
+          <Menu.Item name="home" as={NavLink} to="/" exact />
+          <Menu.Item name="new poll" as={NavLink} to="/add" />
+          <Menu.Item name="leader board" as={NavLink} to="/leaderboard" />
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <span>
+                <Image
+                  src={users[authUser].avatarURL}
+                  avatar
+                  spaced="right"
+                  verticalAlign="bottom"
+                />
+                {users[authUser].name}
+              </span>
+            </Menu.Item>
+            <Menu.Item>
+              <Button
+                content="Logout"
+                labelPosition="right"
+                basic
+                compact
+                icon="log out"
+                size="mini"
+                onClick={this.handleLogout}
+              />
+            </Menu.Item>
+          </Menu.Menu>
+        </Responsive>
+        <Responsive as={Fragment} minWidth={375} maxWidth={650}>
+          ...
+        </Responsive>
+        <Responsive as={Fragment} maxWidth={374}>
+          ...
+        </Responsive>
+      </Container>
+    );
+  }
+}
+
+function mapStateToProps({ users, authUser }) {
+  return {
+    authUser,
+    users
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { setAuthUser }
+)(Nav);
+```
+
+The Login component displays all users in the dropdown which is now coming from our Redux store.
+
+[![wyr57](assets/images/wyr57-small.jpg)](../assets/images/wyr57.jpg)<br>
+<span class="center bold">Login Form Component showing user accounts</span>
+
+[![wyr58](assets/images/wyr58-small.jpg)](../assets/images/wyr58.jpg)<br>
+<span class="center bold">Nav Component showing logged in user</span>
