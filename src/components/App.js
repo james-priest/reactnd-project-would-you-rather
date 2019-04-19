@@ -28,7 +28,7 @@ class App extends Component {
             <Fragment>
               <Nav />
               <ContentGrid>
-                <Route exact path="/" Component={Home} />
+                <Route exact path="/" component={Home} />
               </ContentGrid>
             </Fragment>
           )}
