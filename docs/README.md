@@ -2890,7 +2890,7 @@ class App extends Component {
             <Fragment>
               <Nav />
               <ContentGrid>
-                <Route exact path="/" Component={Home} />
+                <Route exact path="/" component={Home} />
               </ContentGrid>
             </Fragment>
           )}
@@ -3171,3 +3171,230 @@ The Login component displays all users in the dropdown which is now coming from 
 
 [![wyr58](assets/images/wyr58-small.jpg)](../assets/images/wyr58.jpg)<br>
 <span class="center bold">Nav Component showing logged in user</span>
+
+### 4.7 Home View
+The home view consists of multiple components. Tab and Pane are from Semantic-UI-React. The rest are custom components. These are in the following hierarchy and include:
+
+- Home
+  - Tab (SUIR)
+    - Pane (SUIR)
+      - UserCard
+        - PollTeaser
+
+#### 4.7.1 Home Component
+This is located in `/src/components/Home.js`.
+
+```jsx
+// Home.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Tab } from 'semantic-ui-react';
+import UserCard from './UserCard';
+import PollTeaser from './PollTeaser';
+
+const color = {
+  green: {
+    name: 'green',
+    hex: '#21ba45'
+  },
+  blue: {
+    name: 'blue',
+    hex: '#2185d0'
+  }
+};
+
+export class Home extends Component {
+  static propTypes = {
+    userQuestionData: PropTypes.object.isRequired
+  };
+  render() {
+    const { userQuestionData } = this.props;
+
+    return <Tab panes={panes({ userQuestionData })} className="tab" />;
+  }
+}
+
+const panes = props => {
+  const { userQuestionData } = props;
+  return [
+    {
+      menuItem: 'Unanswered',
+      render: () => (
+        <Tab.Pane>
+          {userQuestionData.answered.map(question => (
+            <UserCard
+              key={question.id}
+              userId={question.author}
+              color={color.green.hex}
+            >
+              <PollTeaser
+                question={question}
+                unanswered={true}
+                color={color.green.name}
+              />
+            </UserCard>
+          ))}
+        </Tab.Pane>
+      )
+    },
+    {
+      menuItem: 'Answered',
+      render: () => (
+        <Tab.Pane>
+          {userQuestionData.unanswered.map(question => (
+            <UserCard
+              key={question.id}
+              userId={question.author}
+              color={color.blue.hex}
+            >
+              <PollTeaser
+                question={question}
+                unanswered={false}
+                color={color.blue.name}
+              />
+            </UserCard>
+          ))}
+        </Tab.Pane>
+      )
+    }
+  ];
+};
+
+function mapStateToProps({ authUser, users, questions }) {
+  const answeredIds = Object.keys(users[authUser].answers);
+  const answered = Object.values(questions)
+    .filter(question => answeredIds.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
+  const unanswered = Object.values(questions)
+    .filter(question => !answeredIds.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
+
+  return {
+    userQuestionData: {
+      answered,
+      unanswered
+    }
+  };
+}
+
+export default connect(mapStateToProps)(Home);
+```
+
+#### 4.8.2 UserCard Component
+This file is located at `/src/components/UserCard.js`.
+
+```jsx
+// UserCard.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Segment, Header, Grid, Image } from 'semantic-ui-react';
+
+export class UserCard extends Component {
+  static propTypes = {
+    userId: PropTypes.string.isRequired,
+    color: PropTypes.string
+  };
+  render() {
+    const { user, children, color } = this.props;
+
+    return (
+      <Segment.Group>
+        <Header
+          as="h5"
+          textAlign="left"
+          block
+          attached="top"{% raw %}
+          style={{
+            borderTop: `2px solid ${color}`
+          }}{% endraw %}
+          content={`${user.name} asks:`}
+        />
+
+        <Grid divided padded>
+          <Grid.Row>
+            <Grid.Column width={5}>
+              <Image src={user.avatarURL} />
+            </Grid.Column>
+            <Grid.Column width={11}>{children}</Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment.Group>
+    );
+  }
+}
+
+function mapStateToProps({ users }, props) {
+  const user = users[props.userId];
+
+  return {
+    user
+  };
+}
+
+export default connect(mapStateToProps)(UserCard);
+```
+
+#### 4.8.3 PollTeaser Component
+This file is located at `/src/components/PollTeaser.js`.
+
+```jsx
+// PollTeaser.js
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { Header, Button } from 'semantic-ui-react';
+
+export class PollTeaser extends Component {
+  static propTypes = {
+    question: PropTypes.object.isRequired,
+    unanswered: PropTypes.bool.isRequired,
+    color: PropTypes.string
+  };
+  state = {
+    viewPoll: false
+  };
+  handleClick = e => {
+    this.setState(prevState => ({
+      viewPoll: !prevState.viewPoll
+    }));
+  };
+  render() {
+    const { question, unanswered, color } = this.props;
+
+    if (this.state.viewPoll === true) {
+      return <Redirect push to={`/questions/${question.id}`} />;
+    }
+    return (
+      <Fragment>{% raw %}
+        <Header as="h5" textAlign="left">
+          Would you rather
+        </Header>
+        <p style={{ textAlign: 'center' }}>
+          {question.optionOne.text}
+          <br />
+          or...
+        </p>
+        <Button
+          color={color}
+          size="tiny"
+          fluid
+          onClick={this.handleClick}
+          content={unanswered === true ? 'Answer Poll' : 'Results'}
+        />{% endraw %}
+      </Fragment>
+    );
+  }
+}
+
+export default PollTeaser;
+```
+
+Here are screenshots with the provided data.
+
+[![wyr59](assets/images/wyr59-small.jpg)](../assets/images/wyr59.jpg)<br>
+<span class="center bold">Home View showing Unanswered Questions Tab</span>
+
+[![wyr60](assets/images/wyr60-small.jpg)](../assets/images/wyr60.jpg)<br>
+<span class="center bold">Home View showing Answered Questions Tab</span>
