@@ -3398,3 +3398,282 @@ Here are screenshots with the provided data.
 
 [![wyr60](assets/images/wyr60-small.jpg)](../assets/images/wyr60.jpg)<br>
 <span class="center bold">Home View showing Answered Questions Tab</span>
+
+### 4.8 UserCard Component
+The UserCard component is responsible for displaying each of the following child components based on the context.
+
+- PollTeaser ([view diagram](#322-home-view-components))
+- PollQuestion ([view diagram](#323-poll-question-view-components))
+- PollResult ([view diagram](#324-poll-result-view-components))
+
+For that reason it was necessary to refactor it to account for each option. Our component hierarchy goes like this.
+
+- App
+  - Home (Tab, Pane)
+    - UserCard
+      - PollTeaser \|\| PollQuestion \|\| PollResult
+
+#### 4.8.1 Home Component
+The first step in this refactor was is  reduce the overall footprint of our Home Component. It is responsible for displaying a tab control with a pane for answered questions and another for unanswered questions.
+
+This file is located at `/src/components/Home.js`.
+
+```jsx
+// Home.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Tab } from 'semantic-ui-react';
+import UserCard from './UserCard';
+
+export class Home extends Component {
+  static propTypes = {
+    userQuestionData: PropTypes.object.isRequired
+  };
+  render() {
+    const { userQuestionData } = this.props;
+
+    return <Tab panes={panes({ userQuestionData })} className="tab" />;
+  }
+}
+
+const panes = props => {
+  const { userQuestionData } = props;
+  return [
+    {
+      menuItem: 'Unanswered',
+      render: () => (
+        <Tab.Pane>
+          {userQuestionData.answered.map(question => (
+            <UserCard
+              key={question.id}
+              question_id={question.id}
+              unanswered={true}
+            />
+          ))}
+        </Tab.Pane>
+      )
+    },
+    {
+      menuItem: 'Answered',
+      render: () => (
+        <Tab.Pane>
+          {userQuestionData.unanswered.map(question => (
+            <UserCard
+              key={question.id}
+              question_id={question.id}
+              unanswered={false}
+            />
+          ))}
+        </Tab.Pane>
+      )
+    }
+  ];
+};
+
+function mapStateToProps({ authUser, users, questions }) {
+  const answeredIds = Object.keys(users[authUser].answers);
+  const answered = Object.values(questions)
+    .filter(question => !answeredIds.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
+  const unanswered = Object.values(questions)
+    .filter(question => answeredIds.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
+
+  return {
+    userQuestionData: {
+      answered,
+      unanswered
+    }
+  };
+}
+
+export default connect(mapStateToProps)(Home);
+```
+
+Here most of the complex transformation is done in the `mapStateToProps` function. This is were we determine answered vs. unanswered questions based on an array of answered question id's in the user record. 
+
+#### 4.8.2 UserCard Component
+The next step is to refactor the UserCard component.
+
+This has the most involved code since it is a container for one of three different children.
+
+This file is located at `/src/components/UserCard.js`.
+
+```jsx
+// UserCard.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Segment, Header, Grid, Image } from 'semantic-ui-react';
+import PollQuestion from './PollQuestion';
+import PollResult from './PollResult';
+import PollTeaser from './PollTeaser';
+import { colors } from '../utils/helpers';
+
+const pollTypes = {
+  POLL_TEASER: 'POLL_TEASER',
+  POLL_QUESTION: 'POLL_QUESTION',
+  POLL_RESULT: 'POLL_RESULT'
+};
+
+const PollContent = props => {
+  const { pollType, question, unanswered } = props;
+
+  switch (pollType) {
+    case pollTypes.POLL_TEASER:
+      return <PollTeaser question={question} unanswered={unanswered} />;
+    case pollTypes.POLL_QUESTION:
+      return <PollQuestion question={question} />;
+    case pollTypes.POLL_RESULT:
+      return <PollResult question={question} />;
+    default:
+      return;
+  }
+};
+
+export class UserCard extends Component {
+  static propTypes = {
+    question: PropTypes.object.isRequired,
+    author: PropTypes.object.isRequired,
+    pollType: PropTypes.string.isRequired,
+    unanswered: PropTypes.bool,
+    question_id: PropTypes.string
+  };
+  render() {
+    const { author, question, pollType, unanswered = null } = this.props;
+    const tabColor = unanswered === true ? colors.green : colors.blue;
+    const borderTop =
+      unanswered === null
+        ? `1px solid ${colors.grey}`
+        : `2px solid ${tabColor.hex}`;
+
+    return (
+      <Segment.Group>
+        <Header
+          as="h5"
+          textAlign="left"
+          block
+          attached="top"{% raw %}
+          style={{ borderTop: borderTop }}
+        >{% endraw %}
+          {author.name} asks:
+        </Header>
+
+        <Grid divided padded>
+          <Grid.Row>
+            <Grid.Column width={5}>
+              <Image src={author.avatarURL} />
+            </Grid.Column>
+            <Grid.Column width={11}>
+              <PollContent
+                pollType={pollType}
+                question={question}
+                unanswered={unanswered}
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment.Group>
+    );
+  }
+}
+
+function mapStateToProps(
+  { users, questions, authUser },
+  { match, question_id }
+) {
+  let question, pollType;
+  if (question_id !== undefined) {
+    question = questions[question_id];
+    pollType = pollTypes.POLL_TEASER;
+  } else {
+    const { question_id } = match.params;
+    question = questions[question_id];
+    const user = users[authUser];
+
+    pollType = pollTypes.POLL_QUESTION;
+    if (Object.keys(user.answers).includes(question.id)) {
+      pollType = pollTypes.POLL_RESULT;
+    }
+  }
+  const author = users[question.author];
+
+  return {
+    question,
+    author,
+    pollType
+  };
+}
+
+export default connect(mapStateToProps)(UserCard);
+```
+
+What's happening here is the `pollType` (child component) is being set based on the parameters received or the what the data dictates.
+
+If we don't receive a `question_id` then we know to display the PollTeaser component. If a `question_id` is received (meaning it is a param in the URL path) then we check if the question has been answered already to know whether to display PollQuestion or PollResult.
+
+#### 4.8.3 PollTeaser Component
+
+```jsx
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { Header, Button } from 'semantic-ui-react';
+import { colors } from '../utils/helpers';
+
+export class PollTeaser extends Component {
+  static propTypes = {
+    question: PropTypes.object.isRequired,
+    unanswered: PropTypes.bool.isRequired
+  };
+  state = {
+    viewPoll: false
+  };
+  handleClick = e => {
+    this.setState(prevState => ({
+      viewPoll: !prevState.viewPoll
+    }));
+  };
+  render() {
+    const { question, unanswered } = this.props;
+    const buttonColor = unanswered === true ? colors.green : colors.blue;
+    const buttonContent = unanswered === true ? 'Answer Poll' : 'Results'
+
+    if (this.state.viewPoll === true) {
+      return <Redirect push to={`/questions/${question.id}`} />;
+    }
+    return (
+      <Fragment>
+        <Header as="h5" textAlign="left">
+          Would you rather
+        </Header>{% raw %}
+        <p style={{ textAlign: 'center' }}>
+          {question.optionOne.text}
+          <br />{% endraw %}
+          or...
+        </p>
+        <Button
+          color={buttonColor.name}
+          size="tiny"
+          fluid
+          onClick={this.handleClick}
+          content={buttonContent}
+        />
+      </Fragment>
+    );
+  }
+}
+
+export default PollTeaser;
+```
+
+The main thing happening here is that the color scheme and button text is being changed based on whether the question has been answered or not.
+
+Here are the updated screenshots which should look the same.
+
+[![wyr61](assets/images/wyr61-small.jpg)](../assets/images/wyr61.jpg)<br>
+<span class="center bold">Home View showing Unanswered Questions Tab</span>
+
+[![wyr62](assets/images/wyr62-small.jpg)](../assets/images/wyr62.jpg)<br>
+<span class="center bold">Home View showing Answered Questions Tab</span>
