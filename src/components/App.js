@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Grid } from 'semantic-ui-react';
 import { handleInitialData } from '../actions/shared';
 import { connect } from 'react-redux';
 import Login from './Login';
 import Nav from './Nav';
 import Home from './Home';
+import UserCard from './UserCard';
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +29,10 @@ class App extends Component {
             <Fragment>
               <Nav />
               <ContentGrid>
-                <Route exact path="/" component={Home} />
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/questions/:question_id" component={UserCard} />
+                </Switch>
               </ContentGrid>
             </Fragment>
           )}
