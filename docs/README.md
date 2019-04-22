@@ -3677,3 +3677,204 @@ Here are the updated screenshots which should look the same.
 
 [![wyr62](assets/images/wyr62-small.jpg)](../assets/images/wyr62.jpg)<br>
 <span class="center bold">Home View showing Answered Questions Tab</span>
+
+### 4.9 Answer Poll Question
+This step involved creating actions, action creators, & reducers for both the *users* and *questions* store slices.
+
+- Questions state
+  - ADD_ANSWER_TO_QUESTION action
+  - `addAnswerToQuestion` action creator
+  - *questions* reducer
+- Users state
+  - ADD_ANSWER_TO_USER action
+  - `addAnswerToUser` action creator
+  - *users* reducer
+- Additional code
+  - `handleSaveQuestionAnswer` middleware thunk method
+  - `saveQuestionAnswer` async API function
+  - `connect` to expose store state and dispatch actions
+
+#### 4.9.1 Questions Action
+This is located in `/src/actions/questions.js`.
+
+```js
+// questions.js
+export const ADD_ANSWER_TO_QUESTION = 'ADD_ANSWER_TO_QUESTION';
+
+export function addAnswerToQuestion(authUser, qid, answer) {
+  return {
+    type: ADD_ANSWER_TO_QUESTION,
+    authUser,
+    qid,
+    answer
+  };
+}
+```
+
+#### 4.9.2 Questions Reducer
+This is located in `/src/reducers/questions.js`.
+
+```js
+// questions.js
+import {
+  RECEIVE_QUESTIONS,
+  ADD_ANSWER_TO_QUESTION
+} from '../actions/questions';
+
+export default function questions(state = {}, action) {
+  switch (action.type) {
+    ...
+    case ADD_ANSWER_TO_QUESTION:
+      const { authUser, qid, answer } = action;
+
+      return {
+        ...state,
+        [qid]: {
+          ...state[qid],
+          [answer]: {
+            ...state[qid][answer],
+            votes: state[qid][answer].votes.concat(authUser)
+          }
+        }
+      };
+    ...
+  }
+}
+```
+
+#### 4.9.3 Users Action
+This file contains both out action creator and thunk middleware function. This is located at `/src/actions/users.js`.
+
+```js
+// users.js
+import { saveQuestionAnswer } from '../utils/api';
+import { addAnswerToQuestion } from '../actions/questions';
+
+export const ADD_ANSWER_TO_USER = 'ADD_ANSWER_TO_USER';
+
+function addAnswerToUser(authUser, qid, answer) {
+  return {
+    type: ADD_ANSWER_TO_USER,
+    authUser,
+    qid,
+    answer
+  };
+}
+
+export function handleSaveQuestionAnswer(authUser, qid, answer) {
+  return dispatch => {
+    dispatch(addAnswerToUser(authUser, qid, answer));
+    dispatch(addAnswerToQuestion(authUser, qid, answer));
+
+    return saveQuestionAnswer(authUser, qid, answer).catch(e => {
+      console.warn('Error in handleSaveQuestionAnswer:', e);
+    });
+  };
+}
+```
+
+#### 4.9.4 API code
+This is located at `/src/utils/api.js`.
+
+```js
+// api.js
+import { _saveQuestionAnswer } from './_DATA';
+
+export function saveQuestionAnswer(authUser, qid, answer) {
+  return _saveQuestionAnswer({ authUser, qid, answer });
+}
+```
+
+#### 4.9.5 PollQuestion Component
+This becomes a container component so we can get state as props and dispatch actions based on user interaction.
+
+```jsx
+// PollQuestion.js
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Header, Button, Form, Radio } from 'semantic-ui-react';
+import { handleSaveQuestionAnswer } from '../actions/users';
+
+export class PollQuestion extends Component {
+  static propTypes = {
+    authUser: PropTypes.string.isRequired,
+    handleSaveQuestionAnswer: PropTypes.func.isRequired,
+    question: PropTypes.object.isRequired
+  };
+  state = {
+    value: ''
+  };
+
+  handleChange = (e, { value }) => this.setState({ value });
+
+  handleSubmit = e => {
+    e.preventDefault();
+    if (this.state.value !== '') {
+      const { authUser, question, handleSaveQuestionAnswer } = this.props;
+      handleSaveQuestionAnswer(authUser, question.id, this.state.value);
+    }
+  };
+
+  render() {
+    const { question } = this.props;
+    const disabled = this.state.value === '' ? true : false;
+
+    return (
+      <Fragment>
+        <Header as="h4">Would you rather</Header>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Field>
+            <Radio
+              label={question.optionOne.text}
+              name="radioGroup"
+              value="optionOne"
+              checked={this.state.value === 'optionOne'}
+              onChange={this.handleChange}
+            />
+            <br />
+            <Radio
+              label={question.optionTwo.text}
+              name="radioGroup"
+              value="optionTwo"
+              checked={this.state.value === 'optionTwo'}
+              onChange={this.handleChange}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Button
+              color="green"
+              size="tiny"
+              fluid
+              positive
+              disabled={disabled}
+              content="Submit"
+            />
+          </Form.Field>
+        </Form>
+      </Fragment>
+    );
+  }
+}
+
+function mapStateToProps({ authUser }, { match }) {
+  return {
+    authUser
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { handleSaveQuestionAnswer }
+)(PollQuestion);
+```
+
+Here's a screenshot of the UI.
+
+[![wyr63](assets/images/wyr63-small.jpg)](../assets/images/wyr63.jpg)<br>
+<span class="center bold">Answer Question View</span>
+
+The Redux logger shows that both actions were dispatched as well as updated state info.
+
+[![wyr64](assets/images/wyr64-small.jpg)](../assets/images/wyr64.jpg)<br>
+<span class="center bold">Redux Logger</span>
