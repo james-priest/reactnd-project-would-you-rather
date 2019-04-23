@@ -3878,3 +3878,150 @@ The Redux logger shows that both actions were dispatched as well as updated stat
 
 [![wyr64](assets/images/wyr64-small.jpg)](../assets/images/wyr64.jpg)<br>
 <span class="center bold">Redux Logger</span>
+
+### 4.10 Display Poll Results
+The next step is to connect the PollResult component to the store so we can use the data to calculate the numbers for display.
+
+The items we need to calculate are:
+
+- total number of votes
+- number of votes for each option
+- percentage of total vote for each option
+- indication of which option user voted for
+
+#### 4.10.1 PollResult Component
+This file is located at `/src/components/PollResult.js`.
+
+```jsx
+// PollResult.js
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+  Header,
+  Segment,
+  Progress,
+  Label,
+  Button,
+  Icon
+} from 'semantic-ui-react';
+import { styles } from '../utils/helpers';
+
+const YourVoteLabel = () => (
+  <Label color="orange" ribbon="right" className="vote">{% raw %}
+    <Icon name="check circle outline" size="big" className="compact" />
+    <div style={{ float: 'right' }}>
+      Your
+      <br />
+      Vote
+    </div>{% endraw %}
+  </Label>
+);
+
+export class PollResult extends Component {
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    question: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
+  };
+  handleClick = () => {
+    this.props.history.push('/');
+  };
+
+  render() {
+    const { question, user } = this.props;
+    const optionOneVotes = question.optionOne.votes.length;
+    const optionTwoVotes = question.optionTwo.votes.length;
+    const votesTotal = optionOneVotes + optionTwoVotes;
+    const userVote = user.answers[question.id];
+
+    let option1 = styles.secondary,
+      option2 = styles.secondary;
+    if (optionOneVotes > optionTwoVotes) {
+      option1 = styles.primary;
+    } else if (optionTwoVotes > optionOneVotes) {
+      option2 = styles.primary;
+    }
+
+    return (
+      <Fragment>{% raw %}
+        <Header as="h3">
+          Results:
+          <Header.Subheader style={{ fontWeight: 'bold' }}>
+            Would you rather
+          </Header.Subheader>
+        </Header>
+        <Segment
+          color={option1.color}
+          style={{ backgroundColor: `${option1.bgColor}` }}
+        >
+          {userVote === 'optionOne' && <YourVoteLabel />}
+          <p style={{ fontWeight: 'bold' }}>{question.optionOne.text}</p>
+          <Progress
+            percent={((optionOneVotes / votesTotal) * 100).toFixed(2)}
+            progress
+            color={option1.color}
+          >
+            {optionOneVotes} out of {votesTotal} votes
+          </Progress>
+        </Segment>
+        <Segment
+          color={option2.color}
+          style={{ backgroundColor: `${option2.bgColor}` }}
+        >
+          {userVote === 'optionTwo' && <YourVoteLabel />}
+
+          <p style={{ fontWeight: 'bold' }}>{question.optionTwo.text}</p>
+          <Progress
+            percent={((optionTwoVotes / votesTotal) * 100).toFixed(2)}
+            progress
+            color={option2.color}
+          >
+            {optionTwoVotes} out of {votesTotal} votes
+          </Progress>
+        </Segment>
+        <Button size="tiny" floated="right" onClick={this.handleClick}>
+          Back
+        </Button>
+      </Fragment>{% endraw %}
+    );
+  }
+}
+
+function mapStateToProps({ users, authUser }) {
+  const user = users[authUser];
+  return {
+    user
+  };
+}
+
+export default withRouter(connect(mapStateToProps)(PollResult));
+```
+
+#### 4.10.2 Helper code
+The helper code contains constants so they can be moved out of the component code. This is located at `/src/utils/helpers.js`.
+
+```js
+// helper.js
+export const styles = {
+  primary: {
+    color: 'green',
+    bgColor: 'honeydew'
+  },
+  secondary: {
+    color: 'grey',
+    bgColor: '#f4f4f4'
+  }
+};
+```
+
+Here are some screenshots of the UI.
+
+[![wyr65](assets/images/wyr65-small.jpg)](../assets/images/wyr65.jpg)<br>
+<span class="center bold">Poll Results View</span>
+
+The Redux logger shows that both actions were dispatched as well as updated state info.
+
+[![wyr66](assets/images/wyr66-small.jpg)](../assets/images/wyr66.jpg)<br>
+<span class="center bold">Poll Results with tie</span>
