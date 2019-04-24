@@ -3743,7 +3743,7 @@ export default function questions(state = {}, action) {
 ```
 
 #### 4.9.3 Users Action
-This file contains both out action creator and thunk middleware function. This is located at `/src/actions/users.js`.
+This file contains both our action creator and thunk middleware function. This is located at `/src/actions/users.js`.
 
 ```js
 // users.js
@@ -3773,7 +3773,37 @@ export function handleSaveQuestionAnswer(authUser, qid, answer) {
 }
 ```
 
-#### 4.9.4 API code
+#### 4.9.4 Users Reducer
+This file is located at `/src/reducers/users.js`.
+
+```js
+// users.js
+import {
+  ADD_ANSWER_TO_USER,
+} from '../actions/users';
+
+export default function users(state = {}, action) {
+  switch (action.type) {
+    ...
+    case ADD_ANSWER_TO_USER:
+      const { authUser, qid, answer } = action;
+
+      return {
+        ...state,
+        [authUser]: {
+          ...state[authUser],
+          answers: {
+            ...state[authUser].answers,
+            [qid]: answer
+          }
+        }
+      };
+    ...
+  }
+}
+```
+
+#### 4.9.5 API code
 This is located at `/src/utils/api.js`.
 
 ```js
@@ -3785,7 +3815,7 @@ export function saveQuestionAnswer(authUser, qid, answer) {
 }
 ```
 
-#### 4.9.5 PollQuestion Component
+#### 4.9.6 PollQuestion Component
 This becomes a container component so we can get state as props and dispatch actions based on user interaction.
 
 ```jsx
@@ -4025,3 +4055,270 @@ The Redux logger shows that both actions were dispatched as well as updated stat
 
 [![wyr66](assets/images/wyr66-small.jpg)](../assets/images/wyr66.jpg)<br>
 <span class="center bold">Poll Results with tie</span>
+
+### 4.11 Create New Poll
+The Add Question View allows a new poll to be created. This involves creating actions, action creators, & reducers for both the *questions* and *users* store slices.
+
+- Users state
+  - ADD_QUESTION_TO_USER
+  - `addQuestionToUser` action creator
+  - *users* reducer
+- Questions state
+  - ADD_QUESTION action
+  - `addQuestion` action creator
+  - *questions* reducer
+- Additional code
+  - `handleSaveQuestion` middleware thunk method
+  - `saveQuestion` async API function
+  - `connect` to map state and dispatch actions
+
+#### 4.11.1 Users Action
+This file is located in `/src/actions/users.js`.
+
+```js
+// users.js
+export const ADD_QUESTION_TO_USER = 'ADD_QUESTION_TO_USER';
+
+export function addQuestionToUser({ id, author }) {
+  return {
+    type: ADD_QUESTION_TO_USER,
+    id,
+    author
+  };
+}
+```
+
+#### 4.11.2 Users Reducer
+This file is located in `/src/reducers/users.js`.
+
+```js
+// users.js
+import {
+  RECEIVE_USERS,
+  ADD_ANSWER_TO_USER,
+  ADD_QUESTION_TO_USER
+} from '../actions/users';
+
+export default function users(state = {}, action) {
+  switch (action.type) {
+    ...
+    case ADD_QUESTION_TO_USER:
+      const { id, author } = action;
+
+      return {
+        ...state,
+        [author]: {
+          ...state[author],
+          questions: state[author].questions.concat(id)
+        }
+      };
+    ...
+  }
+}
+```
+
+#### 4.11.3 Questions Actions
+This file contains our action creator and thunk middleware function. This is located in `/src/actions/questions.js`.
+
+```js
+// questions.js
+import { saveQuestion } from '../utils/api';
+import { addQuestionToUser } from '../actions/users';
+
+export const ADD_QUESTION = 'ADD_QUESTION';
+
+function addQuestion(question) {
+  return {
+    type: ADD_QUESTION,
+    question
+  };
+}
+
+export function handleSaveQuestion(optionOneText, optionTwoText, author) {
+  return dispatch => {
+    return saveQuestion({ optionOneText, optionTwoText, author }).then(
+      question => {
+        dispatch(addQuestion(question));
+        dispatch(addQuestionToUser(question));
+      }
+    );
+  };
+}
+```
+
+#### 4.11.4 Questions Reducer
+This file is located at `/src/reducers/questions.js`.
+
+```js
+// questions.js
+import {
+  ADD_QUESTION
+} from '../actions/questions';
+
+export default function questions(state = {}, action) {
+  switch (action.type) {
+    ...
+    case ADD_QUESTION:
+      const { question } = action;
+
+      return {
+        ...state,
+        [question.id]: question
+      };
+    ...
+  }
+}
+```
+
+#### 4.11.5 API code
+This is located at `/src/utils/api.js`.
+
+```js
+// api.js
+import {
+  _saveQuestion,
+} from './_DATA';
+
+export function saveQuestion(question) {
+  return _saveQuestion(question);
+}
+```
+
+#### 4.11.6 NewPoll Component
+This becomes a container component so we can get state as props and dispatch actions based on user interaction.
+
+```jsx
+// NewPoll.js
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {
+  Segment,
+  Header,
+  Grid,
+  Divider,
+  Form,
+  Dimmer,
+  Loader
+} from 'semantic-ui-react';
+import { handleSaveQuestion } from '../actions/questions';
+
+export class NewPoll extends Component {
+  static propTypes = {
+    authUser: PropTypes.string.isRequired,
+    handleSaveQuestion: PropTypes.func.isRequired
+  };
+  state = {
+    validSubmit: false,
+    isLoading: false,
+    option1: '',
+    option2: ''
+  };
+  handleChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    const { authUser, handleSaveQuestion } = this.props;
+    const { option1, option2 } = this.state;
+
+    new Promise((res, rej) => {
+      this.setState({ isLoading: true });
+      handleSaveQuestion(option1, option2, authUser);
+      setTimeout(() => res('success'), 1000);
+    }).then(() => {
+      this.setState({
+        option1: '',
+        option2: ''
+      });
+      this.setState({ validSubmit: true });
+    });
+  };
+  render() {
+    console.log('this.props', this.props);
+    const disabled = this.state.option1 === '' || this.state.option2 === '';
+
+    if (this.state.validSubmit === true) {
+      return <Redirect to="/" />;
+    }
+    return (
+      <Segment.Group>
+        <Header as="h3" textAlign="left" block attached="top">
+          Create a New Poll
+        </Header>
+        <Grid padded>
+          <Grid.Column>
+            {this.state.isLoading && (
+              <Dimmer active inverted>
+                <Loader content="Updating" />
+              </Dimmer>
+            )}
+            <p>Complete the question:</p>
+            <p>
+              <strong>Would you rather...</strong>
+            </p>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Input
+                id="option1"
+                placeholder="Enter option one..."
+                value={this.state.option1}
+                onChange={this.handleChange}
+                required
+              />
+              <Divider horizontal>Or</Divider>
+              <Form.Input
+                id="option2"
+                placeholder="Enter option two..."
+                value={this.state.option2}
+                onChange={this.handleChange}
+                required
+              />
+              <Form.Button positive size="tiny" fluid disabled={disabled}>
+                Submit
+              </Form.Button>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </Segment.Group>
+    );
+  }
+}
+
+function mapStateToProps({ authUser }) {
+  return {
+    authUser
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { handleSaveQuestion }
+)(NewPoll);
+```
+
+Here are some screenshots showing the added question.
+
+[![wyr67](assets/images/wyr67-small.jpg)](../assets/images/wyr67.jpg)<br>
+<span class="center bold">Create New Poll View</span>
+
+The Redux logger shows that both actions were dispatched as well as updated state info.
+
+[![wyr71](assets/images/wyr71-small.jpg)](../assets/images/wyr71.jpg)<br>
+<span class="center bold">Redux Logger</span>
+
+The poll question is then added to the Home view.
+
+[![wyr68](assets/images/wyr68-small.jpg)](../assets/images/wyr68.jpg)<br>
+<span class="center bold">Home View with added poll question</span>
+
+The question can then be answered normally.
+
+[![wyr69](assets/images/wyr69-small.jpg)](../assets/images/wyr69.jpg)<br>
+<span class="center bold">Answer Poll Question</span>
+
+The poll results are then displayed.
+
+[![wyr70](assets/images/wyr70-small.jpg)](../assets/images/wyr70.jpg)<br>
+<span class="center bold">Poll Results</span>
+
