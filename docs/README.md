@@ -4420,3 +4420,181 @@ Here's the screenshot.
 
 [![wyr72](assets/images/wyr72-small.jpg)](../assets/images/wyr72.jpg)<br>
 <span class="center bold">Leaderboard component</span>
+
+### 4.13 No Match 404 Routing
+This last part deals with displaying a 404 error when a bad path is used.
+
+#### 4.13.1 NoMatch Component
+This file is located at `/src/components/NoMatch.js`.
+
+```jsx
+// NoMatch.js
+import React, { Component } from 'react';
+import { Container, Header } from 'semantic-ui-react';
+
+export class NoMatch extends Component {
+  render() {
+    return (
+      <Container textAlign="center">
+        <Header as="h3">No Match 404 Error</Header>
+        <p>Nothing to see here. Please use the menu to try again.</p>
+      </Container>
+    );
+  }
+}
+
+export default NoMatch;
+```
+
+#### 4.13.2 App Component
+The final change involved updating the Routes in App. This file is located at `/src/components/App.js`.
+
+```jsx
+// App.js
+import React, { Component, Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Grid } from 'semantic-ui-react';
+import { handleInitialData } from '../actions/shared';
+import { connect } from 'react-redux';
+import Login from './Login';
+import Nav from './Nav';
+import Home from './Home';
+import UserCard from './UserCard';
+import NewPoll from './NewPoll';
+import Leaderboard from './Leaderboard';
+import NoMatch from './NoMatch';
+
+class App extends Component {
+  componentDidMount() {
+    this.props.handleInitialData();
+  }
+  render() {
+    const { authUser } = this.props;
+    return (
+      <Router>
+        <div className="App">
+          {authUser === null ? (
+            <Route
+              render={() => (
+                <ContentGrid>
+                  <Login />
+                </ContentGrid>
+              )}
+            />
+          ) : (
+            <Fragment>
+              <Nav />
+              <ContentGrid>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/questions/bad_id" component={NoMatch} />
+                  <Route path="/questions/:question_id" component={UserCard} />
+                  <Route path="/add" component={NewPoll} />
+                  <Route path="/leaderboard" component={Leaderboard} />
+                  <Route component={NoMatch} />
+                </Switch>
+              </ContentGrid>
+            </Fragment>
+          )}
+        </div>
+      </Router>
+    );
+  }
+}
+
+const ContentGrid = ({ children }) => (
+  <Grid padded="vertically" columns={1} centered>{% raw %}
+    <Grid.Row>
+      <Grid.Column style={{ maxWidth: 550 }}>{children}</Grid.Column>
+    </Grid.Row>{% endraw %}
+  </Grid>
+);
+
+function mapStateToProps({ authUser }) {
+  return {
+    authUser
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { handleInitialData }
+)(App);
+```
+
+#### 4.13.3 UserCard Component
+Lastly I had to make an update to the UserCard component to redirect when a nonexistent question_id is used in the path. This file is located at `/src/components/UserCard.js`.
+
+```jsx
+// UserCard.js
+import { Redirect } from 'react-router-dom';
+
+export class UserCard extends Component {
+  static propTypes = {
+    question: PropTypes.object,
+    author: PropTypes.object,
+    pollType: PropTypes.string,
+    unanswered: PropTypes.bool,
+    question_id: PropTypes.string
+  };
+  render() {
+    const {
+      author,
+      question,
+      pollType,
+      badPath,
+      unanswered = null
+    } = this.props;
+
+    if (badPath === true) {
+      return <Redirect to="/questions/bad_id" />;
+    }
+
+    render(...)
+  }
+}
+
+function mapStateToProps(
+  { users, questions, authUser },
+  { match, question_id }
+) {
+  let question,
+    author,
+    pollType,
+    badPath = false;
+  if (question_id !== undefined) {
+    question = questions[question_id];
+    author = users[question.author];
+    pollType = pollTypes.POLL_TEASER;
+  } else {
+    const { question_id } = match.params;
+    question = questions[question_id];
+    const user = users[authUser];
+
+    if (question === undefined) {
+      badPath = true;
+    } else {
+      author = users[question.author];
+      pollType = pollTypes.POLL_QUESTION;
+      if (Object.keys(user.answers).includes(question.id)) {
+        pollType = pollTypes.POLL_RESULT;
+      }
+    }
+  }
+
+  return {
+    badPath,
+    question,
+    author,
+    pollType
+  };
+}
+```
+
+Here are the screenshots.
+
+[![wyr73](assets/images/wyr73-small.jpg)](../assets/images/wyr73.jpg)<br>
+<span class="center bold">NoMatch on bad path</span>
+
+[![wyr74](assets/images/wyr74-small.jpg)](../assets/images/wyr74.jpg)<br>
+<span class="center bold">NoMatch on bad question_id</span>
