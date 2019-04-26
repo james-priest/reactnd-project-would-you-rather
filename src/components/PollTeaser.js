@@ -19,7 +19,6 @@ export class PollTeaser extends Component {
   };
   render() {
     const { question, unanswered } = this.props;
-    // console.log('this.props', this.props);
     const buttonColor = unanswered === true ? colors.green : colors.blue;
     const buttonContent = unanswered === true ? 'Answer Poll' : 'Results';
 

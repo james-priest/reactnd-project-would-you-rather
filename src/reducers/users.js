@@ -13,7 +13,6 @@ export default function users(state = {}, action) {
       };
     case ADD_ANSWER_TO_USER:
       const { authUser, qid, answer } = action;
-      // console.log('user reducer state', state);
 
       return {
         ...state,

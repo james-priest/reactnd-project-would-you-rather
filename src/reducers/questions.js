@@ -13,7 +13,6 @@ export default function questions(state = {}, action) {
       };
     case ADD_ANSWER_TO_QUESTION:
       const { authUser, qid, answer } = action;
-      // console.log('question reducer state', state);
 
       return {
         ...state,

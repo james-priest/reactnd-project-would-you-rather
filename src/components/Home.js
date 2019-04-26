@@ -57,9 +57,6 @@ function mapStateToProps({ authUser, users, questions }) {
   const unanswered = Object.values(questions)
     .filter(question => answeredIds.includes(question.id))
     .sort((a, b) => b.timestamp - a.timestamp);
-  // console.log('answeredIds', answeredIds);
-  // console.log('answeredQuestions', answeredQuestions);
-  // console.log('unansweredQuestions', unansweredQuestions);
 
   return {
     userQuestionData: {
