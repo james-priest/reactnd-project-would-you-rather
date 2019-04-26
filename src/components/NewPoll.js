@@ -25,15 +25,12 @@ export class NewPoll extends Component {
     option2: ''
   };
   handleChange = e => {
-    // console.log(e.target.id);
     this.setState({ [e.target.id]: e.target.value });
   };
   handleSubmit = e => {
     e.preventDefault();
     const { authUser, handleSaveQuestion } = this.props;
     const { option1, option2 } = this.state;
-    console.log('this.state.option1', this.state.option1);
-    console.log('this.state.option2', this.state.option2);
 
     new Promise((res, rej) => {
       this.setState({ isLoading: true });
@@ -48,7 +45,6 @@ export class NewPoll extends Component {
     });
   };
   render() {
-    console.log('this.props', this.props);
     const disabled = this.state.option1 === '' || this.state.option2 === '';
 
     if (this.state.validSubmit === true) {

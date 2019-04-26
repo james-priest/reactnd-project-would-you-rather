@@ -20,14 +20,12 @@ export class PollQuestion extends Component {
     e.preventDefault();
     if (this.state.value !== '') {
       const { authUser, question, handleSaveQuestionAnswer } = this.props;
-      // console.log(authUser, question.id, this.state.value);
       handleSaveQuestionAnswer(authUser, question.id, this.state.value);
     }
   };
 
   render() {
     const { question } = this.props;
-    // console.log('this.props', this.props);
     const disabled = this.state.value === '' ? true : false;
 
     return (

@@ -34,7 +34,6 @@ export class PollResult extends Component {
   };
 
   render() {
-    // console.log('this.props', this.props);
     const { question, user } = this.props;
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
