@@ -4598,3 +4598,10 @@ Here are the screenshots.
 
 [![wyr74](assets/images/wyr74-small.jpg)](../assets/images/wyr74.jpg)<br>
 <span class="center bold">NoMatch on bad question_id</span>
+
+## 5. Project Submission
+### 5.1 Clean-up Code
+The next thing I needed to do was prep my code for submission. This involved:
+
+- Remove any debug or `console.log` statements
+- Restore original data for reviewer to use when evaluating the app
