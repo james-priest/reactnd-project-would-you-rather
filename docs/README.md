@@ -4605,3 +4605,11 @@ The next thing I needed to do was prep my code for submission. This involved:
 
 - Remove any debug or `console.log` statements
 - Restore original data for reviewer to use when evaluating the app
+
+### 5.2 Project Review
+I received the results from my project review and passed on my first submission.
+
+Here's a screenshot of the Summary.
+
+[![wyr75](assets/images/wyr75-small.jpg)](../assets/images/wyr75.jpg)<br>
+<span class="center bold">Review Summary</span>
