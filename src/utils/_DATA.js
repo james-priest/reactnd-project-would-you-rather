@@ -1,3 +1,4 @@
+/*
 let users = {
   sarahedo: {
     id: 'sarahedo',
@@ -114,8 +115,8 @@ let questions = {
     }
   }
 };
+*/
 
-/*
 let users = {
   brittini: {
     id: 'brittini',
@@ -267,7 +268,7 @@ let questions = {
     }
   }
 };
-*/
+
 function generateUID() {
   return (
     Math.random()

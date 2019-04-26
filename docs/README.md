@@ -4613,3 +4613,12 @@ Here's a screenshot of the Summary.
 
 [![wyr75](assets/images/wyr75-small.jpg)](../assets/images/wyr75.jpg)<br>
 <span class="center bold">Review Summary</span>
+
+### 5.3 Update README
+The last step is to update the README with screenshots of the app including the following.
+
+[![wyr77](assets/images/wyr77-small.jpg)](../assets/images/wyr77.jpg)<br>
+<span class="center bold">Glamour Shot #1</span>
+
+[![wyr76](assets/images/wyr76-small.jpg)](../assets/images/wyr76.jpg)<br>
+<span class="center bold">Glamour Shot #2</span>
