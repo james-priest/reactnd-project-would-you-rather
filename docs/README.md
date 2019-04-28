@@ -4,6 +4,9 @@
 This site contains code notes for project 2 of my Udacity React Nanodegree project. Click the link below for more information on the course.
 - [Udacity's React Nanodegree Program](https://www.udacity.com/course/react-nanodegree--nd019)
 
+[![wyr77](assets/images/wyr77-small.jpg)](../assets/images/wyr77.jpg)<br>
+<span class="center bold">Would You Rather App</span>
+
 ---
 
 ## 1. Project Requirements
@@ -412,6 +415,7 @@ I played around with various components from the Semantic-UI-React library and t
 #### 2.2.1 UITest1
 Here I tested a handful of random components that you can see from the import list.
 
+<!--
 ```jsx
 // UITest1.js
 import React, { Component } from 'react';
@@ -508,7 +512,7 @@ export default class UITest1 extends Component {
 }
 ```
 
-Here's the output of that this code.
+Here's the output of that this code.-->
 
 [![wyr7](assets/images/wyr7-small.jpg)](../assets/images/wyr7.jpg)<br>
 <span class="center bold">UITest1.js</span>
@@ -518,7 +522,7 @@ I also did a second test to see what the menu and nav system looked like. I want
 
 I had to bump up the font size a bit but overall the components scaled well.
 
-You can also see which components I used from the import list.
+<!-- You can also see which components I used from the import list.
 
 ```jsx
 // UITest2.js
@@ -683,7 +687,7 @@ export class UITest2 extends Component {
 }
 
 export default UITest2;
-```
+``` -->
 
 One of the things that Semantic UI React has is a Responsive control that can be used to show a different UI based on `min-width` or `max-width`.
 
@@ -715,6 +719,7 @@ Live Demo: [Would You Rather@4-ui-mockups](https://codesandbox.io/s/github/james
 ### 2.4 Mockup - Nav
 I split out the navigation into a Nav component that is responsive and scales well on mobile devices.
 
+<!-- 
 ```jsx
 // Nav.js
 import React, { Component, Fragment } from 'react';
@@ -873,7 +878,7 @@ export class Nav extends Component {
 }
 
 export default Nav;
-```
+``` -->
 
 [![wyr12](assets/images/wyr12-small.jpg)](../assets/images/wyr12.jpg)<br>
 Live Demo: [Would You Rather@5-mockup-nav](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/5-mockup-nav/?fontsize=14) on CodeSandbox
@@ -883,7 +888,7 @@ This next mockup employs a Tab component and uses a hard-coded object structure 
 
 I also an using composition to break these components into smaller chunks
 
-#### 2.5.1 App.js
+<!-- #### 2.5.1 App.js
 
 ```jsx
 // App.js
@@ -1044,7 +1049,7 @@ export const Question = ({ avatar, user, question }) => (
     </Grid>
   </Segment.Group>
 );
-```
+``` -->
 
 Here's are two screenshots of the working mockup - one shows the Unanswered Questions tab and the other shows the Answered Questions tab.
 
@@ -1070,7 +1075,7 @@ This component imports the following
 - Mock data
 - Components for each page
 
-```jsx
+<!-- ```jsx
 // App.js
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -1150,11 +1155,11 @@ const AppRoutes = props => (
 );
 
 export default App;
-```
+``` -->
 
 State is used to manage a redirect to the login page and well as whether to show a poll's question or results based on whether the question has been answered or not.
 
-#### 2.6.2 Login.js
+<!-- #### 2.6.2 Login.js
 
 ```jsx
 // Login.js
@@ -1353,7 +1358,7 @@ export class Question extends Component {
 }
 
 export default Question;
-```
+``` -->
 
 [![wyr14](assets/images/wyr14-small.jpg)](../assets/images/wyr14.jpg)<br>
 <span class="center bold">Unanswered Questions Tab</span>
@@ -1361,7 +1366,7 @@ export default Question;
 [![wyr15](assets/images/wyr15-small.jpg)](../assets/images/wyr15.jpg)<br>
 <span class="center bold">Answered Questions Tab</span>
 
-#### 2.6.5 NewPoll.js
+<!-- #### 2.6.5 NewPoll.js
 
 ```jsx
 // NewPoll.js
@@ -1409,14 +1414,14 @@ export default Leaderboard;
 ```
 
 [![wyr17](assets/images/wyr17-small.jpg)](../assets/images/wyr17.jpg)<br>
-<span class="center bold">Leaderboard Stub</span>
+<span class="center bold">Leaderboard Stub</span>-->
 
 > Live Demo: [Would You Rather@7-mockup-framework](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/7-mockup-framework/?fontsize=14) on CodeSandbox
 
 ### 2.7 Mockup - Poll Question
 The next set of changes happens in PollContainer.  This component is responsible for rendering the poll question or poll result based on a `showResult` flag we pass down.
 
-#### 2.7.1 PollContainer.js
+<!-- #### 2.7.1 PollContainer.js
 
 ```jsx
 // PollContainer.js
@@ -1543,7 +1548,7 @@ export class PollQuestion extends Component {
 }
 
 export default PollQuestion;
-```
+``` -->
 
 [![wyr18](assets/images/wyr18-small.jpg)](../assets/images/wyr18.jpg)<br>
 <span class="center bold">Poll Question</span>
@@ -1553,7 +1558,7 @@ export default PollQuestion;
 ### 2.8 Mockup - Poll Result
 The next step was to add in the PollResult.js component.
 
-#### 2.8.1 PollResult.js
+<!-- #### 2.8.1 PollResult.js
 
 ```jsx
 // PollResult.js
@@ -1614,7 +1619,7 @@ export class PollResult extends Component {
 }
 
 export default withRouter(PollResult);
-```
+``` -->
 
 [![wyr19](assets/images/wyr19-small.jpg)](../assets/images/wyr19.jpg)<br>
 <span class="center bold">Poll Result</span>
@@ -1632,7 +1637,7 @@ For this mockup I implemented the following.
 
 I used state to manage the form which makes this a controlled component.
 
-#### 2.9.1 NewPoll.js
+<!-- #### 2.9.1 NewPoll.js
 
 ```jsx
 // NewPoll.js
@@ -1721,7 +1726,7 @@ export class NewPoll extends Component {
 }
 
 export default NewPoll;
-```
+``` -->
 
 Here are screenshots of the form in different states.
 
@@ -1748,7 +1753,7 @@ Here are the elements of the mockup
 - Avatar image
 - Ordered ranking
 
-#### 2.10.1 Leaderboard.js
+<!-- #### 2.10.1 Leaderboard.js
 
 ```jsx
 // Leaderboard.js
@@ -1815,10 +1820,10 @@ export default Leaderboard;
 ```
 
 #### 2.10.2 _data.js
-Here's the mock data. When it comes time to pull actual data from the DB it'll need to be formatted like this in order to be mapped over.
+Here's the mock data. When it comes time to pull actual data from the DB it'll need to be formatted like this in order to be mapped over. -->
 
 <!-- cspell:disable -->
-
+<!-- 
 ```jsx
 // _data.js
 export const leaderboardData = [
@@ -1844,7 +1849,7 @@ export const leaderboardData = [
     questionCount: 3
   }
 ];
-```
+``` -->
 
 <!-- cspell:enable -->
 
@@ -1862,7 +1867,7 @@ The last mockup is of the Login screen. This needs to do the following.
 - Enable submit when a user is selected
 - Pass the user to the nav component for display
 
-#### 2.11.1 Login.js
+<!-- #### 2.11.1 Login.js
 
 ```jsx
 // Login.js
@@ -1963,10 +1968,10 @@ export default Login;
 
 The data that is used to populate the drop down comes from here.
 
-#### 2.11.2 _data.js
+#### 2.11.2 _data.js -->
 
 <!-- cspell:disable -->
-
+<!-- 
 ```jsx
 // _data.js
 export const navUsers = {
@@ -2035,7 +2040,7 @@ export const navUsers = {
     }
   }
 };
-```
+``` -->
 
 <!-- cspell:enable -->
 
