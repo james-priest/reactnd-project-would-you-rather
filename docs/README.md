@@ -4,7 +4,7 @@
 This site contains code notes for project 2 of my Udacity React Nanodegree project. Click the link below for more information on the course.
 - [Udacity's React Nanodegree Program](https://www.udacity.com/course/react-nanodegree--nd019)
 
-[![wyr77](assets/images/wyr77-small.jpg)](../assets/images/wyr77.jpg)<br>
+[![wyr77](assets/images/wyr77-small.jpg)](assets/images/wyr77.jpg)<br>
 <span class="center bold">Would You Rather App</span>
 
 ---
@@ -330,22 +330,22 @@ We encourage you to get creative with your projects by adding additional functio
 
 Here's a set of screenshots that show a sample project.
 
-[![wyr1](assets/images/wyr1-small.jpg)](../assets/images/wyr1.jpg)<br>
+[![wyr1](assets/images/wyr1-small.jpg)](assets/images/wyr1.jpg)<br>
 <span class="center bold">Login page</span>
 
-[![wyr2](assets/images/wyr2-small.jpg)](../assets/images/wyr2.jpg)<br>
+[![wyr2](assets/images/wyr2-small.jpg)](assets/images/wyr2.jpg)<br>
 <span class="center bold">Home page</span>
 
-[![wyr3](assets/images/wyr3-small.jpg)](../assets/images/wyr3.jpg)<br>
+[![wyr3](assets/images/wyr3-small.jpg)](assets/images/wyr3.jpg)<br>
 <span class="center bold">Poll page</span>
 
-[![wyr4](assets/images/wyr4-small.jpg)](../assets/images/wyr4.jpg)<br>
+[![wyr4](assets/images/wyr4-small.jpg)](assets/images/wyr4.jpg)<br>
 <span class="center bold">Poll Results</span>
 
-[![wyr5](assets/images/wyr5-small.jpg)](../assets/images/wyr5.jpg)<br>
+[![wyr5](assets/images/wyr5-small.jpg)](assets/images/wyr5.jpg)<br>
 <span class="center bold">Create Question</span>
 
-[![wyr6](assets/images/wyr6-small.jpg)](../assets/images/wyr6.jpg)<br>
+[![wyr6](assets/images/wyr6-small.jpg)](assets/images/wyr6.jpg)<br>
 <span class="center bold">Leader Board</span>
 
 ### 1.6 Step-by-Step Guide
@@ -514,7 +514,7 @@ export default class UITest1 extends Component {
 
 Here's the output of that this code.-->
 
-[![wyr7](assets/images/wyr7-small.jpg)](../assets/images/wyr7.jpg)<br>
+[![wyr7](assets/images/wyr7-small.jpg)](assets/images/wyr7.jpg)<br>
 <span class="center bold">UITest1.js</span>
 
 #### 2.2.2 UITest2
@@ -693,7 +693,7 @@ One of the things that Semantic UI React has is a Responsive control that can be
 
 I created three breakpoint width for the navigation menu to use. Here's the UI.
 
-[![wyr8](assets/images/wyr8-small.jpg)](../assets/images/wyr8.jpg)<br>
+[![wyr8](assets/images/wyr8-small.jpg)](assets/images/wyr8.jpg)<br>
 <span class="center bold">UITest2.js</span>
 
 ### 2.3 UI Mockups
@@ -713,7 +713,7 @@ This would give me a chance to see which layouts, controls, and components work 
 
 #### 2.3.1 Sample Page
 
-[![wyr9](assets/images/wyr9-small.jpg)](../assets/images/wyr9.jpg)<br>
+[![wyr9](assets/images/wyr9-small.jpg)](assets/images/wyr9.jpg)<br>
 Live Demo: [Would You Rather@4-ui-mockups](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/4-ui-mockups/?fontsize=14) on CodeSandbox
 
 ### 2.4 Mockup - Nav
@@ -880,7 +880,7 @@ export class Nav extends Component {
 export default Nav;
 ``` -->
 
-[![wyr12](assets/images/wyr12-small.jpg)](../assets/images/wyr12.jpg)<br>
+[![wyr12](assets/images/wyr12-small.jpg)](assets/images/wyr12.jpg)<br>
 Live Demo: [Would You Rather@5-mockup-nav](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/5-mockup-nav/?fontsize=14) on CodeSandbox
 
 ### 2.5 Mockup - Home
@@ -1053,10 +1053,10 @@ export const Question = ({ avatar, user, question }) => (
 
 Here's are two screenshots of the working mockup - one shows the Unanswered Questions tab and the other shows the Answered Questions tab.
 
-[![wyr10](assets/images/wyr10-small.jpg)](../assets/images/wyr10.jpg)<br>
+[![wyr10](assets/images/wyr10-small.jpg)](assets/images/wyr10.jpg)<br>
 <span class="center bold">Unanswered Questions</span>
 
-[![wyr11](assets/images/wyr11-small.jpg)](../assets/images/wyr11.jpg)<br>
+[![wyr11](assets/images/wyr11-small.jpg)](assets/images/wyr11.jpg)<br>
 <span class="center bold">Answered Questions</span>
 
 > Live Demo: [Would You Rather@6-mockup-home](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/6-mockup-home/?fontsize=14) on CodeSandbox
@@ -1183,7 +1183,7 @@ export class Login extends Component {
 export default Login;
 ```
 
-[![wyr13](assets/images/wyr13-small.jpg)](../assets/images/wyr13.jpg)<br>
+[![wyr13](assets/images/wyr13-small.jpg)](assets/images/wyr13.jpg)<br>
 <span class="center bold">Minimal Login</span>
 
 #### 2.6.3 Home.js
@@ -1360,10 +1360,10 @@ export class Question extends Component {
 export default Question;
 ``` -->
 
-[![wyr14](assets/images/wyr14-small.jpg)](../assets/images/wyr14.jpg)<br>
+[![wyr14](assets/images/wyr14-small.jpg)](assets/images/wyr14.jpg)<br>
 <span class="center bold">Unanswered Questions Tab</span>
 
-[![wyr15](assets/images/wyr15-small.jpg)](../assets/images/wyr15.jpg)<br>
+[![wyr15](assets/images/wyr15-small.jpg)](assets/images/wyr15.jpg)<br>
 <span class="center bold">Answered Questions Tab</span>
 
 <!-- #### 2.6.5 NewPoll.js
@@ -1388,7 +1388,7 @@ export class NewPoll extends Component {
 export default NewPoll;
 ```
 
-[![wyr16](assets/images/wyr16-small.jpg)](../assets/images/wyr16.jpg)<br>
+[![wyr16](assets/images/wyr16-small.jpg)](assets/images/wyr16.jpg)<br>
 <span class="center bold">New Poll Stub</span>
 
 #### 2.6.6 Leaderboard.js
@@ -1413,7 +1413,7 @@ export class Leaderboard extends Component {
 export default Leaderboard;
 ```
 
-[![wyr17](assets/images/wyr17-small.jpg)](../assets/images/wyr17.jpg)<br>
+[![wyr17](assets/images/wyr17-small.jpg)](assets/images/wyr17.jpg)<br>
 <span class="center bold">Leaderboard Stub</span>-->
 
 > Live Demo: [Would You Rather@7-mockup-framework](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/7-mockup-framework/?fontsize=14) on CodeSandbox
@@ -1550,7 +1550,7 @@ export class PollQuestion extends Component {
 export default PollQuestion;
 ``` -->
 
-[![wyr18](assets/images/wyr18-small.jpg)](../assets/images/wyr18.jpg)<br>
+[![wyr18](assets/images/wyr18-small.jpg)](assets/images/wyr18.jpg)<br>
 <span class="center bold">Poll Question</span>
 
 > Live Demo: [Would You Rather@8-mockup-poll-question](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/8-mockup-poll-question/?fontsize=14) on CodeSandbox
@@ -1621,7 +1621,7 @@ export class PollResult extends Component {
 export default withRouter(PollResult);
 ``` -->
 
-[![wyr19](assets/images/wyr19-small.jpg)](../assets/images/wyr19.jpg)<br>
+[![wyr19](assets/images/wyr19-small.jpg)](assets/images/wyr19.jpg)<br>
 <span class="center bold">Poll Result</span>
 
 > Live Demo: [Would You Rather@9-mockup-poll-result](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/9-mockup-poll-result/?fontsize=14) on CodeSandbox
@@ -1730,13 +1730,13 @@ export default NewPoll;
 
 Here are screenshots of the form in different states.
 
-[![wyr23](assets/images/wyr23-small.jpg)](../assets/images/wyr23.jpg)<br>
+[![wyr23](assets/images/wyr23-small.jpg)](assets/images/wyr23.jpg)<br>
 <span class="center bold">New Poll - Incomplete fields</span>
 
-[![wyr21](assets/images/wyr21-small.jpg)](../assets/images/wyr21.jpg)<br>
+[![wyr21](assets/images/wyr21-small.jpg)](assets/images/wyr21.jpg)<br>
 <span class="center bold">New Poll - Valid fields</span>
 
-[![wyr22](assets/images/wyr22-small.jpg)](../assets/images/wyr22.jpg)<br>
+[![wyr22](assets/images/wyr22-small.jpg)](assets/images/wyr22.jpg)<br>
 <span class="center bold">New Poll - Loader on Submission</span>
 
 > Live Demo: [Would You Rather@10-mockup-new-poll](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/10-mockup-new-poll/?fontsize=14) on CodeSandbox
@@ -1855,7 +1855,7 @@ export const leaderboardData = [
 
 Here's a screenshot of the leaderboard.
 
-[![wyr24](assets/images/wyr24-small.jpg)](../assets/images/wyr24.jpg)<br>
+[![wyr24](assets/images/wyr24-small.jpg)](assets/images/wyr24.jpg)<br>
 <span class="center bold">Leaderboard</span>
 
 > Live Demo: [Would You Rather@11-mockup-leaderboard](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/11-mockup-leaderboard/?fontsize=14) on CodeSandbox
@@ -2046,10 +2046,10 @@ export const navUsers = {
 
 Here are screenshots of the login page.
 
-[![wyr25](assets/images/wyr25-small.jpg)](../assets/images/wyr25.jpg)<br>
+[![wyr25](assets/images/wyr25-small.jpg)](assets/images/wyr25.jpg)<br>
 <span class="center bold">Login 1</span>
 
-[![wyr27](assets/images/wyr27-small.jpg)](../assets/images/wyr27.jpg)<br>
+[![wyr27](assets/images/wyr27-small.jpg)](assets/images/wyr27.jpg)<br>
 <span class="center bold">Login 2</span>
 
 > Live Demo: [Would You Rather@12-mockup-login](https://codesandbox.io/s/github/james-priest/reactnd-project-would-you-rather/tree/12-mockup-login/?fontsize=14) on CodeSandbox
@@ -2060,7 +2060,7 @@ Now that we have mockups created I can list those here along with the requiremen
 
 #### 3.1.1 Login view
 
-[![wyr28](assets/images/wyr28-small.jpg)](../assets/images/wyr28.jpg)<br>
+[![wyr28](assets/images/wyr28-small.jpg)](assets/images/wyr28.jpg)<br>
 <span class="center bold">Login</span>
 
 Login View Requirements:
@@ -2072,7 +2072,7 @@ Login View Requirements:
 
 #### 3.1.2 Home view
 
-[![wyr29](assets/images/wyr29-small.jpg)](../assets/images/wyr29.jpg)<br>
+[![wyr29](assets/images/wyr29-small.jpg)](assets/images/wyr29.jpg)<br>
 <span class="center bold">Home - Unanswered Polls</span>
 
 Home View Requirements:
@@ -2085,12 +2085,12 @@ Home View Requirements:
 - Clicking any poll (answered or unanswered) navigates to the poll's details
 - Poll details should be located at `questions/:question_id`
 
-[![wyr34](assets/images/wyr34-small.jpg)](../assets/images/wyr34.jpg)<br>
+[![wyr34](assets/images/wyr34-small.jpg)](assets/images/wyr34.jpg)<br>
 <span class="center bold">Home - Answered Polls</span>
 
 #### 3.1.3 Poll Question view
 
-[![wyr30](assets/images/wyr30-small.jpg)](../assets/images/wyr30.jpg)<br>
+[![wyr30](assets/images/wyr30-small.jpg)](assets/images/wyr30.jpg)<br>
 <span class="center bold">Poll Question</span>
 
 Poll Question View Requirements:
@@ -2108,7 +2108,7 @@ When someone votes in a poll:
 
 #### 3.1.4 Poll Result view
 
-[![wyr31](assets/images/wyr31-small.jpg)](../assets/images/wyr31.jpg)<br>
+[![wyr31](assets/images/wyr31-small.jpg)](assets/images/wyr31.jpg)<br>
 <span class="center bold">Poll Result</span>
 
 Poll Result View Requirements:
@@ -2121,7 +2121,7 @@ Poll Result View Requirements:
 
 #### 3.1.5 Poll 404 view
 
-[![wyr37](assets/images/wyr37-small.jpg)](../assets/images/wyr37.jpg)<br>
+[![wyr37](assets/images/wyr37-small.jpg)](assets/images/wyr37.jpg)<br>
 <span class="center bold">Poll 404</span>
 
 Poll 404 View Requirements:
@@ -2132,7 +2132,7 @@ Poll 404 View Requirements:
 
 #### 3.1.6 New Poll view
 
-[![wyr32](assets/images/wyr32-small.jpg)](../assets/images/wyr32.jpg)<br>
+[![wyr32](assets/images/wyr32-small.jpg)](assets/images/wyr32.jpg)<br>
 <span class="center bold">New Poll</span>
 
 New Poll View Requirements:
@@ -2144,7 +2144,7 @@ New Poll View Requirements:
 
 #### 3.1.7 Leaderboard view
 
-[![wyr33](assets/images/wyr33-small.jpg)](../assets/images/wyr33.jpg)<br>
+[![wyr33](assets/images/wyr33-small.jpg)](assets/images/wyr33.jpg)<br>
 <span class="center bold">Leaderboard</span>
 
 Leaderboard View Requirements:
@@ -2174,7 +2174,7 @@ Components used in the hierarchies that come from the Semantic-UI-React library 
 
 #### 3.2.1 Login view components
 
-[![wyr35](assets/images/wyr35-small.jpg)](../assets/images/wyr35.jpg)<br>
+[![wyr35](assets/images/wyr35-small.jpg)](assets/images/wyr35.jpg)<br>
 <span class="center bold">Login</span>
 
 This view is broken down into the following React components:
@@ -2187,7 +2187,7 @@ This view is broken down into the following React components:
 
 #### 3.2.2 Home view components
 
-[![wyr36](assets/images/wyr36-small.jpg)](../assets/images/wyr36.jpg)<br>
+[![wyr36](assets/images/wyr36-small.jpg)](assets/images/wyr36.jpg)<br>
 <span class="center bold">Home</span>
 
 - **App** - container for the project
@@ -2202,7 +2202,7 @@ This view is broken down into the following React components:
 
 #### 3.2.3 Poll Question view components
 
-[![wyr38](assets/images/wyr38-small.jpg)](../assets/images/wyr38.jpg)<br>
+[![wyr38](assets/images/wyr38-small.jpg)](assets/images/wyr38.jpg)<br>
 <span class="center bold">Poll Question</span>
 
 - **App** - container for the project
@@ -2212,7 +2212,7 @@ This view is broken down into the following React components:
 
 #### 3.2.4 Poll Result view components
 
-[![wyr39](assets/images/wyr39-small.jpg)](../assets/images/wyr39.jpg)<br>
+[![wyr39](assets/images/wyr39-small.jpg)](assets/images/wyr39.jpg)<br>
 <span class="center bold">Poll Result</span>
 
 - **App** - container for the project
@@ -2222,7 +2222,7 @@ This view is broken down into the following React components:
 
 #### 3.2.5 Poll 404 view components
 
-[![wyr40](assets/images/wyr40-small.jpg)](../assets/images/wyr40.jpg)<br>
+[![wyr40](assets/images/wyr40-small.jpg)](assets/images/wyr40.jpg)<br>
 <span class="center bold">Poll 404</span>
 
 - **App** - container for the project
@@ -2231,7 +2231,7 @@ This view is broken down into the following React components:
 
 #### 3.2.6 New Poll view components
 
-[![wyr41](assets/images/wyr41-small.jpg)](../assets/images/wyr41.jpg)<br>
+[![wyr41](assets/images/wyr41-small.jpg)](assets/images/wyr41.jpg)<br>
 <span class="center bold">New Poll</span>
 
 - **App** - container for the project
@@ -2241,7 +2241,7 @@ This view is broken down into the following React components:
 
 #### 3.2.7 Leaderboard view components
 
-[![wyr42](assets/images/wyr42-small.jpg)](../assets/images/wyr42.jpg)<br>
+[![wyr42](assets/images/wyr42-small.jpg)](assets/images/wyr42.jpg)<br>
 <span class="center bold">Leaderboard</span>
 
 - **App** - container for the project
@@ -2288,7 +2288,7 @@ We’ll do the following in the analysis of of each component:
 #### 3.3.1 App component events
 When the app first loads we need to fill the store with data.
 
-[![wyr43](assets/images/wyr43-small.jpg)](../assets/images/wyr43.jpg)<br>
+[![wyr43](assets/images/wyr43-small.jpg)](assets/images/wyr43.jpg)<br>
 <span class="center bold">App component</span>
 
 Action and data:
@@ -2311,7 +2311,7 @@ Action and data:
 #### 3.3.2 Login component events
 Data used to populate form.
 
-[![wyr44](assets/images/wyr44-small.jpg)](../assets/images/wyr44.jpg)<br>
+[![wyr44](assets/images/wyr44-small.jpg)](assets/images/wyr44.jpg)<br>
 <span class="center bold">Login component</span>
 
 Action and data:
@@ -2322,7 +2322,7 @@ Action and data:
 #### 3.3.3 Home component events
 Data used to populate tab panes.
 
-[![wyr45](assets/images/wyr45-small.jpg)](../assets/images/wyr45.jpg)<br>
+[![wyr45](assets/images/wyr45-small.jpg)](assets/images/wyr45.jpg)<br>
 <span class="center bold">Home component</span>
 
 - <span class="underline">get</span> list of unanswered **questions** for pane 1 (Unanswered).
@@ -2330,21 +2330,21 @@ Data used to populate tab panes.
 
 #### 3.3.4 UserCard component events
 
-[![wyr46](assets/images/wyr46-small.jpg)](../assets/images/wyr46.jpg)<br>
+[![wyr46](assets/images/wyr46-small.jpg)](assets/images/wyr46.jpg)<br>
 <span class="center bold">UserCard component</span>
 
 - <span class="underline">get</span> user from list of **users**.
 
 #### 3.3.5 PollTeaser component events
 
-[![wyr47](assets/images/wyr47-small.jpg)](../assets/images/wyr47.jpg)<br>
+[![wyr47](assets/images/wyr47-small.jpg)](assets/images/wyr47.jpg)<br>
 <span class="center bold">PollTeaser component</span>
 
 - <span class="underline">get</span> question from the list of **questions**.
 
 #### 3.3.6 PollQuestion component events
 
-[![wyr48](assets/images/wyr48-small.jpg)](../assets/images/wyr48.jpg)<br>
+[![wyr48](assets/images/wyr48-small.jpg)](assets/images/wyr48.jpg)<br>
 <span class="center bold">PollQuestion component</span>
 
 - <span class="underline">get</span> **authUser** to record an answered question.
@@ -2353,14 +2353,14 @@ Data used to populate tab panes.
 
 #### 3.3.7 PollAnswer component events
 
-[![wyr49](assets/images/wyr49-small.jpg)](../assets/images/wyr49.jpg)<br>
+[![wyr49](assets/images/wyr49-small.jpg)](assets/images/wyr49.jpg)<br>
 <span class="center bold">PollAnswer component</span>
 
 - <span class="underline">get</span> question from the list of **questions** which contains the answers.
 
 #### 3.3.8 NewPoll component events
 
-[![wyr50](assets/images/wyr50-small.jpg)](../assets/images/wyr50.jpg)<br>
+[![wyr50](assets/images/wyr50-small.jpg)](assets/images/wyr50.jpg)<br>
 <span class="center bold">NewPoll component</span>
 
 - <span class="underline">get</span> **authUser** to save a new question.
@@ -2368,14 +2368,14 @@ Data used to populate tab panes.
 
 #### 3.3.9 Leaderboard component events
 
-[![wyr51](assets/images/wyr51-small.jpg)](../assets/images/wyr51.jpg)<br>
+[![wyr51](assets/images/wyr51-small.jpg)](assets/images/wyr51.jpg)<br>
 <span class="center bold">Leaderboard component</span>
 
 - <span class="underline">get</span> **users**.
 
 #### 3.3.10 LeaderboardCard component events
 
-[![wyr52](assets/images/wyr52-small.jpg)](../assets/images/wyr52.jpg)<br>
+[![wyr52](assets/images/wyr52-small.jpg)](assets/images/wyr52.jpg)<br>
 <span class="center bold">LeaderboardCard component</span>
 
 - <span class="underline">get</span> specific user from **users**.
@@ -2453,7 +2453,7 @@ Our store will consist of the following data "tables".
 - questions
 - authUser
 
-[![wyr53](assets/images/wyr53-small.jpg)](../assets/images/wyr53.jpg)<br>
+[![wyr53](assets/images/wyr53-small.jpg)](assets/images/wyr53.jpg)<br>
 <span class="center bold">Redux Store Entities</span>
 
 ## 4. Coding Phase
@@ -2697,7 +2697,7 @@ ReactDOM.render(
 #### 4.3.6 Testing
 Now we can test to make sure that our Redux store objects are in place by opening Chrome DevTools and going to the React Developer Tools tab.
 
-[![wyr54](assets/images/wyr54-small.jpg)](../assets/images/wyr54.jpg)<br>
+[![wyr54](assets/images/wyr54-small.jpg)](assets/images/wyr54.jpg)<br>
 <span class="center bold">React Tools showing storeState</span>
 
 ### 4.4 Middleware
@@ -2849,12 +2849,12 @@ export default connect( // <- new
 
 When we run the app we can now see the that it is wrapped by the connect component.
 
-[![wyr55](assets/images/wyr55-small.jpg)](../assets/images/wyr55.jpg)<br>
+[![wyr55](assets/images/wyr55-small.jpg)](assets/images/wyr55.jpg)<br>
 <span class="center bold">React Tools showing storeState</span>
 
 We can also see our logger is working properly because it outputs both  the RECEIVE_QUESTIONS and RECEIVE_USERS actions.
 
-[![wyr56](assets/images/wyr56-small.jpg)](../assets/images/wyr56.jpg)<br>
+[![wyr56](assets/images/wyr56-small.jpg)](assets/images/wyr56.jpg)<br>
 <span class="center bold">DevTools Console with Logger output</span>
 
 ### 4.6 Login & Navigation
@@ -3171,10 +3171,10 @@ export default connect(
 
 The Login component displays all users in the dropdown which is now coming from our Redux store.
 
-[![wyr57](assets/images/wyr57-small.jpg)](../assets/images/wyr57.jpg)<br>
+[![wyr57](assets/images/wyr57-small.jpg)](assets/images/wyr57.jpg)<br>
 <span class="center bold">Login Form Component showing user accounts</span>
 
-[![wyr58](assets/images/wyr58-small.jpg)](../assets/images/wyr58.jpg)<br>
+[![wyr58](assets/images/wyr58-small.jpg)](assets/images/wyr58.jpg)<br>
 <span class="center bold">Nav Component showing logged in user</span>
 
 ### 4.7 Home View
@@ -3398,10 +3398,10 @@ export default PollTeaser;
 
 Here are screenshots with the provided data.
 
-[![wyr59](assets/images/wyr59-small.jpg)](../assets/images/wyr59.jpg)<br>
+[![wyr59](assets/images/wyr59-small.jpg)](assets/images/wyr59.jpg)<br>
 <span class="center bold">Home View showing Unanswered Questions Tab</span>
 
-[![wyr60](assets/images/wyr60-small.jpg)](../assets/images/wyr60.jpg)<br>
+[![wyr60](assets/images/wyr60-small.jpg)](assets/images/wyr60.jpg)<br>
 <span class="center bold">Home View showing Answered Questions Tab</span>
 
 ### 4.8 UserCard Component
@@ -3677,10 +3677,10 @@ The main thing happening here is that the color scheme and button text is being 
 
 Here are the updated screenshots which should look the same.
 
-[![wyr61](assets/images/wyr61-small.jpg)](../assets/images/wyr61.jpg)<br>
+[![wyr61](assets/images/wyr61-small.jpg)](assets/images/wyr61.jpg)<br>
 <span class="center bold">Home View showing Unanswered Questions Tab</span>
 
-[![wyr62](assets/images/wyr62-small.jpg)](../assets/images/wyr62.jpg)<br>
+[![wyr62](assets/images/wyr62-small.jpg)](assets/images/wyr62.jpg)<br>
 <span class="center bold">Home View showing Answered Questions Tab</span>
 
 ### 4.9 Answer Poll Question
@@ -3906,12 +3906,12 @@ export default connect(
 
 Here's a screenshot of the UI.
 
-[![wyr63](assets/images/wyr63-small.jpg)](../assets/images/wyr63.jpg)<br>
+[![wyr63](assets/images/wyr63-small.jpg)](assets/images/wyr63.jpg)<br>
 <span class="center bold">Answer Question View</span>
 
 The Redux logger shows that both actions were dispatched as well as updated state info.
 
-[![wyr64](assets/images/wyr64-small.jpg)](../assets/images/wyr64.jpg)<br>
+[![wyr64](assets/images/wyr64-small.jpg)](assets/images/wyr64.jpg)<br>
 <span class="center bold">Redux Logger</span>
 
 ### 4.10 Display Poll Results
@@ -4053,12 +4053,12 @@ export const styles = {
 
 Here are some screenshots of the UI.
 
-[![wyr65](assets/images/wyr65-small.jpg)](../assets/images/wyr65.jpg)<br>
+[![wyr65](assets/images/wyr65-small.jpg)](assets/images/wyr65.jpg)<br>
 <span class="center bold">Poll Results View</span>
 
 The Redux logger shows that both actions were dispatched as well as updated state info.
 
-[![wyr66](assets/images/wyr66-small.jpg)](../assets/images/wyr66.jpg)<br>
+[![wyr66](assets/images/wyr66-small.jpg)](assets/images/wyr66.jpg)<br>
 <span class="center bold">Poll Results with tie</span>
 
 ### 4.11 Create New Poll
@@ -4304,27 +4304,27 @@ export default connect(
 
 Here are some screenshots showing the added question.
 
-[![wyr67](assets/images/wyr67-small.jpg)](../assets/images/wyr67.jpg)<br>
+[![wyr67](assets/images/wyr67-small.jpg)](assets/images/wyr67.jpg)<br>
 <span class="center bold">Create New Poll View</span>
 
 The Redux logger shows that both actions were dispatched as well as updated state info.
 
-[![wyr71](assets/images/wyr71-small.jpg)](../assets/images/wyr71.jpg)<br>
+[![wyr71](assets/images/wyr71-small.jpg)](assets/images/wyr71.jpg)<br>
 <span class="center bold">Redux Logger</span>
 
 The poll question is then added to the Home view.
 
-[![wyr68](assets/images/wyr68-small.jpg)](../assets/images/wyr68.jpg)<br>
+[![wyr68](assets/images/wyr68-small.jpg)](assets/images/wyr68.jpg)<br>
 <span class="center bold">Home View with added poll question</span>
 
 The question can then be answered normally.
 
-[![wyr69](assets/images/wyr69-small.jpg)](../assets/images/wyr69.jpg)<br>
+[![wyr69](assets/images/wyr69-small.jpg)](assets/images/wyr69.jpg)<br>
 <span class="center bold">Answer Poll Question</span>
 
 The poll results are then displayed.
 
-[![wyr70](assets/images/wyr70-small.jpg)](../assets/images/wyr70.jpg)<br>
+[![wyr70](assets/images/wyr70-small.jpg)](assets/images/wyr70.jpg)<br>
 <span class="center bold">Poll Results</span>
 
 ### 4.12 Display Leaderboard
@@ -4423,7 +4423,7 @@ export default connect(mapStateToProps)(Leaderboard);
 
 Here's the screenshot.
 
-[![wyr72](assets/images/wyr72-small.jpg)](../assets/images/wyr72.jpg)<br>
+[![wyr72](assets/images/wyr72-small.jpg)](assets/images/wyr72.jpg)<br>
 <span class="center bold">Leaderboard component</span>
 
 ### 4.13 No Match 404 Routing
@@ -4598,10 +4598,10 @@ function mapStateToProps(
 
 Here are the screenshots.
 
-[![wyr73](assets/images/wyr73-small.jpg)](../assets/images/wyr73.jpg)<br>
+[![wyr73](assets/images/wyr73-small.jpg)](assets/images/wyr73.jpg)<br>
 <span class="center bold">NoMatch on bad path</span>
 
-[![wyr74](assets/images/wyr74-small.jpg)](../assets/images/wyr74.jpg)<br>
+[![wyr74](assets/images/wyr74-small.jpg)](assets/images/wyr74.jpg)<br>
 <span class="center bold">NoMatch on bad question_id</span>
 
 ## 5. Project Submission
@@ -4616,14 +4616,14 @@ I received the results from my project review and passed on my first submission.
 
 Here's a screenshot of the Summary.
 
-[![wyr75](assets/images/wyr75-small.jpg)](../assets/images/wyr75.jpg)<br>
+[![wyr75](assets/images/wyr75-small.jpg)](assets/images/wyr75.jpg)<br>
 <span class="center bold">Review Summary</span>
 
 ### 5.3 Update README
 The last step is to update the README with screenshots of the app including the following.
 
-[![wyr77](assets/images/wyr77-small.jpg)](../assets/images/wyr77.jpg)<br>
+[![wyr77](assets/images/wyr77-small.jpg)](assets/images/wyr77.jpg)<br>
 <span class="center bold">Glamour Shot #1</span>
 
-[![wyr76](assets/images/wyr76-small.jpg)](../assets/images/wyr76.jpg)<br>
+[![wyr76](assets/images/wyr76-small.jpg)](assets/images/wyr76.jpg)<br>
 <span class="center bold">Glamour Shot #2</span>
