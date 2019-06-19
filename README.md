@@ -3,7 +3,7 @@
 
 # Would You Rather
 
-Would You Rather is a polling game that presents the user with a series of questions that can be answered one of two ways.
+Would You Rather is a fully responsive and mobile-ready polling game that presents the user with a series of questions.
 
 ![screenshot #1](docs/assets/images/wyr77-small.jpg)
 
