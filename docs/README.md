@@ -1,11 +1,12 @@
 <!-- markdownlint-disable MD022 MD024 MD032 MD033 -->
 # Code Notes
 
-This site contains code notes for project 2 of my Udacity React Nanodegree project. Click the link below for more information on the course.
-- [Udacity's React Nanodegree Program](https://www.udacity.com/course/react-nanodegree--nd019)
+This site contains code notes for how I built project 2 of my [Udacity React Nanodegree Program](https://www.udacity.com/course/react-nanodegree--nd019).
 
 [![wyr77](assets/images/wyr77-small.jpg)](assets/images/wyr77.jpg)<br>
-<span class="center bold">Would You Rather App</span>
+<span class="center bold">Would You Rather Game</span>
+
+- [Live Demo](https://reactnd-would-you-rather.netlify.com/)
 
 ---
 
