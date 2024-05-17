@@ -11,7 +11,7 @@ It's built with React, Redux, React Router, & Redux Thunk.
 
 This app is the second of three projects required for [Udacity's React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
 
-- **Live Demo:** [https://reactnd-would-you-rather.netlify.com](https://reactnd-would-you-rather.netlify.com/)
+- **Live Demo:** [https://reactnd-would-you-rather.netlify.app](https://reactnd-would-you-rather.netlify.app/)
 - **Code Notes:** [Step-by-step walk-though of how this project was built](https://james-priest.github.io/reactnd-project-would-you-rather/)
 
 ## Installation
